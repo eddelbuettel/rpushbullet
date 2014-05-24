@@ -1,7 +1,37 @@
-
+##' This function posts a message to Pushbullet. Different types of
+##' messages are supported: \sQuote{note}, \sQuote{link} or
+##' \sQuote{address}.
+##'
+##' This function invokes the \sQuote{pushes} functionality of
+##' the Pushbullet API; see \url{https://docs.pushbullet.com/v2/pushes} for more
+##' details.
+##'
+##' When a \sQuote{note} is pushed, the recipient receives the 
+##' title and body of the note.  If a \sQuote{link} is pushed, the recipient's web
+##' browser is opened at the given URL.  If an \sQuote{address} is
+##' pushed, the recipient's web browser is opened in map mode at the
+##' given address.
+##' @title Post a message via Pushbullet
+##' @param type The type of post: one of \sQuote{note}, sQuote{link}
+##' or \sQuote{address}.
+##' @param title The title of the note, or the name of the address, being posted. 
+##' @param body The body of the note, or the address when \code{type} is \sQuote{address}, or the (optional) body when the \code{type} is \sQuote{link}.
+##' @param url The URL of \code{type} is \sQuote{link}.
+##' @param deviceind The index of the device in the list of devices, defaults to one.
+##' @param apikey The API key used to access the service. It can be
+##' supplied as an argument here, or via the file
+##' \code{~/.rpushbullet.json} which is read at package
+##' initialization.
+##' @param device The device to which this post is pushed. It can be
+##' supplied as an argument here, or via the file
+##' \code{~/.rpushbullet.json} which is read at package
+##' initialization.
+##' @return A JSON result record is return invisibly
+##' @author Dirk Eddelbuettel
 pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                    title="",            # also name for type='address'
-                   body="",             # also address for type='address', and item for type='list'
+                   body="",             # also address for type='address',
+                                        # and items for type='list'
                    url="",
                    deviceind=1,
                    apikey,

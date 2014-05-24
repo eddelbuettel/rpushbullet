@@ -10,7 +10,8 @@
         pb <- fromJSON(dotfile)
         assign("pb", pb, envir=.pkgglobalenv)
     } else {
-        packageStartupMessage("No file ", dotfile, "found. Consider placing Pushbullet API key there.")
+        packageStartupMessage("No file ", dotfile,
+                              "found. Consider placing Pushbullet API key there.")
         assign("pb", NULL, envir=.pkgglobalenv)
     }
 }

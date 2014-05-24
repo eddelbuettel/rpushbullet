@@ -7,7 +7,7 @@ pass messenges between your computer, phone and tablet.  It offers immediacy
 which is perfect for alerting and much more.
 
 To use it, just register as a user to obtain an API key, and maybe install
-the app.  See the [Pushbullet](http://www.pushbullet.com) for more.
+the app.  See the [Pushbullet](http://www.pushbullet.com) documentation for more.
 
 ### Status
 
