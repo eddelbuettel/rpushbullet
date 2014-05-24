@@ -1,0 +1,20 @@
+Package: RPushbullet
+Type: Package
+Title: R interface to the wonderful Pushbullet service
+Version: 0.0.1
+Date: 2014-05-24
+Author: Dirk Eddelbuettel
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Description: This package gives an easy-to-use interface for the Pushbullet
+ service at which provides fast and efficient  notifications between
+ computers, phones and tablets.  An account has to be registered at the 
+ http://www.pushbullet.com site in order to obtain a (free) id.
+ .
+ The package currently uses the curl binary directly as using the RCurl 
+ package worked only partially: messages can be sent, but return codes from
+ the service are lost.  
+Imports: RJSONIO
+SystemRequired: The 'curl' binary somewhere in the path, and a set of user
+ and device (text) keys which can be obtained from http://www.pushbullet.com
+NeedsCompilation: no
+License: GPL (>= 2)
