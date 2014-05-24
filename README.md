@@ -8,9 +8,12 @@ which is perfect for alerting, and much more.
 
 To use it, just register as a user to obtain an API key, and maybe install
 the Android or iPhone app.  See the [Pushbullet](http://www.pushbullet.com)
-documentation for more.
+documentation for more, in particular  
 
-### Status
+- [Getting Started](https://www.pushbullet.com/guide/getting-started)
+- [Features](https://www.pushbullet.com/guide/getting-the-most-out-of-pushbullet)
+
+### Package Status
 
 The package is functional, yet still somewhat experimental and subject to change.
 
