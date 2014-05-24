@@ -1,4 +1,5 @@
 
 import(RJSONIO)
+importFrom(utils, packageDescription)
 
 exportPattern("^[[:alpha:]]+")

@@ -13,7 +13,7 @@ Description: This package gives an easy-to-use interface for the Pushbullet
  The package currently uses the curl binary directly as using the RCurl 
  package worked only partially: messages can be sent, but return codes from
  the service are lost.  
-Imports: RJSONIO
+Imports: utils, RJSONIO
 SystemRequired: The 'curl' binary somewhere in the path, and a set of user
  and device (text) keys which can be obtained from http://www.pushbullet.com
 NeedsCompilation: no
