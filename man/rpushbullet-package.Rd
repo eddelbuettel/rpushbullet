@@ -1,41 +1,29 @@
-\name{pkgKitten-package}
-\alias{pkgKitten-package}
-\alias{pkgKitten}
+\name{RPushbullet-package}
+\alias{RPushbullet-package}
+\alias{RPushbullet}
 \docType{package}
 \title{
-  A short title line describing what the package does
+  R interface to the Pushbullet service
 }
 \description{
-  A more detailed description of that the package. A length
-  of about one to five lines is recommended.
+  The \href{http://www.pushbullet.com}{Pushbullet} service
+  permits users to pass messenges between their computers, phones and
+  other devices such as tablets.  It offers immediacy
+  which is perfect for alerting, and much more.
+
+  This package provides a programmatic interface from R.
 }
 \details{
-  A table such as what follows is recommended but not required.
-\tabular{ll}{
-Package: \tab pkgKitten\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2014-04-01\cr
-License: \tab What license is it under?\cr
-}
-  This should be followed by a more detailed overview of how to use the
-  package, including the most important functions.
+  The \href{https://www.pushbullet.com/api}{Pushbullet API} offers a
+  RESTful interface. It requires an API key which can be obtained free
+  of charge.  Given the API key, and one or more registered devices,
+  users can push message to one or more device.
 }
 \author{
-Who wrote it, email optional.
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
+  Dirk Eddelbuettel 
 }
 \references{
-  This optional section can contain literature or other references for
-  background information.
+  See the Pushbullet documentation at the
+  \href{http://www.pushbullet.com}{site}.
 }
-% Optionally other standard keywords, one per line,
-% from the file KEYWORDS in the R documentation.
-\keyword{ package }
-\seealso{
-  Optional links to other man pages
-}
-\examples{
-  # Optional simple examples of the most important functions
-}
+\keyword{package}
