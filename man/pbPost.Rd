@@ -4,7 +4,7 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "address"), title = "", body = "",
-  url = "", deviceind = 1, apikey = .getKey(), device)
+  url = "", deviceind = 1, apikey = .getKey(), devices = .getDevices())
 }
 \arguments{
 \item{type}{The type of post: one of \sQuote{note}, sQuote{link}
