@@ -1,0 +1,14 @@
+2014-05-25  Dirk Eddelbuettel  <edd@debian.org>
+
+	* configure.ac: Added with simple test for curl
+	* configure: Idem
+
+	* tests/simpleTests.R: Added simple test script
+
+	* R/init.R: Improved init. with new helper functions
+
+2014-05-24  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Initial commit as version 0.0.1
+
+	* .travis.yml: Added Travis support
