@@ -3,7 +3,7 @@
 \alias{pbGetDevices}
 \title{Get registered Pushbullet devices}
 \usage{
-pbGetDevices(apikey)
+pbGetDevices(apikey = .getKey())
 }
 \arguments{
 \item{apikey}{The API key used to access the service. It can be

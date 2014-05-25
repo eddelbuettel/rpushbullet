@@ -4,7 +4,7 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "address"), title = "", body = "",
-  url = "", deviceind = 1, apikey, device)
+  url = "", deviceind = 1, apikey = .getKey(), device)
 }
 \arguments{
 \item{type}{The type of post: one of \sQuote{note}, sQuote{link}
@@ -19,9 +19,10 @@ or \sQuote{address}.}
 \item{deviceind}{The index of the device in the list of devices, defaults to one.}
 
 \item{apikey}{The API key used to access the service. It can be
-supplied as an argument here, or via the file
-\code{~/.rpushbullet.json} which is read at package
-initialization.}
+supplied as an argument here, via the global option
+\code{rpushbutton.key}, or via the file \code{~/.rpushbullet.json}
+which is read at package initialization (and, if found, also sets
+the global option).}
 
 \item{device}{The device to which this post is pushed. It can be
 supplied as an argument here, or via the file

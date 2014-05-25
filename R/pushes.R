@@ -19,9 +19,10 @@
 ##' @param url The URL of \code{type} is \sQuote{link}.
 ##' @param deviceind The index of the device in the list of devices, defaults to one.
 ##' @param apikey The API key used to access the service. It can be
-##' supplied as an argument here, or via the file
-##' \code{~/.rpushbullet.json} which is read at package
-##' initialization.
+##' supplied as an argument here, via the global option
+##' \code{rpushbutton.key}, or via the file \code{~/.rpushbullet.json}
+##' which is read at package initialization (and, if found, also sets
+##' the global option).
 ##' @param device The device to which this post is pushed. It can be
 ##' supplied as an argument here, or via the file
 ##' \code{~/.rpushbullet.json} which is read at package
@@ -34,18 +35,11 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                                         # and items for type='list'
                    url="",
                    deviceind=1,
-                   apikey,
+                   apikey = .getKey(),
                    device) {
 
     type <- match.arg(type)
     
-    if (missing(apikey)) {
-        if (is.null(.pkgglobalenv$pb)) {
-            stop("No 'apikey' argument provided, and no rc file found. Aborting.")
-        }
-        apikey <- .pkgglobalenv$pb["key"]
-    }
-
     if (missing(device)) {
         if (is.null(.pkgglobalenv$pb)) {
             stop("No 'device' argument provided, and no rc file found. Aborting.")
