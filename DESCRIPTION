@@ -14,7 +14,10 @@ Description: This package gives an easy-to-use interface for the Pushbullet
  package worked only partially: messages can be sent, but return codes from
  the service are lost.  
 Imports: utils, RJSONIO
-SystemRequired: The 'curl' binary somewhere in the path, and a set of user
- and device (text) keys which can be obtained from http://www.pushbullet.com
+SystemRequirements: The 'curl' binary somewhere in the path, a user key
+ which can be obtained from http://www.pushbullet.com, and one or more
+ devices to push messages too which may be any one of an Android phone, 
+ iPhone, or the Chrome browser provided the corresponding Pushbullet 'app'
+ has been installed.
 NeedsCompilation: no
 License: GPL (>= 2)
