@@ -36,18 +36,10 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                    url="",
                    deviceind=1,
                    apikey = .getKey(),
-                   device) {
+                   devices = .getDevices()) {
 
     type <- match.arg(type)
     
-    if (missing(device)) {
-        if (is.null(.pkgglobalenv$pb)) {
-            stop("No 'device' argument provided, and no rc file found. Aborting.")
-        }
-        device <- .pkgglobalenv$pb[["devices"]][deviceind]
-    }
-
-
     txt <- switch(type,
 
                   ## curl https://api.pushbullet.com/v2/pushes \
@@ -59,19 +51,19 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                   ##   -X POST
                   note = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                                         '-d type="note" -d title="%s" -d body="%s" -X POST'),
-                                 "https://api.pushbullet.com/v2/pushes", apikey, device,
+                                 "https://api.pushbullet.com/v2/pushes", apikey, devices[deviceind],
                                  title, body),
 
                   link = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                                         '-d type="link" -d title="%s" -d body="%s" ',
                                         '-d url="%s" -X POST'),
-                                 "https://api.pushbullet.com/v2/pushes", apikey, device,
+                                 "https://api.pushbullet.com/v2/pushes", apikey, devices[deviceind],
                                  title, body, url),
 
                   address = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                                            '-d type="address" -d name="%s" -d address="%s" ',
                                            '-X POST'),
-                                    "https://api.pushbullet.com/v2/pushes", apikey, device,
+                                    "https://api.pushbullet.com/v2/pushes", apikey, devices[deviceind],
                                     title, body)
 
                   ## ## not quite sure what a list body would be 
@@ -89,7 +81,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                   
                   )
 
-    #print(txt)
+    print(txt)
     res <- system(txt, intern=TRUE)
     invisible(res)
 }
