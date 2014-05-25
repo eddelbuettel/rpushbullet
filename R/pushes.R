@@ -81,7 +81,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
 
                   )
 
-    print(txt)
+    #print(txt)
     res <- system(txt, intern=TRUE)
     invisible(res)
 }
