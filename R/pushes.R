@@ -6,7 +6,7 @@
 ##' the Pushbullet API; see \url{https://docs.pushbullet.com/v2/pushes} for more
 ##' details.
 ##'
-##' When a \sQuote{note} is pushed, the recipient receives the 
+##' When a \sQuote{note} is pushed, the recipient receives the
 ##' title and body of the note.  If a \sQuote{link} is pushed, the recipient's web
 ##' browser is opened at the given URL.  If an \sQuote{address} is
 ##' pushed, the recipient's web browser is opened in map mode at the
@@ -14,7 +14,7 @@
 ##' @title Post a message via Pushbullet
 ##' @param type The type of post: one of \sQuote{note}, sQuote{link}
 ##' or \sQuote{address}.
-##' @param title The title of the note, or the name of the address, being posted. 
+##' @param title The title of the note, or the name of the address, being posted.
 ##' @param body The body of the note, or the address when \code{type} is \sQuote{address}, or the (optional) body when the \code{type} is \sQuote{link}.
 ##' @param url The URL of \code{type} is \sQuote{link}.
 ##' @param deviceind The index of the device in the list of devices, defaults to one.
@@ -23,7 +23,7 @@
 ##' \code{rpushbutton.key}, or via the file \code{~/.rpushbullet.json}
 ##' which is read at package initialization (and, if found, also sets
 ##' the global option).
-##' @param device The device to which this post is pushed. It can be
+##' @param devices The device to which this post is pushed. It can be
 ##' supplied as an argument here, or via the file
 ##' \code{~/.rpushbullet.json} which is read at package
 ##' initialization.
@@ -39,7 +39,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                    devices = .getDevices()) {
 
     type <- match.arg(type)
-    
+
     txt <- switch(type,
 
                   ## curl https://api.pushbullet.com/v2/pushes \
@@ -66,7 +66,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                                     "https://api.pushbullet.com/v2/pushes", apikey, devices[deviceind],
                                     title, body)
 
-                  ## ## not quite sure what a list body would be 
+                  ## ## not quite sure what a list body would be
                   ## list = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                   ##                       '-d type="list" -d title="%s" -d items="%s" -X POST'),
                   ##                "https://api.pushbullet.com/v2/pushes", apikey, device,
@@ -78,7 +78,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                   ##                       '-d url="%s" -X POST'),
                   ##                "https://api.pushbullet.com/v2/pushes", apikey, device,
                   ##                title, body, url),
-                  
+
                   )
 
     print(txt)

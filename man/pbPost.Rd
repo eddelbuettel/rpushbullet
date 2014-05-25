@@ -24,7 +24,7 @@ supplied as an argument here, via the global option
 which is read at package initialization (and, if found, also sets
 the global option).}
 
-\item{device}{The device to which this post is pushed. It can be
+\item{devices}{The device to which this post is pushed. It can be
 supplied as an argument here, or via the file
 \code{~/.rpushbullet.json} which is read at package
 initialization.}
