@@ -27,6 +27,7 @@
 ##' supplied as an argument here, or via the file
 ##' \code{~/.rpushbullet.json} which is read at package
 ##' initialization.
+##' @param verbose Boolean switch to add additional output
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
 pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
@@ -36,10 +37,12 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                    url="",
                    deviceind=1,
                    apikey = .getKey(),
-                   devices = .getDevices()) {
+                   devices = .getDevices(),
+                   verbose = FALSE) {
 
     type <- match.arg(type)
-
+    pburl <- "https://api.pushbullet.com/v2/pushes"
+    
     txt <- switch(type,
 
                   ## curl https://api.pushbullet.com/v2/pushes \
@@ -51,37 +54,32 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                   ##   -X POST
                   note = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                                         '-d type="note" -d title="%s" -d body="%s" -X POST'),
-                                 "https://api.pushbullet.com/v2/pushes", apikey, devices[deviceind],
-                                 title, body),
+                                 pburl, apikey, devices[deviceind], title, body),
 
                   link = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                                         '-d type="link" -d title="%s" -d body="%s" ',
                                         '-d url="%s" -X POST'),
-                                 "https://api.pushbullet.com/v2/pushes", apikey, devices[deviceind],
-                                 title, body, url),
+                                 pburl, apikey, devices[deviceind], title, body, url),
 
                   address = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                                            '-d type="address" -d name="%s" -d address="%s" ',
                                            '-X POST'),
-                                    "https://api.pushbullet.com/v2/pushes", apikey, devices[deviceind],
-                                    title, body)
+                                    pburl, apikey, devices[deviceind], title, body)
 
                   ## ## not quite sure what a list body would be
                   ## list = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                   ##                       '-d type="list" -d title="%s" -d items="%s" -X POST'),
-                  ##                "https://api.pushbullet.com/v2/pushes", apikey, device,
-                  ##                title, body),
+                  ##                pburl, apikey, device, title, body),
 
                   ## for file see docs, need to upload file first
                   ## file = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
                   ##                       '-d type="link" -d title="%s" -d body="%s" ',
                   ##                       '-d url="%s" -X POST'),
-                  ##                "https://api.pushbullet.com/v2/pushes", apikey, device,
-                  ##                title, body, url),
+                  ##                pburl, apikey, device, title, body, url),
 
                   )
 
-    #print(txt)
+    if (verbose) print(txt)
     res <- system(txt, intern=TRUE)
     invisible(res)
 }

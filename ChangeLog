@@ -1,3 +1,8 @@
+2014-05-27  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R (pbPost): Added new optional argument 'debug', and minor
+	refactoring in pbPost() making url string a common variable
+
 2014-05-25  Dirk Eddelbuettel  <edd@debian.org>
 
 	* configure.ac: Added with simple test for curl
