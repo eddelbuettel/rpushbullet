@@ -4,7 +4,8 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "address"), title = "", body = "",
-  url = "", deviceind = 1, apikey = .getKey(), devices = .getDevices())
+  url = "", deviceind = 1, apikey = .getKey(), devices = .getDevices(),
+  verbose = FALSE)
 }
 \arguments{
 \item{type}{The type of post: one of \sQuote{note}, sQuote{link}
@@ -28,6 +29,8 @@ the global option).}
 supplied as an argument here, or via the file
 \code{~/.rpushbullet.json} which is read at package
 initialization.}
+
+\item{verbose}{Boolean switch to add additional output}
 }
 \value{
 A JSON result record is return invisibly

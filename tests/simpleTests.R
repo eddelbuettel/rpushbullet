@@ -11,9 +11,9 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     library(RPushbullet)
 
     ## As there is a file, check the package global environment 'pb' we create on startup
-    RPushbullet:::.pkgglobalenv[["pb"]]
-    RPushbullet:::.pkgglobalenv[["pb"]][["key"]]
-    RPushbullet:::.pkgglobalenv[["pb"]][["devices"]]
+    RPushbullet:::.pkgenv[["pb"]]
+    RPushbullet:::.pkgenv[["pb"]][["key"]]
+    RPushbullet:::.pkgenv[["pb"]][["devices"]]
     
     ## As well as the options we create then too
     getOption("rpushbullet.key")
