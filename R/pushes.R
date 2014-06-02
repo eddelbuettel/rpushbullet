@@ -63,6 +63,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
 
     type <- match.arg(type)
     pburl <- "https://api.pushbullet.com/v2/pushes"
+    curl <- .getCurl()
     
     txt <- switch(type,
 
@@ -73,19 +74,19 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                   ##   -d title="Note title" \
                   ##   -d body="note body" \
                   ##   -X POST
-                  note = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
+                  note = sprintf(paste0('%s -s %s -u %s: -d device_iden="%s" ',
                                         '-d type="note" -d title="%s" -d body="%s" -X POST'),
-                                 pburl, apikey, devices[deviceind], title, body),
+                                 curl, pburl, apikey, devices[deviceind], title, body),
 
-                  link = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
+                  link = sprintf(paste0('%s -s %s -u %s: -d device_iden="%s" ',
                                         '-d type="link" -d title="%s" -d body="%s" ',
                                         '-d url="%s" -X POST'),
-                                 pburl, apikey, devices[deviceind], title, body, url),
+                                 curl, pburl, apikey, devices[deviceind], title, body, url),
 
-                  address = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
+                  address = sprintf(paste0('%s -s %s -u %s: -d device_iden="%s" ',
                                            '-d type="address" -d name="%s" -d address="%s" ',
                                            '-X POST'),
-                                    pburl, apikey, devices[deviceind], title, body)
+                                    curl, apikey, devices[deviceind], title, body)
 
                   ## ## not quite sure what a list body would be
                   ## list = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',

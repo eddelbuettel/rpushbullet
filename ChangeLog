@@ -1,3 +1,12 @@
+2014-06-02  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/init.R: Detect curl binary in PATH at startup
+	* R/pushes.R: Use curl binary identified at startup
+	* R/devices.R: Ditto
+
+	* R/init.R: Package environment is now .pkgenv
+	* tests/simpleTests.R: Ditto
+
 2014-05-27  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R (pbPost): Added new optional argument 'debug', and minor

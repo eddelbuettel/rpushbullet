@@ -32,7 +32,8 @@
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
 pbGetDevices <- function(apikey=.getKey()) {
-    txt <- sprintf("curl -s %s -u %s:", "https://api.pushbullet.com/v2/devices", apikey)
+    txt <- sprintf("%s -s %s -u %s:",
+                   .getCurl(), "https://api.pushbullet.com/v2/devices", apikey)
     res <- system(txt, intern=TRUE)
     invisible(res)
 }

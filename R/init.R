@@ -24,6 +24,13 @@
     packageStartupMessage("Attaching RPushbullet version ",
                           packageDescription("RPushbullet")$Version, ".")
 
+    curl <- Sys.which("curl")
+    if (curl == "") {
+        warning("No curl binary found in your path. Please consider installing curl.")
+    } else {
+        assign("curl", curl, envir=.pkgenv)
+    }
+    
     dotfile <- "~/.rpushbullet.json"
     if (file.exists(dotfile)) {
         packageStartupMessage("Reading ", dotfile)
@@ -55,3 +62,10 @@
                                 "package environment found. Aborting."), call.=FALSE)))
 }
 
+.getCurl <- function() {
+    curl <- .pkgenv$curl
+    if (curl == "") stop(paste("No curl binary registered. ",
+                               "Install curl, and restart R and reload package"),
+                         call.=FALSE)
+    curl
+}
