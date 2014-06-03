@@ -1,5 +1,7 @@
 2014-06-02  Dirk Eddelbuettel  <edd@debian.org>
 
+	* DESCRIPTION: Version 0.0.2
+
 	* R/init.R: Detect curl binary in PATH at startup
 	* R/pushes.R: Use curl binary identified at startup
 	* R/devices.R: Ditto
