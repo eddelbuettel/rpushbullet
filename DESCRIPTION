@@ -5,19 +5,20 @@ Version: 0.0.2
 Date: 2014-06-02
 Author: Dirk Eddelbuettel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
-Description: This package gives an easy-to-use interface for the Pushbullet
- service at which provides fast and efficient  notifications between
- computers, phones and tablets.  An account has to be registered at the 
- http://www.pushbullet.com site in order to obtain a (free) id.
+Description: This package provides an easy-to-use interface for the 
+ Pushbullet servicet which provides fast and efficient notifications 
+ between computers, phones and tablets.  An account has to be registered 
+ at the site http://www.pushbullet.com site to obtain a (free) api key.
  .
  The package currently uses the curl binary directly as using the RCurl 
- package worked only partially: messages can be sent, but return codes from
- the service are lost.  
+ package worked only partially: messages can be sent, but return codes 
+ from the service are being lost.  
 Imports: utils, RJSONIO
-SystemRequirements: The 'curl' binary somewhere in the path, a user key
- which can be obtained from http://www.pushbullet.com, and one or more
- devices to push messages too which may be any one of an Android phone, 
- iPhone, or the Chrome browser provided the corresponding Pushbullet 'app'
- has been installed.
+SystemRequirements: The 'curl' binary has to be in the path (and this is
+ checked at package startup), a user api key which can be obtained from 
+ http://www.pushbullet.com, and one or more devices to push messages to 
+ which may be any one of an Android phone, iPhone, or the Chrome browser 
+ provided the corresponding Pushbullet 'app' has been installed on any
+ one of these.
 NeedsCompilation: no
 License: GPL (>= 2)

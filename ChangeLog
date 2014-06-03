@@ -6,6 +6,9 @@
 	* R/pushes.R: Use curl binary identified at startup
 	* R/devices.R: Ditto
 
+	* .Rbuildignore: Add attic/ directory with file configure and
+	configure.ac which is no longer needed at init.R checks for curl
+
 	* R/init.R: Package environment is now .pkgenv
 	* tests/simpleTests.R: Ditto
 
