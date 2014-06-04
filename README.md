@@ -30,7 +30,32 @@ the JSON response.
 
 A  file `~/.rpushbutton.json` can be used to pass the API key and device
 identifiers to the package.  The content is read upon package startup, and
-stored in a package-local environment.
+stored in a package-local environment. The format of this file is as follows:
+```
+{ 
+    "key": "...placey your api key here...",
+
+    "devices": [ 
+        ".....device 1 id......",
+        ".....device 2 id......",
+        ".....device 3 id......"
+    ],
+
+    "names": [
+        "...name1...",
+        "...name2...",
+        "...name3..."
+    ]
+}
+```
+
+The `names` field is optional and not (yet?) used. You can also use it programmatically via
+
+```
+cat(RJSONSIO::toJSON(list(key="....key here", devices=c("..aa..", "...bb.."))))
+```
+
+and write that content to the file `~/.rpushbutton.json`.
 
 ### Author
 
