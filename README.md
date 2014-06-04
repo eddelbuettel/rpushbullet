@@ -57,6 +57,11 @@ cat(RJSONSIO::toJSON(list(key="..key here..", devices=c("..aa..", "..bb.."))))
 
 and write that content to the file `~/.rpushbullet.json`.
 
+You can also retrieve the ids of your devices with the `pbGetDevices()`
+function by calling, say, `str(fromJSON(pbGetDevices()))`.  Note that you
+need to load one of the packages `RJSONIO` or `rjson` or `jsonlite` to access
+the `fromJSON()` function.
+
 ### Author
 
 Dirk Eddelbuettel
