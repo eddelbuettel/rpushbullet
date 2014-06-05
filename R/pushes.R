@@ -41,7 +41,7 @@
 ##' @param deviceind The index of the device in the list of devices, defaults to one.
 ##' @param apikey The API key used to access the service. It can be
 ##' supplied as an argument here, via the global option
-##' \code{rpushbutton.key}, or via the file \code{~/.rpushbullet.json}
+##' \code{rpushbullet.key}, or via the file \code{~/.rpushbullet.json}
 ##' which is read at package initialization (and, if found, also sets
 ##' the global option).
 ##' @param devices The device to which this post is pushed. It can be

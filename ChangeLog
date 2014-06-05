@@ -1,3 +1,9 @@
+2014-06-05  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/init.R: Fixed two more references to pushbutton which should of
+	course have been pushbullet
+	* R/pushes.R: And another one here
+
 2014-06-02  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION: Version 0.0.2

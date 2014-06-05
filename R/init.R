@@ -50,7 +50,7 @@
     getOption("rpushbullet.key",                # retrieve as option, 
               ifelse(!is.null(.pkgenv$pb),      # else try environment
                      .pkgenv$pb[["key"]],       # and use it, or signal error
-                     stop(paste("Neither option 'rpushbutton.key' nor entry in",
+                     stop(paste("Neither option 'rpushbullet.key' nor entry in",
                                 "package environment found. Aborting."), call.=FALSE)))
 }
 
@@ -58,7 +58,7 @@
     getOption("rpushbullet.devices",       	# retrieve as option, 
               ifelse(!is.null(.pkgenv$pb),	# else try environment
                      .pkgenv$pb[["devices"]],   # and use it, or signal error
-                     stop(paste("Neither option 'rpushbutton.devices' nor entry in",
+                     stop(paste("Neither option 'rpushbullet.devices' nor entry in",
                                 "package environment found. Aborting."), call.=FALSE)))
 }
 
