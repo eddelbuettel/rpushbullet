@@ -33,7 +33,7 @@
 ##' pushed, the recipient's web browser is opened in map mode at the
 ##' given address.
 ##'
-##' The \sQuote(deviceind} can be NULL to use the default device as
+##' The \sQuote{deviceind} can be NULL to use the default device as
 ##' defined as \sQuote{defdevice} in \code{~/.rpushbullet.json}; a
 ##' positive integer to indicate the device to which the message will
 ##' be sent; a vector or list of such indices; or 0 to send to all
