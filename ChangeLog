@@ -1,3 +1,8 @@
+2014-06-07  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/devices.R: pgGetDevices() converted to an S3 method with proper
+	print and summary methods
+
 2014-06-06  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/init.R: Applied pull request #3 by Bill Evans
