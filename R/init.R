@@ -38,8 +38,8 @@
         assign("pb", pb, envir=.pkgenv)
         options("rpushbullet.key" = pb[["key"]])
         options("rpushbullet.devices" = pb[["devices"]])
-        options("rpushbullet.defdevice" =
-                ifelse("defdevice" %in% names(pb), pb[["defdevice"]], 1))
+        options("rpushbullet.defaultdevice" =
+                ifelse("defaultdevice" %in% names(pb), pb[["defaultdevice"]], 1))
     } else {
         txt <- paste("No file", dotfile, "found.\nConsider placing the",
                      "Pushbullet API key and your device id(s) there.")
@@ -64,10 +64,10 @@
                                 "package environment found. Aborting."), call.=FALSE)))
 }
 
-.getDefDevice <- function() {
-    getOption("rpushbullet.defdevice",       	# retrieve as option, 
+.getDefaultDevice <- function() {
+    getOption("rpushbullet.defaultdevice",     	# retrieve as option, 
               ifelse(!is.null(.pkgenv$pb),	# else try environment
-                     .pkgenv$pb[["defdevice"]], # and use it, or return first device
+                     .pkgenv$pb[["defaultdevice"]], # and use it, or return first device
                      1))
 }
 

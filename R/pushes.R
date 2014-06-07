@@ -71,7 +71,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                    body="",             # also address for type='address',
                                         # and items for type='list'
                    url="",
-                   deviceind=NULL,
+                   deviceind=NULL,      # missing or NULL or ... ?
                    apikey = .getKey(),
                    devices = .getDevices(),
                    verbose = FALSE) {
@@ -81,7 +81,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
     curl <- .getCurl()
     
     if (is.null(deviceind))
-        deviceind <- .getDefDevice()
+        deviceind <- .getDefaultDevice()
 
     if (0 %in% deviceind) {
         ## this will send to all devices in the pushbullet account,

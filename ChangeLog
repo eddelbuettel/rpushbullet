@@ -1,3 +1,11 @@
+2014-06-06  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/init.R: Applied pull request #3 by Bill Evans
+	* R/push.R: Ditto
+
+	* R/init.R: Minor tweak using 'defaultdevice'
+	* R/push.R: Ditto
+
 2014-06-05  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/init.R: Fixed two more references to pushbutton which should of
