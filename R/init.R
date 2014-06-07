@@ -38,6 +38,8 @@
         assign("pb", pb, envir=.pkgenv)
         options("rpushbullet.key" = pb[["key"]])
         options("rpushbullet.devices" = pb[["devices"]])
+        options("rpushbullet.defdevice" =
+                ifelse("defdevice" %in% names(pb), pb[["defdevice"]], 1))
     } else {
         txt <- paste("No file", dotfile, "found.\nConsider placing the",
                      "Pushbullet API key and your device id(s) there.")
@@ -60,6 +62,13 @@
                      .pkgenv$pb[["devices"]],   # and use it, or signal error
                      stop(paste("Neither option 'rpushbullet.devices' nor entry in",
                                 "package environment found. Aborting."), call.=FALSE)))
+}
+
+.getDefDevice <- function() {
+    getOption("rpushbullet.defdevice",       	# retrieve as option, 
+              ifelse(!is.null(.pkgenv$pb),	# else try environment
+                     .pkgenv$pb[["defdevice"]], # and use it, or return first device
+                     1))
 }
 
 .getCurl <- function() {
