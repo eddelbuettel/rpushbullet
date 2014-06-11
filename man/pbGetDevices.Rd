@@ -27,7 +27,9 @@ initialization.}
 \item{object}{Default object for \code{summary} method}
 }
 \value{
-A JSON result record is return invisibly
+The resulting JSON record is converted to a list and
+returned as a \code{pbDevices} object with appropriate
+\code{print} and \code{summary} methods.
 }
 \description{
 Retrieve the list of devices registered for the given API key.

@@ -1,7 +1,17 @@
+2014-06-10  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: Rewritten in terms of new argument 'recipients' with
+	the default being sent to all devices; old argument 'deviceind' now
+	deprecated.
+
+	* R/init.R: New internal helper function .getNames()
+	* R/init.R: The .getDefaultDevice() now defaults to 'zero' implying
+	all devices should be used.
+
 2014-06-07  Dirk Eddelbuettel  <edd@debian.org>
 
-	* R/devices.R: pgGetDevices() converted to an S3 method with proper
-	print and summary methods
+	* R/devices.R: pgGetDevices() converted to an S3 object with proper
+	print and summary methods for the returned class 'pbDevices'
 
 2014-06-06  Dirk Eddelbuettel  <edd@debian.org>
 

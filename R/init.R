@@ -67,8 +67,8 @@
 .getDefaultDevice <- function() {
     getOption("rpushbullet.defaultdevice",     	# retrieve as option, 
               ifelse(!is.null(.pkgenv$pb),	# else try environment
-                     .pkgenv$pb[["defaultdevice"]], # and use it, or return first device
-                     1))
+                     .pkgenv$pb[["defaultdevice"]], # and use it, or return zero
+                     0))                            # as code for all devices
 }
 
 .getCurl <- function() {
@@ -77,4 +77,12 @@
                                "Install curl, and restart R and reload package"),
                          call.=FALSE)
     curl
+}
+
+.getNames <- function() {
+    getOption("rpushbullet.names",       	# retrieve as option, 
+              ifelse(!is.null(.pkgenv$pb),	# else try environment
+                     .pkgenv$pb[["names"]],   # and use it, or signal error
+                     stop(paste("Neither option 'rpushbullet.names' nor entry in",
+                                "package environment found. Aborting."), call.=FALSE)))
 }

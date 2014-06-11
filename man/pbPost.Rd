@@ -4,7 +4,7 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "address"), title = "", body = "",
-  url = "", deviceind = NULL, apikey = .getKey(),
+  url = "", recipients, deviceind, apikey = .getKey(),
   devices = .getDevices(), verbose = FALSE)
 }
 \arguments{
@@ -13,12 +13,17 @@ or \sQuote{address}.}
 
 \item{title}{The title of the note, or the name of the address, being posted.}
 
-\item{body}{The body of the note, or the address when \code{type} is \sQuote{address}, or the (optional) body when the \code{type} is \sQuote{link}.}
+\item{body}{The body of the note, or the address when \code{type}
+is \sQuote{address}, or the (optional) body when the \code{type}
+is \sQuote{link}.}
 
 \item{url}{The URL of \code{type} is \sQuote{link}.}
 
-\item{deviceind}{The index (or a vector/list of indices) of the
-device(s) in the list of devices. See 'Details'.}
+\item{recipients}{A character or numeric vector indicating the
+devices this post should go to. If missing, all devices are used.}
+
+\item{deviceind}{(Deprecated) The index (or a vector/list of indices) of the
+device(s) in the list of devices.}
 
 \item{apikey}{The API key used to access the service. It can be
 supplied as an argument here, via the global option
@@ -52,19 +57,21 @@ browser is opened at the given URL.  If an \sQuote{address} is
 pushed, the recipient's web browser is opened in map mode at the
 given address.
 
-The \sQuote{deviceind} can be NULL to use the default device as
-defined as \sQuote{defdevice} in \code{~/.rpushbullet.json}; a
-positive integer to indicate the device to which the message will
-be sent; a vector or list of such indices; or 0 to send to all
-devices listed in the pushbullet account.
+If \sQuote{recipients} argument is missing, the post is pushed to
+\emph{all} devices in accordance with the API definition. If
+\sQuote{recipients} is text vector, it matched against the device
+names (from either the config file or a corresponding
+option). Lastly, if \sQuote{recipients} is a numeric vector, the
+post is pushed the corresponding elements in the devices vector.
 
-Note: when choosing 0 for the \sQuote{deviceind}, the message is
-sent to all devices in the pushbullet account, regardless of the
-\sQuote{devices} vector or those defined in
-\code{~/.rpushbullet.json}. If you want to send to only those
-defined in \sQuote{devices} excluding extras in your pushbullet
-account, provide a vector or list of device indices in
-\sQuote{deviceind}.
+In other words, the default of value of no specified recipients results
+in sending to all devices. If you want a particular subset of
+devices you have to specify it name or index. A default device can be set
+in the configuration file, or as a global option. If none is set, zero
+is used as a code to imply \sQuote{all} devices.
+
+The earlier argument \code{deviceind} is now deprecated and will
+be removed in a later release.
 }
 \author{
 Dirk Eddelbuettel

@@ -33,27 +33,33 @@
 ##' pushed, the recipient's web browser is opened in map mode at the
 ##' given address.
 ##'
-##' The \sQuote{deviceind} can be NULL to use the default device as
-##' defined as \sQuote{defdevice} in \code{~/.rpushbullet.json}; a
-##' positive integer to indicate the device to which the message will
-##' be sent; a vector or list of such indices; or 0 to send to all
-##' devices listed in the pushbullet account.
+##' If \sQuote{recipients} argument is missing, the post is pushed to
+##' \emph{all} devices in accordance with the API definition. If
+##' \sQuote{recipients} is text vector, it matched against the device
+##' names (from either the config file or a corresponding
+##' option). Lastly, if \sQuote{recipients} is a numeric vector, the
+##' post is pushed the corresponding elements in the devices vector.
 ##' 
-##' Note: when choosing 0 for the \sQuote{deviceind}, the message is
-##' sent to all devices in the pushbullet account, regardless of the
-##' \sQuote{devices} vector or those defined in
-##' \code{~/.rpushbullet.json}. If you want to send to only those
-##' defined in \sQuote{devices} excluding extras in your pushbullet
-##' account, provide a vector or list of device indices in
-##' \sQuote{deviceind}.
+##' In other words, the default of value of no specified recipients results
+##' in sending to all devices. If you want a particular subset of
+##' devices you have to specify it name or index. A default device can be set
+##' in the configuration file, or as a global option. If none is set, zero
+##' is used as a code to imply \sQuote{all} devices.
+##'
+##' The earlier argument \code{deviceind} is now deprecated and will
+##' be removed in a later release.
 ##' @title Post a message via Pushbullet
 ##' @param type The type of post: one of \sQuote{note}, sQuote{link}
 ##' or \sQuote{address}.
 ##' @param title The title of the note, or the name of the address, being posted.
-##' @param body The body of the note, or the address when \code{type} is \sQuote{address}, or the (optional) body when the \code{type} is \sQuote{link}.
+##' @param body The body of the note, or the address when \code{type}
+##' is \sQuote{address}, or the (optional) body when the \code{type}
+##' is \sQuote{link}.
 ##' @param url The URL of \code{type} is \sQuote{link}.
-##' @param deviceind The index (or a vector/list of indices) of the
-##' device(s) in the list of devices. See 'Details'.
+##' @param recipients A character or numeric vector indicating the
+##' devices this post should go to. If missing, all devices are used.
+##' @param deviceind (Deprecated) The index (or a vector/list of indices) of the
+##' device(s) in the list of devices. 
 ##' @param apikey The API key used to access the service. It can be
 ##' supplied as an argument here, via the global option
 ##' \code{rpushbullet.key}, or via the file \code{~/.rpushbullet.json}
@@ -70,26 +76,45 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                    title="",            # also name for type='address'
                    body="",             # also address for type='address',
                                         # and items for type='list'
-                   url="",
-                   deviceind=NULL,      # missing or NULL or ... ?
+                   url="",              # url is post is of type link
+                   recipients,          # devices to post to
+                   deviceind,           # deprecated, see detail
                    apikey = .getKey(),
                    devices = .getDevices(),
                    verbose = FALSE) {
 
     type <- match.arg(type)
+
+    if (!missing(deviceind)) {
+        if (missing(recipients)) {
+            warning("Agument 'deviceind' is deprecated. Please use 'recipients'.", call.=FALSE)
+            recipients <- deviceind
+        } else {
+            warning("Using 'recipients' and ignoring deprecated 'deviceinds'.", call.=FALSE)
+        }
+    }
+
+    if (missing(recipients)) {
+        recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
+    }
+    
+    if (is.character(recipients)) {
+        recipients <- match(recipients, .getNames())
+    }
+    
     pburl <- "https://api.pushbullet.com/v2/pushes"
     curl <- .getCurl()
     
-    if (is.null(deviceind))
-        deviceind <- .getDefaultDevice()
+    ## if (is.null(deviceind))
+    ##     deviceind <- .getDefaultDevice()
 
-    if (0 %in% deviceind) {
-        ## this will send to all devices in the pushbullet account,
-        ## explicitly including others would result in double-tapping
-        deviceind <- 0
-    }
+    ## if (0 %in% deviceind) {
+    ##     ## this will send to all devices in the pushbullet account,
+    ##     ## explicitly including others would result in double-tapping
+    ##     deviceind <- 0
+    ## }
 
-    ret <- sapply(deviceind, function(ind) {
+    ret <- sapply(recipients, function(ind) {
         tgt <- ifelse(ind == 0,
                       '',                             # all devices
                       sprintf('-d device_iden="%s" ', # specific device
@@ -120,7 +145,8 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
 
                       ## ## not quite sure what a list body would be
                       ## list = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
-                      ##                       '-d type="list" -d title="%s" -d items="%s" -X POST'),
+                      ##                       '-d type="list" -d title="%s" -d items="%s" ',
+                      ##                       '-X POST'),
                       ##                pburl, apikey, device, title, body),
 
                       ## for file see docs, need to upload file first
