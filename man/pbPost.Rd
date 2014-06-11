@@ -8,7 +8,7 @@ pbPost(type = c("note", "link", "address"), title = "", body = "",
   devices = .getDevices(), verbose = FALSE)
 }
 \arguments{
-\item{type}{The type of post: one of \sQuote{note}, sQuote{link}
+\item{type}{The type of post: one of \sQuote{note}, \sQuote{link}
 or \sQuote{address}.}
 
 \item{title}{The title of the note, or the name of the address, being posted.}

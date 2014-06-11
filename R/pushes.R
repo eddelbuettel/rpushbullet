@@ -49,7 +49,7 @@
 ##' The earlier argument \code{deviceind} is now deprecated and will
 ##' be removed in a later release.
 ##' @title Post a message via Pushbullet
-##' @param type The type of post: one of \sQuote{note}, sQuote{link}
+##' @param type The type of post: one of \sQuote{note}, \sQuote{link}
 ##' or \sQuote{address}.
 ##' @param title The title of the note, or the name of the address, being posted.
 ##' @param body The body of the note, or the address when \code{type}

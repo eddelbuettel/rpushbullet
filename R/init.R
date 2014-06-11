@@ -39,7 +39,7 @@
         options("rpushbullet.key" = pb[["key"]])
         options("rpushbullet.devices" = pb[["devices"]])
         options("rpushbullet.defaultdevice" =
-                ifelse("defaultdevice" %in% names(pb), pb[["defaultdevice"]], 1))
+                ifelse("defaultdevice" %in% names(pb), pb[["defaultdevice"]], 0))
     } else {
         txt <- paste("No file", dotfile, "found.\nConsider placing the",
                      "Pushbullet API key and your device id(s) there.")
