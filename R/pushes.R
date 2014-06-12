@@ -98,10 +98,28 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
         recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
     }
     
-    if (is.character(recipients)) {
-        recipients <- match(recipients, .getNames())
-    }
-    
+    ## if (is.character(recipients)) {
+    ##     recipients <- match(recipients, .getNames())
+    ## }
+
+    recipients <- sapply(recipients, function(rcvr) {
+        if (is.numeric(rcvr)) {
+            if (rcvr == 0) rcvr
+            else if (rcvr > length(devices)) {
+                stop(paste0("recipient '", rcvr,
+                            "' greater than the number of devices ('", length(devices),
+                            "'), aborting."))
+            } else devices[[rcvr]]$iden
+        } else {
+            ret <- match(rcvr, sapply(devices, `[[`, 'nickname'))
+            if (is.na(ret))
+                ret <- match(rcvr, sapply(devices, `[[`, 'iden'))
+            if (is.na(ret))
+                stop(paste0("recipient '", rcvr, "' not found, aborting."))
+            devices[[ret]]$iden
+        }
+    })
+
     pburl <- "https://api.pushbullet.com/v2/pushes"
     curl <- .getCurl()
     
@@ -114,11 +132,11 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
     ##     deviceind <- 0
     ## }
 
-    ret <- sapply(recipients, function(ind) {
-        tgt <- ifelse(ind == 0,
+    ret <- sapply(recipients, function(rcvr) {
+        tgt <- ifelse(rcvr == 0,
                       '',                             # all devices
                       sprintf('-d device_iden="%s" ', # specific device
-                              devices[ind]))
+                              rcvr))
 
         txt <- switch(type,
 
