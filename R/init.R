@@ -34,7 +34,8 @@
     dotfile <- "~/.rpushbullet.json"
     if (file.exists(dotfile)) {
         packageStartupMessage("Reading ", dotfile)
-        pb <- fromJSON(dotfile)
+        ## pbLoadConfig(dotfile)
+        pb <- fromJSON(dotfile, simplify=FALSE)
         assign("pb", pb, envir=.pkgenv)
         options("rpushbullet.key" = pb[["key"]])
         options("rpushbullet.devices" = pb[["devices"]])
@@ -57,11 +58,15 @@
 }
 
 .getDevices <- function() {
-    getOption("rpushbullet.devices",       	# retrieve as option, 
+    ret <- getOption("rpushbullet.devices",     # retrieve as option, 
               ifelse(!is.null(.pkgenv$pb),	# else try environment
                      .pkgenv$pb[["devices"]],   # and use it, or signal error
                      stop(paste("Neither option 'rpushbullet.devices' nor entry in",
                                 "package environment found. Aborting."), call.=FALSE)))
+    ## update to pushbullet-provided list format
+    if (!is.list(ret))
+        ret <- lapply(ret, function(x) list(iden=x, nickname=x))
+    ret
 }
 
 .getDefaultDevice <- function() {
@@ -79,10 +84,12 @@
     curl
 }
 
-.getNames <- function() {
-    getOption("rpushbullet.names",       	# retrieve as option, 
-              ifelse(!is.null(.pkgenv$pb),	# else try environment
-                     .pkgenv$pb[["names"]],   # and use it, or signal error
-                     stop(paste("Neither option 'rpushbullet.names' nor entry in",
-                                "package environment found. Aborting."), call.=FALSE)))
-}
+## ## removed because $devices is now a list of lists, not a vector of strings
+## ## ... could use lapply(pb$devices, `[[`, 'nickname') if still needed
+## .getNames <- function() {
+##     ret <- getOption("rpushbullet.names",       # retrieve as option, 
+##               ifelse(!is.null(.pkgenv$pb),	# else try environment
+##                      .pkgenv$pb[["names"]],     # and use it, or signal error
+##                      stop(paste("Neither option 'rpushbullet.names' nor entry in",
+##                                 "package environment found. Aborting."), call.=FALSE)))
+## }

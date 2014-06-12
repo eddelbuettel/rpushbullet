@@ -6,9 +6,10 @@
 \alias{summary.pbDevices}
 \title{Get registered Pushbullet devices}
 \usage{
-pbGetDevices(apikey = .getKey())
+pbGetDevices(apikey = .getKey(), ignore.pushable = FALSE, use = TRUE)
 
-\method{pbGetDevices}{default}(apikey = .getKey())
+\method{pbGetDevices}{default}(apikey = .getKey(), ignore.pushable = FALSE,
+  use = TRUE)
 
 \method{print}{pbDevices}(x, ...)
 
@@ -19,6 +20,18 @@ pbGetDevices(apikey = .getKey())
 supplied as an argument here, or via the file
 \code{~/.rpushbullet.json} which is read at package
 initialization.}
+
+\item{ignore.pushable}{Pushbullet includes a 'pushable' flag in
+its list of devices, flagging a device as false if the device has
+been deleted or for some reason disabled. Setting
+\sQuote{ignore.pushable=TRUE} will ignore this behavior and include all
+devices.}
+
+\item{use}{Save the results to the options ("rpushbullet.key",
+"rpushbullet.devices", and "rpushbullet.defaultdevice"). Doing
+this does not last past this R session; for that, either manually
+assign the options in your \code{~/.Rprofile} or save them in
+\code{~/.rpushbullet.json} via `pbSaveConfig()`.}
 
 \item{x}{Default object for \code{print} method}
 
