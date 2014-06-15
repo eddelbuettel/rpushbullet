@@ -49,13 +49,15 @@
 ##' The earlier argument \code{deviceind} is now deprecated and will
 ##' be removed in a later release.
 ##' @title Post a message via Pushbullet
-##' @param type The type of post: one of \sQuote{note}, \sQuote{link}
+##' @param type The type of post: one of \sQuote{note}, \sQuote{link}, \sQuote{file}
 ##' or \sQuote{address}.
 ##' @param title The title of the note, or the name of the address, being posted.
 ##' @param body The body of the note, or the address when \code{type}
 ##' is \sQuote{address}, or the (optional) body when the \code{type}
-##' is \sQuote{link}.
+##' is \sQuote{link} or \sQuote{file}.
 ##' @param url The URL of \code{type} is \sQuote{link}.
+##' @param local.url The local path for a file to send.
+##' @param file.type The MIME type for the file at \code{local.url}.
 ##' @param recipients A character or numeric vector indicating the
 ##' devices this post should go to. If missing, all devices are used.
 ##' @param deviceind (Deprecated) The index (or a vector/list of indices) of the
@@ -72,11 +74,13 @@
 ##' @param verbose Boolean switch to add additional output
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
-pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
+pbPost <- function(type=c("note", "link", "address", "file"),
                    title="",            # also name for type='address'
                    body="",             # also address for type='address',
                                         # and items for type='list'
-                   url="",              # url is post is of type link
+                   url="",              # url if post is of type link
+                   local.url="",        # local path to file for type='file'
+                   file.type="",        # file type for upload of type='file'
                    recipients,          # devices to post to
                    deviceind,           # deprecated, see detail
                    apikey = .getKey(),
@@ -113,6 +117,28 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
     ##     ## explicitly including others would result in double-tapping
     ##     deviceind <- 0
     ## }
+    
+    if (type=="file") {
+        if (local.url!="" & file.type!="")
+        {
+            # Request Upload
+            upload.request <- .getUploadRequest(file.name = local.url, file.type = file.type)
+            file.url <- upload.request$file_url
+            
+            # Upload File
+            txt<-sprintf("%s -i %s -F awsaccesskeyid='%s' -F acl='%s' -F key='%s' -F signature='%s' -F policy='%s' -F content-type='%s' -F 'file=@%s'",
+                    curl, 
+                    upload.request$upload_url,
+                    upload.request$data['awsaccesskeyid'],
+                    upload.request$data['acl'],
+                    upload.request$data['key'],
+                    upload.request$data['signature'],
+                    upload.request$data['policy'],
+                    upload.request$data['content-type'],
+                    local.url)
+            upload.result<-system(txt, intern=TRUE)
+        }
+    }
 
     ret <- sapply(recipients, function(ind) {
         tgt <- ifelse(ind == 0,
@@ -141,7 +167,7 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                       address = sprintf(paste0('%s -s %s -u %s: %s ',
                           '-d type="address" -d name="%s" -d address="%s" ',
                           '-X POST'),
-                          curl, apikey, tgt, title, body)
+                          curl, pburl, apikey, tgt, title, body),
 
                       ## ## not quite sure what a list body would be
                       ## list = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
@@ -150,10 +176,14 @@ pbPost <- function(type=c("note", "link", "address"), #"list", "file"),
                       ##                pburl, apikey, device, title, body),
 
                       ## for file see docs, need to upload file first
-                      ## file = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
-                      ##                       '-d type="link" -d title="%s" -d body="%s" ',
-                      ##                       '-d url="%s" -X POST'),
-                      ##                pburl, apikey, device, title, body, url),
+                      file = sprintf(paste0('%s -u %s: %s ',
+                                            ifelse(tgt != "",'-d device_iden=%s ','%s'), # avoid server error if blank
+                                            '-d type="file" -d file_name="%s" ',
+                                            '-d file_type="%s" ',
+                                            '-d file_url="%s" ',
+                                            '-d body="%s" -X POST'),
+                                     curl, apikey, pburl, tgt, basename(upload.request$file_name), 
+                                     upload.request$file_type, upload.request$file_url, body),
 
                       )
 
