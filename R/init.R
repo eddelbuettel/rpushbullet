@@ -37,7 +37,8 @@
         pb <- fromJSON(dotfile)
         assign("pb", pb, envir=.pkgenv)
         options("rpushbullet.key" = pb[["key"]])
-        options("rpushbullet.devices" = pb[["devices"]])
+        options("rpushbullet.devices" =
+                ifelse("devices" %in% names(pb), pb[["devices"]],0))
         options("rpushbullet.defaultdevice" =
                 ifelse("defaultdevice" %in% names(pb), pb[["defaultdevice"]], 0))
     } else {
@@ -56,12 +57,26 @@
                                 "package environment found. Aborting."), call.=FALSE)))
 }
 
+.getDeviceList <- function(apikey = .getKey())
+{
+    curl <- .getCurl()
+    pburl <- "https://api.pushbullet.com/v2/devices"
+    txt <- sprintf('%s -u %s: %s',curl, apikey, pburl)
+    result <- fromJSON(system(txt, intern=TRUE))
+    result
+}
+
 .getDevices <- function() {
     getOption("rpushbullet.devices",       	# retrieve as option, 
-              ifelse(!is.null(.pkgenv$pb),	# else try environment
-                     .pkgenv$pb[["devices"]],   # and use it, or signal error
-                     stop(paste("Neither option 'rpushbullet.devices' nor entry in",
-                                "package environment found. Aborting."), call.=FALSE)))
+                if(!is.null(.pkgenv$pb)){ 	# else try environment
+                    if("devices" %in% names(.pkgenv$pb)){
+                        .pkgenv$pb[["devices"]]
+                    }
+                })
+    if(getOption("rpushbullet.devices") == 0){
+        result <- .getDeviceList()
+        sapply(result$devices, FUN = function(x){ x$iden })
+    }
 }
 
 .getDefaultDevice <- function() {
@@ -97,3 +112,37 @@
     result <- fromJSON(system(txt,intern=TRUE))
     result
 }
+
+.getContacts <- function(apikey = .getKey()) {
+    curl <- .getCurl()
+    pburl <- "https://api.pushbullet.com/v2/contacts"
+    
+    txt <- sprintf('%s -u %s: %s',curl, apikey, pburl)
+    result <- fromJSON(system(txt, intern=TRUE))
+    result
+}
+
+.getDeviceId <- function(nickname)
+{
+    devicelist<-.getDeviceList()
+    if(missing(nickname)) {
+        sapply(devicelist$devices, FUN = function(x){ x$iden })
+    } else {
+        result<-sapply(devicelist$devices, FUN=function(x){ifelse(x$nickname %in% nickname, x$iden, NA)})
+        result[!is.na(result)]
+    }
+    
+}
+
+## Not currently using, but could be handy:
+#.getContactId <- function(email)
+#{
+#    contact.list<-.getContacts()
+#    if(missing(email))
+#    {
+#        sapply(contact.list$contacts, FUN = function(x){x$iden})
+#    } else {
+#        result<-sapply(contact.list$contacts, FUN = function(x){ifelse(x$email %in% email, x$iden, NA)})
+#        result[!is.na(result)]
+#    }
+#}
