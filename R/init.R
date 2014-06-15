@@ -102,12 +102,12 @@
                                 "package environment found. Aborting."), call.=FALSE)))
 }
 
-.getUploadRequest <- function(file.name,file.type="img/png",apikey = .getKey()) {
+.getUploadRequest <- function(filename,filetype="img/png",apikey = .getKey()) {
     
     curl <- .getCurl()
     pburl <- "https://api.pushbullet.com/v2/upload-request"
     
-    txt <- sprintf('%s -u %s: %s -d file_name=%s -d file_type=%s',curl, apikey, pburl, file.name, file.type)
+    txt <- sprintf('%s -u %s: %s -d file_name=%s -d file_type=%s',curl, apikey, pburl, filename, filetype)
     
     result <- fromJSON(system(txt,intern=TRUE))
     result
