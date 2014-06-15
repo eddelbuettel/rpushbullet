@@ -3,21 +3,25 @@
 \alias{pbPost}
 \title{Post a message via Pushbullet}
 \usage{
-pbPost(type = c("note", "link", "address"), title = "", body = "",
-  url = "", recipients, deviceind, apikey = .getKey(),
-  devices = .getDevices(), verbose = FALSE)
+pbPost(type = c("note", "link", "address", "file"), title = "", body = "",
+  url = "", local.url = "", file.type = "", recipients, deviceind,
+  apikey = .getKey(), devices = .getDevices(), verbose = FALSE)
 }
 \arguments{
-\item{type}{The type of post: one of \sQuote{note}, \sQuote{link}
+\item{type}{The type of post: one of \sQuote{note}, \sQuote{link}, \sQuote{file}
 or \sQuote{address}.}
 
 \item{title}{The title of the note, or the name of the address, being posted.}
 
 \item{body}{The body of the note, or the address when \code{type}
 is \sQuote{address}, or the (optional) body when the \code{type}
-is \sQuote{link}.}
+is \sQuote{link} or \sQuote{file}.}
 
 \item{url}{The URL of \code{type} is \sQuote{link}.}
+
+\item{local.url}{The local path for a file to send.}
+
+\item{file.type}{The MIME type for the file at \code{local.url}.}
 
 \item{recipients}{A character or numeric vector indicating the
 devices this post should go to. If missing, all devices are used.}
