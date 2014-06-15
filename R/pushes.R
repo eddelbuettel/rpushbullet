@@ -56,8 +56,8 @@
 ##' is \sQuote{address}, or the (optional) body when the \code{type}
 ##' is \sQuote{link} or \sQuote{file}.
 ##' @param url The URL of \code{type} is \sQuote{link}.
-##' @param local.url The local path for a file to send.
-##' @param file.type The MIME type for the file at \code{local.url}.
+##' @param localurl The local path for a file to send.
+##' @param filetype The MIME type for the file at \code{localurl}.
 ##' @param nicknames A character vector indicating the nicknames of
 ##' devices this post should go to. If missing, and no \code{emails}
 ##' are specified, all devices are used.
@@ -69,6 +69,10 @@
 ##' \code{rpushbullet.key}, or via the file \code{~/.rpushbullet.json}
 ##' which is read at package initialization (and, if found, also sets
 ##' the global option).
+##' @param devices The device to which this post is pushed. It can be
+##' supplied as an argument here, or via the file
+##' \code{~/.rpushbullet.json} which is read at package
+##' initialization.
 ##' @param verbose Boolean switch to add additional output
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
@@ -77,11 +81,12 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                    body="",             # also address for type='address',
                                         # and items for type='list'
                    url="",              # url if post is of type link
-                   local.url="",        # local path to file for type='file'
-                   file.type="",        # file type for upload of type='file'
+                   localurl="",         # local path to file for type='file'
+                   filetype="",         # file type for upload of type='file'
                    nicknames,           # nicknames of devices to post to
                    emails,              # emails of contacts to send to (can be in addition to devices)
                    apikey = .getKey(),
+                   devices = .getDevices(),
                    verbose = FALSE) {
 
     type <- match.arg(type)
@@ -89,7 +94,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     # Determine recipients for push
     recipients <- data.frame()
     if(missing(nicknames) & missing(emails)) {
-        recipients <- data.frame(iden = "", type = "")
+        recipients <- data.frame(iden = "", type = "") # If not specified, will push to all devices.
     } else {
         if(!missing(nicknames)) {
             recipients <- data.frame(iden = .getDeviceId(nickname = nicknames), type = "device_iden")
