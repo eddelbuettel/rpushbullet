@@ -175,7 +175,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                                             '-d file_url="%s" ',
                                             '-d body="%s" -X POST'),
                                      curl, apikey, pburl, tgt, title, 
-                                     upload.request$file_type, upload.request$file_url, body),
+                                     uploadrequest$file_type, uploadrequest$file_url, body),
 
                       )
 
