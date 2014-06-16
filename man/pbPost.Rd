@@ -4,7 +4,7 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "address", "file"), title = "", body = "",
-  url = "", local.url = "", file.type = "", recipients, deviceind,
+  url = "", localurl = "", filetype = "", nicknames, emails,
   apikey = .getKey(), devices = .getDevices(), verbose = FALSE)
 }
 \arguments{
@@ -19,15 +19,17 @@ is \sQuote{link} or \sQuote{file}.}
 
 \item{url}{The URL of \code{type} is \sQuote{link}.}
 
-\item{local.url}{The local path for a file to send.}
+\item{localurl}{The local path for a file to send.}
 
-\item{file.type}{The MIME type for the file at \code{local.url}.}
+\item{filetype}{The MIME type for the file at \code{localurl}.}
 
-\item{recipients}{A character or numeric vector indicating the
-devices this post should go to. If missing, all devices are used.}
+\item{nicknames}{A character vector indicating the nicknames of
+devices this post should go to. If missing, and no \code{emails}
+are specified, all devices are used.}
 
-\item{deviceind}{(Deprecated) The index (or a vector/list of indices) of the
-device(s) in the list of devices.}
+\item{emails}{A character vector of email addresses in user contacts
+where this post should go. Can be specified in conjunction with
+\code{nicknames}.}
 
 \item{apikey}{The API key used to access the service. It can be
 supplied as an argument here, via the global option

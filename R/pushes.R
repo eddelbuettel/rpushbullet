@@ -56,12 +56,14 @@
 ##' is \sQuote{address}, or the (optional) body when the \code{type}
 ##' is \sQuote{link} or \sQuote{file}.
 ##' @param url The URL of \code{type} is \sQuote{link}.
-##' @param local.url The local path for a file to send.
-##' @param file.type The MIME type for the file at \code{local.url}.
-##' @param recipients A character or numeric vector indicating the
-##' devices this post should go to. If missing, all devices are used.
-##' @param deviceind (Deprecated) The index (or a vector/list of indices) of the
-##' device(s) in the list of devices. 
+##' @param localurl The local path for a file to send.
+##' @param filetype The MIME type for the file at \code{localurl}.
+##' @param nicknames A character vector indicating the nicknames of
+##' devices this post should go to. If missing, and no \code{emails}
+##' are specified, all devices are used.
+##' @param emails A character vector of email addresses in user contacts
+##' where this post should go. Can be specified in conjunction with 
+##' \code{nicknames}.
 ##' @param apikey The API key used to access the service. It can be
 ##' supplied as an argument here, via the global option
 ##' \code{rpushbullet.key}, or via the file \code{~/.rpushbullet.json}
@@ -79,73 +81,64 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                    body="",             # also address for type='address',
                                         # and items for type='list'
                    url="",              # url if post is of type link
-                   local.url="",        # local path to file for type='file'
-                   file.type="",        # file type for upload of type='file'
-                   recipients,          # devices to post to
-                   deviceind,           # deprecated, see detail
+                   localurl="",         # local path to file for type='file'
+                   filetype="",         # file type for upload of type='file'
+                   nicknames,           # nicknames of devices to post to
+                   emails,              # emails of contacts to send to (can be in addition to devices)
                    apikey = .getKey(),
                    devices = .getDevices(),
                    verbose = FALSE) {
 
     type <- match.arg(type)
 
-    if (!missing(deviceind)) {
-        if (missing(recipients)) {
-            warning("Agument 'deviceind' is deprecated. Please use 'recipients'.", call.=FALSE)
-            recipients <- deviceind
-        } else {
-            warning("Using 'recipients' and ignoring deprecated 'deviceinds'.", call.=FALSE)
+    # Determine recipients for push
+    recipients <- data.frame()
+    if(missing(nicknames) & missing(emails)) {
+        recipients <- data.frame(iden = "", type = "") # If not specified, will push to all devices.
+    } else {
+        if(!missing(nicknames)) {
+            recipients <- data.frame(iden = .getDeviceId(nickname = nicknames), type = "device_iden")
+        }
+        if(!missing(emails)) {
+            recipients <- rbind(recipients, data.frame(iden = emails, type = "email"))
         }
     }
 
-    if (missing(recipients)) {
-        recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
-    }
-    
-    if (is.character(recipients)) {
-        recipients <- match(recipients, .getNames())
-    }
-    
     pburl <- "https://api.pushbullet.com/v2/pushes"
     curl <- .getCurl()
     
-    ## if (is.null(deviceind))
-    ##     deviceind <- .getDefaultDevice()
-
-    ## if (0 %in% deviceind) {
-    ##     ## this will send to all devices in the pushbullet account,
-    ##     ## explicitly including others would result in double-tapping
-    ##     deviceind <- 0
-    ## }
-    
+    # If type is file, upload file
     if (type=="file") {
-        if (local.url!="" & file.type!="")
+        if (localurl!="" & filetype!="")
         {
             # Request Upload
-            upload.request <- .getUploadRequest(file.name = local.url, file.type = file.type)
-            file.url <- upload.request$file_url
+            uploadrequest <- .getUploadRequest(filename = localurl, filetype = filetype)
+            fileurl <- uploadrequest$file_url
             
             # Upload File
             txt<-sprintf("%s -i %s -F awsaccesskeyid='%s' -F acl='%s' -F key='%s' -F signature='%s' -F policy='%s' -F content-type='%s' -F 'file=@%s'",
                     curl, 
-                    upload.request$upload_url,
-                    upload.request$data['awsaccesskeyid'],
-                    upload.request$data['acl'],
-                    upload.request$data['key'],
-                    upload.request$data['signature'],
-                    upload.request$data['policy'],
-                    upload.request$data['content-type'],
-                    local.url)
-            upload.result<-system(txt, intern=TRUE)
+                    uploadrequest$upload_url,
+                    uploadrequest$data['awsaccesskeyid'],
+                    uploadrequest$data['acl'],
+                    uploadrequest$data['key'],
+                    uploadrequest$data['signature'],
+                    uploadrequest$data['policy'],
+                    uploadrequest$data['content-type'],
+                    localurl)
+            uploadresult<-system(txt, intern=TRUE)
         }
     }
 
-    ret <- sapply(recipients, function(ind) {
-        tgt <- ifelse(ind == 0,
-                      '',                             # all devices
-                      sprintf('-d device_iden="%s" ', # specific device
-                              devices[ind]))
-
+    ret <- apply(recipients, MARGIN = 1, FUN = function(recipient) {
+        cat(paste0("Sending to ",recipient[1],"...\n"))
+        #tgt <- sapply(recipient,FUN=function(x){sprintf('-d device_iden="%s" ',x)})
+        if(recipient[2] == ""){
+            tgt <- ""
+        } else {
+            tgt <- paste0("-d ",recipient[2],"=",recipient[1]," ")
+        }
+            
         txt <- switch(type,
 
                       ## curl https://api.pushbullet.com/v2/pushes \
@@ -176,14 +169,13 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                       ##                pburl, apikey, device, title, body),
 
                       ## for file see docs, need to upload file first
-                      file = sprintf(paste0('%s -u %s: %s ',
-                                            ifelse(tgt != "",'-d device_iden=%s ','%s'), # avoid server error if blank
+                      file = sprintf(paste0('%s -u %s: %s %s',
                                             '-d type="file" -d file_name="%s" ',
                                             '-d file_type="%s" ',
                                             '-d file_url="%s" ',
                                             '-d body="%s" -X POST'),
-                                     curl, apikey, pburl, tgt, basename(upload.request$file_name), 
-                                     upload.request$file_type, upload.request$file_url, body),
+                                     curl, apikey, pburl, tgt, title, 
+                                     uploadrequest$file_type, uploadrequest$file_url, body),
 
                       )
 
