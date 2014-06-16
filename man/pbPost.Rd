@@ -4,8 +4,8 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "address", "file"), title = "", body = "",
-  url = "", local.url = "", file.type = "", recipients, deviceind,
-  apikey = .getKey(), devices = .getDevices(), verbose = FALSE)
+  url = "", filetype = "", recipients, deviceind, apikey = .getKey(),
+  devices = .getDevices(), verbose = FALSE)
 }
 \arguments{
 \item{type}{The type of post: one of \sQuote{note}, \sQuote{link}, \sQuote{file}
@@ -17,11 +17,11 @@ or \sQuote{address}.}
 is \sQuote{address}, or the (optional) body when the \code{type}
 is \sQuote{link} or \sQuote{file}.}
 
-\item{url}{The URL of \code{type} is \sQuote{link}.}
+\item{url}{The URL of \code{type} is \sQuote{link}, or the local
+path of a file to be sent if \code{type} is \sQuote{file}.}
 
-\item{local.url}{The local path for a file to send.}
-
-\item{file.type}{The MIME type for the file at \code{local.url}.}
+\item{filetype}{The MIME type for the file at \code{url} (if
+\code{type} is \sQuote{file}).}
 
 \item{recipients}{A character or numeric vector indicating the
 devices this post should go to. If missing, all devices are used.}
@@ -47,8 +47,8 @@ A JSON result record is return invisibly
 }
 \description{
 This function posts a message to Pushbullet. Different types of
-messages are supported: \sQuote{note}, \sQuote{link} or
-\sQuote{address}.
+messages are supported: \sQuote{note}, \sQuote{link},
+\sQuote{address}, or \sQuote{file}.
 }
 \details{
 This function invokes the \sQuote{pushes} functionality of

@@ -20,8 +20,8 @@
 
 
 ##' This function posts a message to Pushbullet. Different types of
-##' messages are supported: \sQuote{note}, \sQuote{link} or
-##' \sQuote{address}.
+##' messages are supported: \sQuote{note}, \sQuote{link}, 
+##' \sQuote{address}, or \sQuote{file}.
 ##'
 ##' This function invokes the \sQuote{pushes} functionality of
 ##' the Pushbullet API; see \url{https://docs.pushbullet.com/v2/pushes} for more
@@ -31,7 +31,7 @@
 ##' title and body of the note.  If a \sQuote{link} is pushed, the recipient's web
 ##' browser is opened at the given URL.  If an \sQuote{address} is
 ##' pushed, the recipient's web browser is opened in map mode at the
-##' given address.
+##' given address. 
 ##'
 ##' If \sQuote{recipients} argument is missing, the post is pushed to
 ##' \emph{all} devices in accordance with the API definition. If
@@ -55,9 +55,10 @@
 ##' @param body The body of the note, or the address when \code{type}
 ##' is \sQuote{address}, or the (optional) body when the \code{type}
 ##' is \sQuote{link} or \sQuote{file}.
-##' @param url The URL of \code{type} is \sQuote{link}.
-##' @param local.url The local path for a file to send.
-##' @param file.type The MIME type for the file at \code{local.url}.
+##' @param url The URL of \code{type} is \sQuote{link}, or the local
+##' path of a file to be sent if \code{type} is \sQuote{file}.
+##' @param filetype The MIME type for the file at \code{url} (if
+##' \code{type} is \sQuote{file}).
 ##' @param recipients A character or numeric vector indicating the
 ##' devices this post should go to. If missing, all devices are used.
 ##' @param deviceind (Deprecated) The index (or a vector/list of indices) of the
@@ -78,9 +79,9 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                    title="",            # also name for type='address'
                    body="",             # also address for type='address',
                                         # and items for type='list'
-                   url="",              # url if post is of type link
-                   local.url="",        # local path to file for type='file'
-                   file.type="",        # file type for upload of type='file'
+                   url="",              # url if post is of type link, or
+                                        # local path to file for type='file'
+                   filetype="",         # file type for upload of type='file'
                    recipients,          # devices to post to
                    deviceind,           # deprecated, see detail
                    apikey = .getKey(),
@@ -119,24 +120,25 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     ## }
     
     if (type=="file") {
-        if (local.url!="" & file.type!="")
-        {
+        if (url != "" && filetype != "") {
             # Request Upload
-            upload.request <- .getUploadRequest(file.name = local.url, file.type = file.type)
-            file.url <- upload.request$file_url
+            uploadrequest <- .getUploadRequest(filename = url, filetype = filetype)
+            fileurl <- uploadrequest$file_url
             
             # Upload File
-            txt<-sprintf("%s -i %s -F awsaccesskeyid='%s' -F acl='%s' -F key='%s' -F signature='%s' -F policy='%s' -F content-type='%s' -F 'file=@%s'",
-                    curl, 
-                    upload.request$upload_url,
-                    upload.request$data['awsaccesskeyid'],
-                    upload.request$data['acl'],
-                    upload.request$data['key'],
-                    upload.request$data['signature'],
-                    upload.request$data['policy'],
-                    upload.request$data['content-type'],
-                    local.url)
-            upload.result<-system(txt, intern=TRUE)
+            txt <- sprintf(paste0("%s -i %s -F awsaccesskeyid='%s' -F acl='%s' ",
+                                  "-F key='%s' -F signature='%s' -F policy='%s'",
+                                  "-F content-type='%s' -F 'file=@%s'"),
+                           curl, 
+                           uploadrequest$upload_url,
+                           uploadrequest$data['awsaccesskeyid'],
+                           uploadrequest$data['acl'],
+                           uploadrequest$data['key'],
+                           uploadrequest$data['signature'],
+                           uploadrequest$data['policy'],
+                           uploadrequest$data['content-type'],
+                           url)
+            uploadresult <- system(txt, intern=TRUE)
         }
     }
 
@@ -182,8 +184,9 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                                             '-d file_type="%s" ',
                                             '-d file_url="%s" ',
                                             '-d body="%s" -X POST'),
-                                     curl, apikey, pburl, tgt, basename(upload.request$file_name), 
-                                     upload.request$file_type, upload.request$file_url, body),
+                                     curl, apikey, pburl, tgt,
+                                     basename(uploadrequest$file_name), 
+                                     uploadrequest$file_type, uploadrequest$file_url, body),
 
                       )
 

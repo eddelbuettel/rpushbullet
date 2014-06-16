@@ -1,3 +1,12 @@
+2014-06-15  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: Applied pull request #7 by Mike Birdgeneau which
+	implements pushes of type 'file'
+	* R/init.R: Ditto
+
+	* R/pushes: Minor postprocessing of pull request
+	* R/init.R: Ditto
+
 2014-06-10  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: Rewritten in terms of new argument 'recipients' with
