@@ -60,7 +60,9 @@
 ##' @param filetype The MIME type for the file at \code{url} (if
 ##' \code{type} is \sQuote{file}).
 ##' @param recipients A character or numeric vector indicating the
-##' devices this post should go to. If missing, all devices are used.
+##' devices this post should go to. If missing, the default device
+##' is looked up from an optional setting, and if none has been set 
+##' the push is sent to all devices.
 ##' @param deviceind (Deprecated) The index (or a vector/list of indices) of the
 ##' device(s) in the list of devices. 
 ##' @param apikey The API key used to access the service. It can be

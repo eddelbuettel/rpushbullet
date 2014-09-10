@@ -1,3 +1,7 @@
+2014-09-10  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: Documentation clarified for 'recipient' option
+
 2014-06-15  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: Applied pull request #7 by Mike Birdgeneau which
