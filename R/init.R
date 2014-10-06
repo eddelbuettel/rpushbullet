@@ -92,7 +92,7 @@
     curl <- .getCurl()
     pburl <- "https://api.pushbullet.com/v2/upload-request"
     
-    txt <- sprintf('%s -u %s: %s -d file_name=%s -d file_type=%s',
+    txt <- sprintf('%s -s -u %s: %s -d file_name=%s -d file_type=%s',
                    curl, apikey, pburl, filename, filetype)
     
     result <- fromJSON(system(txt, intern=TRUE))

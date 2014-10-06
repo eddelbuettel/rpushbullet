@@ -1,3 +1,10 @@
+2014-10-06  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: Minor typo correction by Mike Birdgeneau
+
+	* R/pushes.R: Made file operations silent, minor tweak to docs
+	* R/init.R: Made file operations silent
+
 2014-09-10  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: Documentation clarified for 'recipient' option

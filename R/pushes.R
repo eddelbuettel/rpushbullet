@@ -54,11 +54,11 @@
 ##' @param title The title of the note, or the name of the address, being posted.
 ##' @param body The body of the note, or the address when \code{type}
 ##' is \sQuote{address}, or the (optional) body when the \code{type}
-##' is \sQuote{link} or \sQuote{file}.
+##' is \sQuote{link}.
 ##' @param url The URL of \code{type} is \sQuote{link}, or the local
 ##' path of a file to be sent if \code{type} is \sQuote{file}.
 ##' @param filetype The MIME type for the file at \code{url} (if
-##' \code{type} is \sQuote{file}).
+##' \code{type} is \sQuote{file}), defaults to \dQuote{text/plain}.
 ##' @param recipients A character or numeric vector indicating the
 ##' devices this post should go to. If missing, the default device
 ##' is looked up from an optional setting, and if none has been set 
@@ -78,14 +78,14 @@
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
 pbPost <- function(type=c("note", "link", "address", "file"),
-                   title="",            # also name for type='address'
-                   body="",             # also address for type='address',
-                                        # and items for type='list'
-                   url="",              # url if post is of type link, or
-                                        # local path to file for type='file'
-                   filetype="",         # file type for upload of type='file'
-                   recipients,          # devices to post to
-                   deviceind,           # deprecated, see detail
+                   title="",             # also name for type='address'
+                   body="",              # also address for type='address',
+                                         # and items for type='list'
+                   url="",               # url if post is of type link, or
+                                         # local path to file for type='file'
+                   filetype="text/plain",# file type for upload of type='file'
+                   recipients,           # devices to post to
+                   deviceind,            # deprecated, see detail
                    apikey = .getKey(),
                    devices = .getDevices(),
                    verbose = FALSE) {
@@ -128,7 +128,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
             fileurl <- uploadrequest$file_url
             
             # Upload File
-            txt <- sprintf(paste0("%s -i %s -F awsaccesskeyid='%s' -F acl='%s' ",
+            txt <- sprintf(paste0("%s -s -i %s -F awsaccesskeyid='%s' -F acl='%s' ",
                                   "-F key='%s' -F signature='%s' -F policy='%s' ",
                                   "-F content-type='%s' -F 'file=@%s'"),
                            curl, 
@@ -180,7 +180,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                       ##                pburl, apikey, device, title, body),
 
                       ## for file see docs, need to upload file first
-                      file = sprintf(paste0('%s -u %s: %s ',
+                      file = sprintf(paste0('%s -s -u %s: %s ',
                                             ifelse(tgt != "",'-d device_iden=%s ','%s'), # avoid server error if blank
                                             '-d type="file" -d file_name="%s" ',
                                             '-d file_type="%s" ',
