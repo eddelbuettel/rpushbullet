@@ -127,7 +127,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
             
             # Upload File
             txt <- sprintf(paste0("%s -i %s -F awsaccesskeyid='%s' -F acl='%s' ",
-                                  "-F key='%s' -F signature='%s' -F policy='%s'",
+                                  "-F key='%s' -F signature='%s' -F policy='%s' ",
                                   "-F content-type='%s' -F 'file=@%s'"),
                            curl, 
                            uploadrequest$upload_url,
