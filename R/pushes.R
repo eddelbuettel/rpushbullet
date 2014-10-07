@@ -122,10 +122,10 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     ## }
     
     if (type=="file") {
-        if (url != "" && filetype != "") {
-            # Request Upload
+        if (url != "" && filetype != "") {             # Request Upload
+            url <- normalizePath(url)                  # abs/rel path, tilde expansion, ...
             uploadrequest <- .getUploadRequest(filename = url, filetype = filetype)
-            fileurl <- uploadrequest$file_url
+            #fileurl <- uploadrequest$file_url
             
             # Upload File
             txt <- sprintf(paste0("%s -s -i %s -F awsaccesskeyid='%s' -F acl='%s' ",
