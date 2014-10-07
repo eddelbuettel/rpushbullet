@@ -5,6 +5,8 @@
 	* R/pushes.R: Made file operations silent, minor tweak to docs
 	* R/init.R: Made file operations silent
 
+	* tests/simpleTests.R: Added simple type='file' example
+
 2014-09-10  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: Documentation clarified for 'recipient' option

@@ -30,4 +30,8 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
     ## Post a note item
     str(fromJSON(pbPost("note", "simple Test", "We think this should work.\nWe really do.")))
+
+    ## Post a file
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))))
+
 }
