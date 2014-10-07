@@ -29,10 +29,13 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     str(fromJSON(pbGetDevices()))
 
     ## Post a note item
-    str(fromJSON(pbPost("note", "simple Test", "We think this should work.\nWe really do.")))
+    str(fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")))
 
-    ## Post a URL
-    str(fromJSON(pbPost(type="link", body="Some URL", title="Some title",
+    ## Post an address -- should open browser in Google Maps
+    str(fromJSON(pbPost(type="address", title="An Address", body="South Pole, Antarctica")))
+
+    ## Post a URL -- should open browser
+    str(fromJSON(pbPost(type="link", title="Some title", body="Some URL", 
                         url="http://cran.r-project.org/package=RPushbullet")))
     
     ## Post a file
