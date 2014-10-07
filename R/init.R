@@ -38,6 +38,7 @@
         assign("pb", pb, envir=.pkgenv)
         options("rpushbullet.key" = pb[["key"]])
         options("rpushbullet.devices" = pb[["devices"]])
+        options("rpushbullet.names" = pb[["names"]])
         options("rpushbullet.defaultdevice" =
                 ifelse("defaultdevice" %in% names(pb), pb[["defaultdevice"]], 0))
     } else {

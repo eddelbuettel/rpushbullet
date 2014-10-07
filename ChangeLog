@@ -5,7 +5,10 @@
 	* R/pushes.R: Made file operations silent, minor tweak to docs
 	* R/init.R: Made file operations silent
 
-	* tests/simpleTests.R: Added simple type='file' example
+	* R/init.R: Also set 'names' option from init file
+
+	* tests/simpleTests.R: Added two examples for type='link'
+	and type='file'
 
 2014-09-10  Dirk Eddelbuettel  <edd@debian.org>
 
