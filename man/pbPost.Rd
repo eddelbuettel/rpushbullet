@@ -79,6 +79,22 @@ is used as a code to imply \sQuote{all} devices.
 The earlier argument \code{deviceind} is now deprecated and will
 be removed in a later release.
 }
+\examples{
+\dontrun{
+# A note
+pbPost("note", "A Simple Test", "We think this should work.\\nWe really do.")
+
+# An address -- should open browser in Google Maps
+pbPost(type="address", title="An Address", body="South Pole, Antarctica")
+
+# A URL -- should open browser
+pbPost(type="link", title="Some title", body="Some URL",
+       url="http://cran.r-project.org/package=RPushbullet")
+
+# A file
+pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))
+}
+}
 \author{
 Dirk Eddelbuettel
 }

@@ -77,6 +77,21 @@
 ##' @param verbose Boolean switch to add additional output
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
+##' @examples
+##' \dontrun{
+##' # A note
+##' pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")
+##' 
+##' # An address -- should open browser in Google Maps
+##' pbPost(type="address", title="An Address", body="South Pole, Antarctica")
+##' 
+##' # A URL -- should open browser
+##' pbPost(type="link", title="Some title", body="Some URL", 
+##'        url="http://cran.r-project.org/package=RPushbullet")
+##'  
+##' # A file
+##' pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))
+##' }
 pbPost <- function(type=c("note", "link", "address", "file"),
                    title="",             # also name for type='address'
                    body="",              # also address for type='address',

@@ -22,6 +22,10 @@
 \author{
   Dirk Eddelbuettel 
 }
+\seealso{
+  The documentation for the main function \code{\link{pbPost}}, as well
+  as the documentation for \code{\link{pbGetDevices}}.
+}
 \references{
   See the Pushbullet documentation at the
   \href{http://www.pushbullet.com}{site}.
