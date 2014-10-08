@@ -63,6 +63,9 @@
 ##' devices this post should go to. If missing, the default device
 ##' is looked up from an optional setting, and if none has been set 
 ##' the push is sent to all devices.
+##' @param email An alternative way to specify a recipient is to specify 
+##' an email address. If both \code{recipients} and \code{email} are
+##' present, \code{recipients} is used.
 ##' @param deviceind (Deprecated) The index (or a vector/list of indices) of the
 ##' device(s) in the list of devices. 
 ##' @param apikey The API key used to access the service. It can be
@@ -100,6 +103,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                                          # local path to file for type='file'
                    filetype="text/plain",# file type for upload of type='file'
                    recipients,           # devices to post to
+                   email,                # alternatively use an email
                    deviceind,            # deprecated, see detail
                    apikey = .getKey(),
                    devices = .getDevices(),
@@ -108,20 +112,28 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     type <- match.arg(type)
 
     if (!missing(deviceind)) {
-        if (missing(recipients)) {
+        if (missing(recipients) && missing(email)) {
             warning("Agument 'deviceind' is deprecated. Please use 'recipients'.", call.=FALSE)
             recipients <- deviceind
         } else {
-            warning("Using 'recipients' and ignoring deprecated 'deviceinds'.", call.=FALSE)
+            warning("Using 'recipients' (or 'email') and ignoring deprecated 'deviceinds'.",
+                    call.=FALSE)
         }
     }
 
-    if (missing(recipients)) {
+    if (missing(recipients) && missing(email)) {
         recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
-    }
-    
-    if (is.character(recipients)) {
-        recipients <- match(recipients, .getNames())
+        dest <- match(recipients, .getNames())
+    } else {
+        if (!missing(recipients)) {     # hence recipient present
+            if (is.character(recipients)) {
+                dest <- match(recipients, .getNames())
+            } else {
+                dest <- recipients      # numeric values
+            }
+        } else {                        # hence email presnt
+           dest <- email
+       }
     }
     
     pburl <- "https://api.pushbullet.com/v2/pushes"
@@ -159,12 +171,18 @@ pbPost <- function(type=c("note", "link", "address", "file"),
         }
     }
 
-    ret <- sapply(recipients, function(ind) {
-        tgt <- ifelse(ind == 0,
-                      '',                             # all devices
-                      sprintf('-d device_iden="%s" ', # specific device
-                              devices[ind]))
-
+    ret <- lapply(dest, function(d) {
+        if (is.character(d)) {          # this was an email
+            tgt <- sprintf(' -d email="%s" ', d)
+        } else if (is.numeric(d)) {     # this a listed device, now transfered to index
+            tgt <- ifelse(d == 0,
+                          '',                             # all devices
+                          sprintf('-d device_iden="%s" ', # specific device
+                                  devices[ind]))
+        } else {                        #
+            tgt <- ''
+        }
+        
         txt <- switch(type,
 
                       ## curl https://api.pushbullet.com/v2/pushes \

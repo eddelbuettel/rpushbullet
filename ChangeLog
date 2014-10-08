@@ -1,3 +1,8 @@
+2014-10-08  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: New (optional) argument 'email' in pbPost
+	* man/pbPost.Rd: Corresponding manual page updates
+
 2014-10-06  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: Minor typo correction by Mike Birdgeneau
