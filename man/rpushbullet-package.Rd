@@ -15,10 +15,19 @@
 }
 \details{
   The \href{https://www.pushbullet.com/api}{Pushbullet API} offers a
-  RESTful interface. It requires an API key which can be obtained free
+  RESTful interface which requires an API key. A key can be obtained free
   of charge from \href{https://www.pushbullet.com}{Pushbullet}.  Given
-  the API key, and one or more registered devices, 
-  users can push message to one or more device.
+  such a key, and one or more registered devices, 
+  users can push messages to one or more device, or a given email
+  address.
+
+  The main function is \code{\link{pbPost}} which can be used to send a
+  message comprising a note (with free-form body and title), link (for
+  sending a URL), address or even a file. The message recipients is
+  typically one (or several) of the devices known to the user (see the
+  next section for details), it can also be an email address in which
+  case \href{http://www.pushbullet.com}{Pushbullet} creates and sends an
+  email to the given address.
 }
 \section{Initialization}{
   The authentication key, as well as the device id, nicknames for the
@@ -47,9 +56,9 @@
     "defaultdevice": "Phone"
 }
 }
-  The entire block is denoted by a pair of curly braces. Within the
+  The entire block is delimited by a pair of curly braces. Within the
   curly braces we have \dQuote{key} and \dQuote{devices} which are
-  mandatory. \dQuote{key} is expected to contain a single value;
+  mandatory. Here \dQuote{key} is expected to contain a single value;
   \dQuote{devices} can be an array which is denoted by square brackets.
   Optionally a \dQuote{names} single value or array can be used to
   assign nicknames to the devices. Lastly, a \dQuote{defaultdevice} can
@@ -74,6 +83,6 @@
 }
 \references{
   See the Pushbullet documentation at the
-  \href{http://www.pushbullet.com}{site}.
+  \href{http://www.pushbullet.com}{Pushbullet website}.
 }
 \keyword{package}
