@@ -16,8 +16,54 @@
 \details{
   The \href{https://www.pushbullet.com/api}{Pushbullet API} offers a
   RESTful interface. It requires an API key which can be obtained free
-  of charge.  Given the API key, and one or more registered devices,
+  of charge from \href{https://www.pushbullet.com}{Pushbullet}.  Given
+  the API key, and one or more registered devices, 
   users can push message to one or more device.
+}
+\section{Initialization}{
+  The authentication key, as well as the device id, nicknames for the
+  devices and default device can all be declared in several ways.
+
+  One possibility is to use a file \code{.rpushbullet.json} in the
+  \code{$HOME} directory. (Note that on Windows you may have to set the
+  \code{$HOME} environment variable.) It uses the JSON format which uses
+  a key:value pair notation; values may be arrays.  A simple example
+  follows.
+
+  \preformatted{
+{ 
+    "key": "abc...YourKeyHereBetweenQuote....xyz",
+
+    "devices": [ 
+        "abc...SomeId.......xyz",
+        "abc...SomeOtherId..xyz"
+    ],
+
+    "names": [
+        "Phone",
+        "Browser"
+    ],
+
+    "defaultdevice": "Phone"
+}
+}
+  The entire block is denoted by a pair of curly braces. Within the
+  curly braces we have \dQuote{key} and \dQuote{devices} which are
+  mandatory. \dQuote{key} is expected to contain a single value;
+  \dQuote{devices} can be an array which is denoted by square brackets.
+  Optionally a \dQuote{names} single value or array can be used to
+  assign nicknames to the devices. Lastly, a \dQuote{defaultdevice} can
+  be designated as well.
+
+  However, use of a configuration file is not mandatory. The arguments
+  can also be supplied as global options (which could be done in the
+  usual R startup files, see \code{\link{Startup}} for details) as well
+  as via standard function arguments when calling the corresponding
+  functions. When using global options, use the names
+  \code{rpushbullet.key}, \code{rpushbullet.devices}, \code{rpushbullet.names}, 
+  and \code{rpushbullet.defaultdevice} corresponding to the entries in
+  the JSON file shown above.
+  
 }
 \author{
   Dirk Eddelbuettel 

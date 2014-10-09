@@ -1,5 +1,9 @@
 2014-10-09  Dirk Eddelbuettel  <edd@debian.org>
 
+	* man/rpushbullet-package.Rd: Added a new section on intialization
+	detailing how api key, device key(s) and name(s) and defaultdevice
+	can be specified via a dotfile, options or function arguments.
+
 	* R/pushes.R: Minor correction
 
 2014-10-08  Dirk Eddelbuettel  <edd@debian.org>
