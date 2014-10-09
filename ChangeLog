@@ -1,3 +1,7 @@
+2014-10-09  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: Minor correction
+
 2014-10-08  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: New (optional) argument 'email' in pbPost

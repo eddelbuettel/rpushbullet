@@ -175,11 +175,10 @@ pbPost <- function(type=c("note", "link", "address", "file"),
         if (is.character(d)) {          # this was an email
             tgt <- sprintf(' -d email="%s" ', d)
         } else if (is.numeric(d)) {     # this a listed device, now transfered to index
-            tgt <- ifelse(d == 0,
-                          '',                             # all devices
-                          sprintf('-d device_iden="%s" ', # specific device
-                                  devices[ind]))
-        } else {                        #
+            tgt <- ifelse(d == 0,       # if zero, then use all devices
+                          '',           # otherwise given specific device
+                          sprintf('-d device_iden="%s" ', devices[d]))
+        } else {                        # fallback, should not get reached
             tgt <- ''
         }
         
