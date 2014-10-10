@@ -1,3 +1,7 @@
+2014-10-10  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Version 0.1.0
+
 2014-10-09  Dirk Eddelbuettel  <edd@debian.org>
 
 	* man/rpushbullet-package.Rd: Added a new section on intialization
