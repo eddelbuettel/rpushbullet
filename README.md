@@ -8,14 +8,14 @@ which is perfect for alerting, and much more.
 
 To use it, just register as a user to obtain an API key, and maybe install
 the Android or iPhone app.  See the [Pushbullet](http://www.pushbullet.com)
-documentation for more, in particular  
+documentation for more, in particular
 
 - [Getting Started](https://www.pushbullet.com/guide/getting-started)
 - [Features](https://www.pushbullet.com/guide/getting-the-most-out-of-pushbullet)
 
 ### Package Status
 
-The package is functional, yet still somewhat experimental and subject to change.
+The package is functional, yet still young and thus subject to change.
 
 Initial explorations at the end of March 2014 were not entirely successful:
 Using [RCurl](http://cran.rstudio.com/package=RCurl), one could retrieve
@@ -28,7 +28,7 @@ the JSON response.
 
 ### Initialization
 
-A  file `~/.rpushbullet.json` can be used to pass the API key and device
+A file `~/.rpushbullet.json` can be used to pass the API key and device
 identifiers to the package.  The content is read upon package startup, and
 stored in a package-local environment. The format of this file is as follows:
 ```
@@ -45,11 +45,16 @@ stored in a package-local environment. The format of this file is as follows:
         "...name1...",
         "...name2...",
         "...name3..."
-    ]
+    ],
+
+    "defaultdevice": "...nameOfYourDefault..."
 }
 ```
 
-The `names` field is optional and not (yet?) used. You can also use it programmatically via
+The `names` and `defaultdevice` fields are optional. See the main package
+help page for more details.
+
+You can also create the file programmatically via
 
 ```
 cat(RJSONSIO::toJSON(list(key="..key here..", devices=c("..aa..", "..bb.."))))
