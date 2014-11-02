@@ -1,3 +1,11 @@
+2014-11-02  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION: Increment version for interim test
+
+	* R/pushes.R: Correct file upload method
+
+	* R/init.R: Protect filename by spaces
+
 2014-10-10  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION: Version 0.1.0
