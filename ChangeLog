@@ -1,6 +1,10 @@
-2014-11-02  Dirk Eddelbuettel  <edd@debian.org>
+2014-11-03  Dirk Eddelbuettel  <edd@debian.org>
 
-	* DESCRIPTION: Increment version for interim test
+	* DESCRIPTION: Version 0.1.1
+
+	* DESCRIPTION: Updated the text in Description:
+
+2014-11-02  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: Correct file upload method
 
