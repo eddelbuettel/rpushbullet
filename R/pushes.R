@@ -228,7 +228,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                       ##                pburl, apikey, device, title, body),
 
                       ## for file see docs, need to upload file first
-		      file = sprintf(paste0('%s -s %s -u %s: %s',
+		      file = sprintf(paste0('%s -s %s -u %s: ',ifelse(tgt!='','%s',''),
                                             '-d type="file" -d file_name="%s" ',
                                             '-d file_type="%s" ',
                                             '-d file_url="%s" ',
