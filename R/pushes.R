@@ -138,9 +138,9 @@ pbPost <- function(type=c("note", "link", "address", "file"),
 	} else {
 	    if(!missing(email))         # either email or channel
 	    {
-		dest <- email
+		dest <- email           # email present
 	    } else {
-		dest <- channel
+		dest <- channel         # hence channel
 	    }
 
        }
