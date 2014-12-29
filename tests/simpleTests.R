@@ -15,7 +15,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     RPushbullet:::.pkgenv[["pb"]]
     RPushbullet:::.pkgenv[["pb"]][["key"]]
     RPushbullet:::.pkgenv[["pb"]][["devices"]]
-    
+
     ## As well as the options we create then too
     getOption("rpushbullet.key")
     getOption("rpushbullet.devices")
@@ -35,10 +35,24 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     str(fromJSON(pbPost(type="address", title="An Address", body="South Pole, Antarctica")[[1]]))
 
     ## Post a URL -- should open browser
-    
-    ## Post a file
-    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))))
     str(fromJSON(pbPost(type="link", title="Some title", body="Some URL",
-			url="http://cran.r-project.org/package=RPushbullet")[[1]]))
+                        url="http://cran.r-project.org/package=RPushbullet")[[1]]))
+
+    #### Posting Files with different arguments ####
+
+    ## Post a file with no recipients
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))[[1]]))
+
+    ## Post a file with numeric recipient
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        recipients = 1)[[1]]))
+
+    ## Post a file with device name of recipient specified
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        recipients = "iPhone")[[1]]))
+
+    ## Post a file with an email recipient specified:
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        email = "youremail@yourdomain.com")[[1]]))
 
 }
