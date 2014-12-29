@@ -29,7 +29,10 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     str(pbGetDevices())
 
     ## Post a note item
-    str(fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")[[1]]))
+    res<-fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")[[1]])
+    str(res)
+    # res$receiver_email # storing this test result to allow us to use active user's email for testing below.
+
 
     ## Post an address -- should open browser in Google Maps
     str(fromJSON(pbPost(type="address", title="An Address", body="South Pole, Antarctica")[[1]]))
@@ -49,10 +52,16 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
     ## Post a file with device name of recipient specified
     str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
-                        recipients = "iPhone")[[1]]))
+                        recipients = RPushbullet:::.getNames()[1])[[1]]))
 
     ## Post a file with an email recipient specified:
+    pbPost()
+
     str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
-                        email = "youremail@yourdomain.com")[[1]]))
+                        email = res$receiver_email)[[1]]))
+
+    ## Post file with both email and numeric recipient specified:
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        recipients = RPushbullet:::.getNames()[1], email = res$receiver_email)[[1]]))
 
 }
