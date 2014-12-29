@@ -26,19 +26,19 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
     ## Show the list of devices registered to the key
     require(RJSONIO)
-    str(fromJSON(pbGetDevices()))
+    str(pbGetDevices())
 
     ## Post a note item
-    str(fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")))
+    str(fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")[[1]]))
 
     ## Post an address -- should open browser in Google Maps
-    str(fromJSON(pbPost(type="address", title="An Address", body="South Pole, Antarctica")))
+    str(fromJSON(pbPost(type="address", title="An Address", body="South Pole, Antarctica")[[1]]))
 
     ## Post a URL -- should open browser
-    str(fromJSON(pbPost(type="link", title="Some title", body="Some URL", 
-                        url="http://cran.r-project.org/package=RPushbullet")))
     
     ## Post a file
     str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))))
+    str(fromJSON(pbPost(type="link", title="Some title", body="Some URL",
+			url="http://cran.r-project.org/package=RPushbullet")[[1]]))
 
 }
