@@ -123,7 +123,11 @@ pbPost <- function(type=c("note", "link", "address", "file"),
 
     if (missing(recipients) && missing(email)) {
         recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
-        dest <- match(recipients, .getNames())
+	if(recipients==0) {
+	    dest <- ''
+	} else {
+	    dest <- match(recipients, .getNames())
+	}
     } else {
         if (!missing(recipients)) {     # hence recipient present
             if (is.character(recipients)) {
