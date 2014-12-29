@@ -15,7 +15,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     RPushbullet:::.pkgenv[["pb"]]
     RPushbullet:::.pkgenv[["pb"]][["key"]]
     RPushbullet:::.pkgenv[["pb"]][["devices"]]
-    
+
     ## As well as the options we create then too
     getOption("rpushbullet.key")
     getOption("rpushbullet.devices")
@@ -26,19 +26,42 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
     ## Show the list of devices registered to the key
     require(RJSONIO)
-    str(fromJSON(pbGetDevices()))
+    str(pbGetDevices())
 
     ## Post a note item
-    str(fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")))
+    res<-fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")[[1]])
+    str(res)
+    # res$receiver_email # storing this test result to allow us to use active user's email for testing below.
+
 
     ## Post an address -- should open browser in Google Maps
-    str(fromJSON(pbPost(type="address", title="An Address", body="South Pole, Antarctica")))
+    str(fromJSON(pbPost(type="address", title="An Address", body="South Pole, Antarctica")[[1]]))
 
     ## Post a URL -- should open browser
-    str(fromJSON(pbPost(type="link", title="Some title", body="Some URL", 
-                        url="http://cran.r-project.org/package=RPushbullet")))
-    
-    ## Post a file
-    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))))
+    str(fromJSON(pbPost(type="link", title="Some title", body="Some URL",
+                        url="http://cran.r-project.org/package=RPushbullet")[[1]]))
+
+    #### Posting Files with different arguments ####
+
+    ## Post a file with no recipients
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))[[1]]))
+
+    ## Post a file with numeric recipient
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        recipients = 1)[[1]]))
+
+    ## Post a file with device name of recipient specified
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        recipients = RPushbullet:::.getNames()[1])[[1]]))
+
+    ## Post a file with an email recipient specified:
+    pbPost()
+
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        email = res$receiver_email)[[1]]))
+
+    ## Post file with both email and numeric recipient specified:
+    str(fromJSON(pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"),
+                        recipients = RPushbullet:::.getNames()[1], email = res$receiver_email)[[1]]))
 
 }
