@@ -59,8 +59,6 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
                         recipients = RPushbullet:::.getNames()[1])[[1]]))
 
     ## Post a file with an email recipient specified:
-    pbPost()
-
     str(fromJSON(pbPost(type="file", url=descfile, email = res$receiver_email)[[1]]))
 
     ## Post file with both email and numeric recipient specified:
