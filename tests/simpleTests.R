@@ -29,7 +29,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     str(pbGetDevices())
 
     ## Post a note item
-    res<-fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")[[1]])
+    res <- fromJSON(pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")[[1]])
     str(res)
     # res$receiver_email # storing this test result to allow us to use active user's email for testing below.
 
