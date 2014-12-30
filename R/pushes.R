@@ -123,7 +123,11 @@ pbPost <- function(type=c("note", "link", "address", "file"),
 
     if (missing(recipients) && missing(email)) {
         recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
-        dest <- match(recipients, .getNames())
+	if(recipients==0) {
+	    dest <- ''
+	} else {
+	    dest <- match(recipients, .getNames())
+	}
     } else {
         if (!missing(recipients)) {     # hence recipient present
             if (is.character(recipients)) {
@@ -212,13 +216,13 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                       ##                pburl, apikey, device, title, body),
 
                       ## for file see docs, need to upload file first
-                      file = sprintf(paste0('%s -s -u %s: %s ',
+		      file = sprintf(paste0('%s -s %s -u %s: %s ',
                                             '-d type="file" -d file_name="%s" ',
                                             '-d file_type="%s" ',
                                             '-d file_url="%s" ',
                                             '-d body="%s" -X POST'),
-                                     curl, apikey, pburl, tgt,
-                                     basename(uploadrequest$file_name), 
+				     curl, pburl, apikey, tgt,
+				     basename(uploadrequest$file_name),
                                      uploadrequest$file_type, uploadrequest$file_url, body)
                       )
         if (verbose) print(txt)
