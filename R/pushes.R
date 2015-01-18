@@ -66,6 +66,9 @@
 ##' @param email An alternative way to specify a recipient is to specify 
 ##' an email address. If both \code{recipients} and \code{email} are
 ##' present, \code{recipients} is used.
+##' @param channel A channel tag used to specify the name of the channel
+##' as the recipient. If either \code{recipients} or \code{email} are present,
+##' they will take precedence over \code{channel}.
 ##' @param deviceind (Deprecated) The index (or a vector/list of indices) of the
 ##' device(s) in the list of devices. 
 ##' @param apikey The API key used to access the service. It can be
@@ -104,6 +107,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                    filetype="text/plain",# file type for upload of type='file'
                    recipients,           # devices to post to
                    email,                # alternatively use an email
+		   channel,              # alternatively specify a channel
                    deviceind,            # deprecated, see detail
                    apikey = .getKey(),
                    devices = .getDevices(),
@@ -112,16 +116,16 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     type <- match.arg(type)
 
     if (!missing(deviceind)) {
-        if (missing(recipients) && missing(email)) {
+	if (missing(recipients) && missing(email) && missing(channel)) {
             warning("Agument 'deviceind' is deprecated. Please use 'recipients'.", call.=FALSE)
             recipients <- deviceind
         } else {
-            warning("Using 'recipients' (or 'email') and ignoring deprecated 'deviceinds'.",
+	    warning("Using 'recipients' (or 'email' or 'channel') and ignoring deprecated 'deviceinds'.",
                     call.=FALSE)
         }
     }
 
-    if (missing(recipients) && missing(email)) {
+    if (missing(recipients) && missing(email) && missing(channel)) {
         recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
 	if(recipients==0) {
 	    dest <- ''
@@ -135,8 +139,13 @@ pbPost <- function(type=c("note", "link", "address", "file"),
             } else {
                 dest <- recipients      # numeric values
             }
-        } else {                        # hence email presnt
-           dest <- email
+	} else {                        # either email or channel present
+	    if(!missing(email)) {
+		dest <- email
+	    } else {                    # hence channel present
+		dest <- channel
+		email <- NA # Set e-mail to NA, missing() is unreliable
+	    }
        }
     }
     
@@ -176,8 +185,12 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     }
 
     ret <- lapply(dest, function(d) {
-        if (is.character(d)) {          # this was an email
-            tgt <- sprintf(' -d email="%s" ', d)
+	if (is.character(d)) {          # this is an email or channel.
+	    if(!is.na(email)){
+		tgt <- sprintf(' -d email="%s" ', d)
+	    } else {                    # hence assume channel
+		tgt <- sprintf(' -d channel_tag="%s" ', d)
+	    }
         } else if (is.numeric(d)) {     # this a listed device, now transfered to index
             tgt <- ifelse(d == 0,       # if zero, then use all devices
                           '',           # otherwise given specific device
