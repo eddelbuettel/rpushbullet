@@ -75,7 +75,7 @@ which allows the developer to create (per-topic) channels for various
 applications / topics that her users can subscribe to.
 
 Creating a channel is easy: one simply needs to login and visit the
-[My Channels](https://www.pushbullet.com/my-channels) page. From there, one
+[My Channel](https://www.pushbullet.com/my-channel) page. From there, one
 can easily create a new channel by clicking the "add channel" button. There
 will be a prompt to enter a 'tag', a channel name, as well as a
 description. The channel 'tag' is what is needed to push posts to the
