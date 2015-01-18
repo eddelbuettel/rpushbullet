@@ -69,11 +69,26 @@ the `fromJSON()` function.
 
 ### Channels
 
-Pushbullet has recently implemented [channels](https://www.pushbullet.com/channels) into their API, which are notification feeds that can be subscribed to. This allows you to create channels for various applications / topics that users can subscribe to.
+Pushbullet has recently added [channels](https://www.pushbullet.com/channels)
+to their API. These are notification feeds that user can subscribe to, and
+which allows the developer to create (per-topic) channels for various
+applications / topics that her users can subscribe to.
 
-Creating a channel is very easy, you simply need to login and visit the [My Channels](https://www.pushbullet.com/my-channels) page. From there, you can easily create a new channel by clicking the "add channel" button. You will be prompted to enter a 'tag', a channel name, as well as a description. The channel 'tag' is what you will need to use to push posts to your channel. Currently, only the owner of a channel has permisisons to post to that channel, so you will need to create the channel using the same login you will have specified in `~/.rpushbullet.json` in order to use RPushbullet to post to a channel.
+Creating a channel is easy: one simply needs to login and visit the
+[My Channels](https://www.pushbullet.com/my-channels) page. From there, one
+can easily create a new channel by clicking the "add channel" button. There
+will be a prompt to enter a 'tag', a channel name, as well as a
+description. The channel 'tag' is what is needed to push posts to the
+channel. Currently, only the owner of a channel has permisisons to post to
+that channel, so one will need to create the channel using the same login one
+has specified in `~/.rpushbullet.json` in order to use RPushbullet to post to
+a channel.
 
-Channels are not currently implemented, but once complete the `pbPost` function will be modified to incorporate passing a `channel` argument to the Pushbullet pushes API as the target parameter: `channel_tag`. See the [Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for more information.
+Channels are not currently implemented, but once complete the `pbPost`
+function will be modified to incorporate passing a `channel` argument to the
+Pushbullet pushes API as the target parameter: `channel_tag`. See the
+[Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for more
+information.
 
 
 ### Author

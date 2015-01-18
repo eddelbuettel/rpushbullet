@@ -1,10 +1,18 @@
+2015-01-18  Dirk Eddelbuettel  <edd@debian.org>
+
+2015-01-18  Mike Birdgeneau  <mike.birdgeneau@gmail.com>
+
+	* R/pushes.R (pbPost): Support for channels
+
+	* tests/simpleTests.R: Added tests for channels
+
 2014-12-30  Dirk Eddelbuettel  <edd@debian.org>
 
 	* tests/simpleTests.R: A few minor edits
 
 2014-12-29  Mike Birdgeneau  <mike.birdgeneau@gmail.com>
 
-	* R/pushes.R: Corrections to file transder mode
+	* R/pushes.R: Corrections to file transfer mode
 
 	* tests/simpleTests.R: Added more tests
 

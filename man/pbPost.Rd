@@ -4,7 +4,7 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "address", "file"), title = "", body = "",
-  url = "", filetype = "text/plain", recipients, email, deviceind,
+  url = "", filetype = "text/plain", recipients, email, channel, deviceind,
   apikey = .getKey(), devices = .getDevices(), verbose = FALSE)
 }
 \arguments{
@@ -31,6 +31,8 @@ the push is sent to all devices.}
 \item{email}{An alternative way to specify a recipient is to specify
 an email address. If both \code{recipients} and \code{email} are
 present, \code{recipients} is used.}
+
+\item{channel}{The (optional) channel tag to post the message to.}
 
 \item{deviceind}{(Deprecated) The index (or a vector/list of indices) of the
 device(s) in the list of devices.}
