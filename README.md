@@ -1,6 +1,6 @@
-## RPushbullet: R interface to Pushbullet
+## RPushbullet [![Build Status](https://travis-ci.org/eddelbuettel/rpushbullet.png)](https://travis-ci.org/eddelbuettel/rpushbullet) [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 
-[![Build Status](https://travis-ci.org/eddelbuettel/rpushbullet.png)](https://travis-ci.org/eddelbuettel/rpushbullet)
+### R interface to Pushbullet
 
 [Pushbullet](http://www.pushbullet.com) is an awesome (and free) service to
 pass messages between your computer, phone and tablet.  It offers immediacy
