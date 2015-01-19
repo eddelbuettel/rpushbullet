@@ -2,7 +2,7 @@ Package: RPushbullet
 Type: Package
 Title: R Interface to the Pushbullet Messaging Service
 Version: 0.1.1.2
-Date: 2015-01-18
+Date: 2015-01-19
 Author: Dirk Eddelbuettel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
 Description: This package provides an easy-to-use interface for the 

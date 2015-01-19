@@ -39,8 +39,14 @@
         options("rpushbullet.key" = pb[["key"]])
         options("rpushbullet.devices" = pb[["devices"]])
         options("rpushbullet.names" = pb[["names"]])
+        ## defaultdevice is an optional entry, with fallback value of 0
         options("rpushbullet.defaultdevice" =
-                ifelse("defaultdevice" %in% names(pb), pb[["defaultdevice"]], 0))
+                    if ("defaultdevice" %in% names(pb)) pb[["defaultdevice"]] else 0)
+        ## these are for testing
+        options("rpushbullet.testemail" =
+                    if ("testemail" %in% names(pb)) pb[["testemail"]] else character())
+        options("rpushbullet.testchannel" =
+                    if ("testchannel" %in% names(pb)) pb[["testchannel"]] else character())
     } else {
         txt <- paste("No file", dotfile, "found.\nConsider placing the",
                      "Pushbullet API key and your device id(s) there.")
@@ -51,41 +57,42 @@
 
 .getKey <- function() {
     getOption("rpushbullet.key",                # retrieve as option, 
-              ifelse(!is.null(.pkgenv$pb),      # else try environment
-                     .pkgenv$pb[["key"]],       # and use it, or signal error
-                     stop(paste("Neither option 'rpushbullet.key' nor entry in",
-                                "package environment found. Aborting."), call.=FALSE)))
+              if (!is.null(.pkgenv$pb))         # else try environment
+                  .pkgenv$pb[["key"]]           # and use it, or signal error
+              else stop(paste("Neither option 'rpushbullet.key' nor entry in",
+                              "package environment found. Aborting."), call.=FALSE))
 }
 
 .getDevices <- function() {
     getOption("rpushbullet.devices",       	# retrieve as option, 
-              ifelse(!is.null(.pkgenv$pb),	# else try environment
-                     .pkgenv$pb[["devices"]],   # and use it, or signal error
-                     stop(paste("Neither option 'rpushbullet.devices' nor entry in",
-                                "package environment found. Aborting."), call.=FALSE)))
+              if (!is.null(.pkgenv$pb))   	# else try environment
+                  .pkgenv$pb[["devices"]]       # and use it, or signal error
+              else stop(paste("Neither option 'rpushbullet.devices' nor entry in",
+                              "package environment found. Aborting."), call.=FALSE))
 }
 
 .getDefaultDevice <- function() {
     getOption("rpushbullet.defaultdevice",     	# retrieve as option, 
-              ifelse(!is.null(.pkgenv$pb),	# else try environment
-                     .pkgenv$pb[["defaultdevice"]], # and use it, or return zero
-                     0))                            # as code for all devices
+              if (!is.null(.pkgenv$pb) && 	# else try environment
+                  "defaultdevice" %in% names(.pkgenv$pb))
+                  .pkgenv$pb[["defaultdevice"]] # and use it, or return zero
+              else 0)                           # as code for all devices
 }
 
 .getCurl <- function() {
     curl <- .pkgenv$curl
-    if (curl == "") stop(paste("No curl binary registered. ",
-                               "Install curl, and restart R and reload package"),
-                         call.=FALSE)
+    if (curl == "")
+        stop(paste("No curl binary registered. ",
+                   "Install curl, and restart R and reload package"), call.=FALSE)
     curl
 }
 
 .getNames <- function() {
     getOption("rpushbullet.names",       	# retrieve as option, 
-              ifelse(!is.null(.pkgenv$pb),	# else try environment
-                     .pkgenv$pb[["names"]],   # and use it, or signal error
-                     stop(paste("Neither option 'rpushbullet.names' nor entry in",
-                                "package environment found. Aborting."), call.=FALSE)))
+              if (!is.null(.pkgenv$pb)) 	# else try environment
+                  .pkgenv$pb[["names"]]         # and use it, or signal error
+              else stop(paste("Neither option 'rpushbullet.names' nor entry in",
+                              "package environment found. Aborting."), call.=FALSE))
 }
 
 .getUploadRequest <- function(filename, filetype="img/png", apikey = .getKey()) {
@@ -98,4 +105,20 @@
     
     result <- fromJSON(system(txt, intern=TRUE))
     result
+}
+
+.getTestEmail <- function() {
+    getOption("rpushbullet.testemail",     	# retrieve as option, 
+              if (!is.null(.pkgenv$pb) &&  	# else try environment
+                  "testemail" %in% names(.pkgenv$pb))  
+                  .pkgenv$pb[["testemail"]]     # and use it, or 
+              else character())                 # return empty character()
+}
+
+.getTestChannel <- function() {
+    getOption("rpushbullet.testchannel",     	# retrieve as option, 
+              if (!is.null(.pkgenv$pb) &&  	# else try environment
+                  "testchannel" %in% names(.pkgenv$pb)) 
+                  .pkgenv$pb[["testchannel"]]   # and use it, or 
+              else character())                 # return empty character()
 }

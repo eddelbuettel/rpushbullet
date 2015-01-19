@@ -1,4 +1,8 @@
-2015-01-18  Dirk Eddelbuettel  <edd@debian.org>
+2015-01-19  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/init.R: Support option testemail and testchannel
+
+	* DESCRIPTION: Bump Version: and Date:
 
 2015-01-18  Mike Birdgeneau  <mike.birdgeneau@gmail.com>
 
