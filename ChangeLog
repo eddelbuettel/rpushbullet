@@ -1,3 +1,7 @@
+2015-01-20  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: Some improvements to logic and use of test variables
+
 2015-01-19  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/init.R: Support option testemail and testchannel
