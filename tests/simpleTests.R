@@ -23,80 +23,49 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     ## Check the internal helper functions
     RPushbullet:::.getKey()
     RPushbullet:::.getDevices()
-    RPushbullet:::.getTestEmail()
-    RPushbullet:::.getTestChannel()
-
-    ## Check for missing options needed for testing
-    if(length(RPushbullet:::.getTestEmail())==0){
-        stop("Valid test e-mail needs to be specified in ~/.rpushbullet.json to run tests.")
-    }
-    if(length(RPushbullet:::.getTestChannel())==0){
-        stop("Valid test e-mail needs to be specified in ~/.rpushbullet.json to run tests.")
-    }
 
     ## Show the list of devices registered to the key
     require(RJSONIO)
     str(pbGetDevices())
 
     ## Post a note item
-    result <- fromJSON(pbPost("note", "A Simple Test",
+    res <- fromJSON(pbPost("note", "A Simple Test",
                            "We think this should work.\nWe really do.")[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
-    ## storing this test result to allow us to use active user's email for testing below.
+    str(res)
+    ## storing this test result to allow us to use active user's email for testing below. 
 
 
     ## Post an address -- should open browser in Google Maps
-    result <- fromJSON(pbPost(type="address", title="An Address",
-                        body="Mount Everest, Nepal")[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
+    str(fromJSON(pbPost(type="address", title="An Address",
+                        body="South Pole, Antarctica")[[1]]))
 
     ## Post a URL -- should open browser
-    result <- fromJSON(pbPost(type="link", title="Some title", body="Some URL",
-                        url="http://cran.r-project.org/package=RPushbullet")[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
+    str(fromJSON(pbPost(type="link", title="Some title", body="Some URL",
+                        url="http://cran.r-project.org/package=RPushbullet")[[1]]))
 
     #### Posting Files with different arguments ####
 
     ## we use this file several times below
     descfile <- system.file("DESCRIPTION", package="RPushbullet")
-
+    
     ## Post a file with no recipients
-    result<-fromJSON(pbPost(type="file", url=descfile)[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
+    str(fromJSON(pbPost(type="file", url=descfile)[[1]]))
 
     ## Post a file with numeric recipient
-    result <- fromJSON(pbPost(type="file", url=descfile, recipients = 1)[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
+    str(fromJSON(pbPost(type="file", url=descfile, recipients = 1)[[1]]))
 
     ## Post a file with device name of recipient specified
-    result <- fromJSON(pbPost(type="file", url=descfile,
-                        recipients = RPushbullet:::.getNames()[1])[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
+    str(fromJSON(pbPost(type="file", url=descfile,
+                        recipients = RPushbullet:::.getNames()[1])[[1]]))
 
     ## Post a file with an email recipient specified:
-    result <- fromJSON(pbPost(type="file", url=descfile, email = RPushbullet:::.getTestEmail())[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
+    str(fromJSON(pbPost(type="file", url=descfile,
+                        email = res$receiver_email)[[1]]))
 
     ## Post file with both email and numeric recipient specified:
-    result <- fromJSON(pbPost(type="file", url=descfile, recipients = RPushbullet:::.getNames()[1],
-                        email = RPushbullet:::.getTestEmail())[[1]])
-    if(!result$active){
-        stop("Test Failed.")
-    }
+    str(fromJSON(pbPost(type="file", url=descfile,
+                        recipients = RPushbullet:::.getNames()[1],
+                        email = res$receiver_email)[[1]]))
 
     ## Test hierarchy of arguments with channel specified:
     ## 1) All three should send to recipients.
@@ -105,25 +74,34 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     ## 4) Only channel should send to channel.
 
     ## Post a note with recipients, email and channel specified.
-    result <- fromJSON(pbPost(type="note","A Simple Test","We think this should work.\nWe really do.",recipients = RPushbullet:::.getNames()[1],email = RPushbullet:::.getTestEmail(),channel = RPushbullet:::.getTestChannel())[[1]])
-    if(is.null(result$target_device_iden)){
+    result <- fromJSON(pbPost(type="note", "A Simple Test", "We think this should work.\nWe really do.",
+                              recipients = RPushbullet:::.getNames()[1],
+                              email = RPushbullet::.getTestEmail(),
+                              channel = RPushbullet::.getTestChannel())[[1]])
+    if (is.null(result$target_device_iden)) {
 	stop("Test Failed.")
     }
 
     ## Post a note with email and channel specified.
-    result <- fromJSON(pbPost(type="note","A Simple Test","We think this should work.\nWe really do.",email = RPushbullet:::.getTestEmail(),channel = RPushbullet:::.getTestChannel())[[1]])
-    if(is.null(result$receiver_email)){
+    result <- fromJSON(pbPost(type="note", "A Simple Test", "We think this should work.\nWe really do.",
+                              email = RPushbullet::.getTestEmail(),
+                              channel = RPushbullet::.getTestChannel())[[1]])
+    if (is.null(result$receiver_email)) {
 	stop("Test Failed.")
     }
 
     ## Post a note with recipients and channel specified.
-    result <- fromJSON(pbPost(type="note","A Simple Test","We think this should work.\nWe really do.",recipients = RPushbullet:::.getNames()[1],channel = RPushbullet:::.getTestChannel())[[1]])
-    if(is.null(result$target_device_iden)){
+    result <- fromJSON(pbPost(type="note", "A Simple Test", "We think this should work.\nWe really do.",
+                              recipients = RPushbullet:::.getNames()[1],
+                              channel = RPushbullet::.getTestChannel())[[1]])
+    if (is.null(result$target_device_iden)) {
 	stop("Test Failed.")
     }
 
     ## Post a note with only the channel specified.
-    str(fromJSON(pbPost(type="note","A Simple Test","We think this should work.\nWe really do.",channel = RPushbullet:::.getTestChannel())[[1]]))
+    str(fromJSON(pbPost(type="note", "A Simple Test", "We think this should work.\nWe really do.",
+                        channel = RPushbullet::.getTestChannel(),
+                        verbose=TRUE)[[1]]))
     # Returns empty list, but posts successfully. API seems to return empty JSON. (tested curl command)
 
 }
