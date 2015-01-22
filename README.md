@@ -78,16 +78,16 @@ Creating a channel is easy: one simply needs to login and visit the
 [My Channel](https://www.pushbullet.com/my-channel) page. From there, one
 can easily create a new channel by clicking the "add channel" button. There
 will be a prompt to enter a 'tag', a channel name, as well as a
-description. The channel 'tag' is what is needed to push posts to the
+description. The `channel_tag` is what is needed to push posts to the
 channel. Currently, only the owner of a channel has permisisons to post to
 that channel, so one will need to create the channel using the same login one
 has specified in `~/.rpushbullet.json` in order to use RPushbullet to post to
 a channel.
 
-Channels are not currently implemented, but once complete the `pbPost`
-function will be modified to incorporate passing a `channel` argument to the
-Pushbullet pushes API as the target parameter: `channel_tag`. See the
-[Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for more
+Channels can be used by passing a `channel` argument to the `pbPost`
+function. The Pushbullet API identifies a channel via the
+supplied`channel_tag` value of this argument. See the
+[Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for +more
 information.
 
 
