@@ -191,7 +191,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     }
 
     ret <- lapply(dest, function(d) {
-        if (debug) message("in lapply, d is:")
+        if (debug) message(sprintf("in lapply, d is: %s", d))
         if (is.character(d)) {          # this is an email or channel.
             if (!is.na(email)){
                 tgt <- sprintf(' -d email="%s" ', d)

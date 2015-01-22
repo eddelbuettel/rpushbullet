@@ -84,11 +84,10 @@ that channel, so one will need to create the channel using the same login one
 has specified in `~/.rpushbullet.json` in order to use RPushbullet to post to
 a channel.
 
-Channels are not currently implemented, but once complete the `pbPost`
-function will be modified to incorporate passing a `channel` argument to the
-Pushbullet pushes API as the target parameter: `channel_tag`. See the
-[Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for more
-information.
+Channels can be used by passing a `channel` argument to the `pbPost`
+function. Pushbullet pushes API as the target parameter: `channel_tag`. See 
+the [Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for 
+more information.
 
 
 ### Author
