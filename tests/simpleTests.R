@@ -34,7 +34,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     res <- fromJSON(pbPost("note", title,
                            "We think this should work.\nWe really do.")[[1]])
     str(res)
-    ## storing this test result to allow us to use active user's email for testing below.
+    ## storing this test result to allow us to use active user's email for testing below. 
 
 
     ## Post an address -- should open browser in Google Maps
@@ -49,7 +49,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
     ## we use this file several times below
     descfile <- system.file("DESCRIPTION", package="RPushbullet")
-
+    
     ## Post a file with no recipients
     str(fromJSON(pbPost(type="file", url=descfile)[[1]]))
 
