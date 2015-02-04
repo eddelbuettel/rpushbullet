@@ -7,7 +7,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     ## I put a request in to the authors of Pushbullet to provide a "test id" key, and they
     ## are sympathetetic but do not have one implemented yet, and only suggested a woraround
     # of a 'throwaway' GMail id which I find unappealing.
-    stopifnot(file.exists("~/.rpushbullet.json"))
+    stopifnot(file.exists(RPushbullet:::.findDotfile()))
 
     library(RPushbullet)
 

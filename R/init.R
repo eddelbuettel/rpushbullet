@@ -20,6 +20,61 @@
 
 .pkgenv <- new.env(parent=emptyenv())
 
+.findDotfile <- function(filename=".rpushbullet.json", paths=c(".", "~"), firstOnly=TRUE, onMissing=c("pkgmessage", "warning", "error")) {
+  onMissing <- match.arg(onMissing)
+  pathnames <- file.path(paths, filename)
+  pathnames <- pathnames[file_test("-f", pathnames)]
+
+  if (length(pathnames) == 0L) {
+    txt <- sprintf("No file %s found (directories searched: %s)\nConsider placing the Pushbullet API key and your device id(s) there.", sQuote(filename), paste(sQuote(paste0(paths, "/")), collapse=", "))
+    if (onMissing == "pkgmessage") {
+      packageStartupMessage(txt)
+    } else if (onMissing == "message") {
+      message(txt)
+    } else if (onMissing == "warning") {
+      warning(txt)
+    } else if (onMissing == "error") {
+      stop(txt)
+    }
+    ## Intentially returns NA_character_ if firstOnly=TRUE
+  }
+  if (firstOnly)
+    pathnames <- pathnames[1L]
+  pathnames
+}
+
+.parseDotfile <- function(...) {
+    dotfile <- .findDotfile(...)
+    if (!file.exists(dotfile)) {
+        assign("pb", NULL, envir=.pkgenv)
+        return(invisible(NULL))
+    }
+
+    packageStartupMessage("Reading ", dotfile)
+    pb <- fromJSON(dotfile, simplify=FALSE)
+    assign("pb", pb, envir=.pkgenv)
+
+    if (is.null(pb[["key"]])) {
+        warning("Field 'key' is either empty or missing: ", dotfile,
+                call.=FALSE, immediate.=TRUE)
+    }
+
+    options("rpushbullet.key" = pb[["key"]])
+    options("rpushbullet.devices" = pb[["devices"]])
+    ## names is an optional entry, with fallback value of NULL
+    options("rpushbullet.names" = pb[["names"]])
+    ## defaultdevice is an optional entry, with fallback value of 0
+    options("rpushbullet.defaultdevice" =
+                if ("defaultdevice" %in% names(pb)) pb[["defaultdevice"]] else 0)
+    ## these are for testing
+    options("rpushbullet.testemail" =
+                if ("testemail" %in% names(pb)) pb[["testemail"]] else character())
+    options("rpushbullet.testchannel" =
+                if ("testchannel" %in% names(pb)) pb[["testchannel"]] else character())
+
+    invisible(pb)
+}
+
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage("Attaching RPushbullet version ",
                           packageDescription("RPushbullet")$Version, ".")
@@ -32,33 +87,7 @@
         assign("curl", curl, envir=.pkgenv)
     }
 
-    dotfile <- "~/.rpushbullet.json"
-    if (file.exists(dotfile)) {
-        packageStartupMessage("Reading ", dotfile)
-        pb <- fromJSON(dotfile, simplify=FALSE)
-        assign("pb", pb, envir=.pkgenv)
-        if (is.null(pb[["key"]])) {
-            warning("Field 'key' is either empty or missing: ", dotfile,
-                    call.=FALSE, immediate.=TRUE)
-        }
-        options("rpushbullet.key" = pb[["key"]])
-        options("rpushbullet.devices" = pb[["devices"]])
-        ## names is an optional entry, with fallback value of NULL
-        options("rpushbullet.names" = pb[["names"]])
-        ## defaultdevice is an optional entry, with fallback value of 0
-        options("rpushbullet.defaultdevice" =
-                    if ("defaultdevice" %in% names(pb)) pb[["defaultdevice"]] else 0)
-        ## these are for testing
-        options("rpushbullet.testemail" =
-                    if ("testemail" %in% names(pb)) pb[["testemail"]] else character())
-        options("rpushbullet.testchannel" =
-                    if ("testchannel" %in% names(pb)) pb[["testchannel"]] else character())
-    } else {
-        txt <- paste("No file", dotfile, "found.\nConsider placing the",
-                     "Pushbullet API key and your device id(s) there.")
-        packageStartupMessage(txt)
-        assign("pb", NULL, envir=.pkgenv)
-    }
+    .parseDotfile()
 }
 
 .getKey <- function() {

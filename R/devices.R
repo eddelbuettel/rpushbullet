@@ -25,8 +25,9 @@
 ##' details.
 ##' @title Get registered Pushbullet devices
 ##' @param apikey The API key used to access the service. It can be
-##' supplied as an argument here, or via the file
-##' \code{~/.rpushbullet.json} which is read at package
+##' supplied as an argument here, or via the local file
+##' \code{./.rpushbullet.json}, or if that does not exist the global
+##' file \code{~/.rpushbullet.json}, which is read at package
 ##' initialization.
 ##' @return The resulting JSON record is converted to a list and
 ##' returned as a \code{pbDevices} object with appropriate
