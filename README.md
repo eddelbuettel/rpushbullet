@@ -6,7 +6,8 @@
 pass messages between your computer, phone and tablet.  It offers immediacy
 which is perfect for alerting, and much more.
 
-To use it, just register as a user to obtain an API key, and maybe install
+To use it, just register as a user to obtain an 
+[API key](https://www.pushbullet.com/account), and maybe install
 the Android or iPhone app.  See the [Pushbullet](http://www.pushbullet.com)
 documentation for more, in particular
 
@@ -79,14 +80,21 @@ Creating a channel is easy: one simply needs to login and visit the
 can easily create a new channel by clicking the "add channel" button. There
 will be a prompt to enter a 'tag', a channel name, as well as a
 description. The `channel_tag` is what is needed to push posts to the
-channel. Currently, only the owner of a channel has permisisons to post to
+channel. Currently, only the owner of a channel has permissions to post to
 that channel, so one will need to create the channel using the same login one
 has specified in `~/.rpushbullet.json` in order to use RPushbullet to post to
 a channel.
 
+_Channels are public_: Anyone who knows the channel 'tag' can subscribe and
+will therefore receive all messages pushed to that channel. Some users create
+hard-to-guess channel tags to achieve semi privacy. This works because it is,
+currently as of February 2015, neither possible to list the channels owned by
+a specific user nor possible to browse or search for other users' channels.
+One method to generate a hard-to-guess tag is `digest::digest(rnorm(1))`.
+
 Channels can be used by passing a `channel` argument to the `pbPost`
 function. The Pushbullet API identifies a channel via the
-supplied`channel_tag` value of this argument. See the
+supplied `channel_tag` value of this argument. See the
 [Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for +more
 information.
 
