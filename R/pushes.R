@@ -74,12 +74,13 @@
 ##' device(s) in the list of devices.
 ##' @param apikey The API key used to access the service. It can be
 ##' supplied as an argument here, via the global option
-##' \code{rpushbullet.key}, or via the file \code{~/.rpushbullet.json}
+##' \code{rpushbullet.key}, or via the local file \code{./.rpushbullet.json},
+##' or if that does not exist the global file \code{~/.rpushbullet.json},
 ##' which is read at package initialization (and, if found, also sets
 ##' the global option).
 ##' @param devices The device to which this post is pushed. It can be
 ##' supplied as an argument here, or via the file
-##' \code{~/.rpushbullet.json} which is read at package
+##' \code{.rpushbullet.json} which is read at package
 ##' initialization.
 ##' @param verbose Boolean switch to add additional output
 ##' @param debug Boolean switch to add even more debugging output
@@ -191,7 +192,7 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     }
 
     ret <- lapply(dest, function(d) {
-        if (debug) message(sprintf("in lapply, d is: %s", d))   
+        if (debug) message(sprintf("in lapply, d is: %s", d))
         if (is.character(d)) {          # this is an email or channel.
             if (!is.na(email)){
                 tgt <- sprintf(' -d email="%s" ', d)

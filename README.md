@@ -29,7 +29,8 @@ the JSON response.
 
 ### Initialization
 
-A file `~/.rpushbullet.json` can be used to pass the API key and device
+A local file `./.rpushbullet.json`, or if that does not exist a global
+file `~/.rpushbullet.json`, can be used to pass the API key and device
 identifiers to the package.  The content is read upon package startup, and
 stored in a package-local environment. The format of this file is as follows:
 ```
@@ -61,7 +62,7 @@ You can also create the file programmatically via
 cat(RJSONIO::toJSON(list(key="..key here..", devices=c("..aa..", "..bb.."))))
 ```
 
-and write that content to the file `~/.rpushbullet.json`.
+and write that content to the file `.rpushbullet.json`.
 
 You can also retrieve the ids of your devices with the `pbGetDevices()`
 function by calling, say, `str(fromJSON(pbGetDevices()))`.  Note that you
@@ -82,7 +83,7 @@ will be a prompt to enter a 'tag', a channel name, as well as a
 description. The `channel_tag` is what is needed to push posts to the
 channel. Currently, only the owner of a channel has permissions to post to
 that channel, so one will need to create the channel using the same login one
-has specified in `~/.rpushbullet.json` in order to use RPushbullet to post to
+has specified in `.rpushbullet.json` in order to use RPushbullet to post to
 a channel.
 
 _Channels are public_: Anyone who knows the channel 'tag' can subscribe and

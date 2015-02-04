@@ -17,8 +17,9 @@ pbGetDevices(apikey = .getKey())
 }
 \arguments{
 \item{apikey}{The API key used to access the service. It can be
-supplied as an argument here, or via the file
-\code{~/.rpushbullet.json} which is read at package
+supplied as an argument here, or via the local file
+\code{./.rpushbullet.json}, or if that does not exist the global
+file \code{~/.rpushbullet.json}, which is read at package
 initialization.}
 
 \item{x}{Default object for \code{print} method}
