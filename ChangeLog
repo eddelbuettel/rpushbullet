@@ -2,6 +2,8 @@
 
 	* R/init.R (.onAttach): Warn on non-existing key
 	* README.md: Typo fixes, added note that channels are public
+	* NAMESPACE: Export S3 methods
+	* tests/simpleTests.R: Internal improvements and typo fixes
 
 2015-01-20  Dirk Eddelbuettel  <edd@debian.org>
 
