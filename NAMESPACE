@@ -3,3 +3,7 @@ import(RJSONIO)
 importFrom(utils, packageDescription)
 
 exportPattern("^[[:alpha:]]+")
+
+S3method("pbGetDevices", "default")
+S3method("print", "pbDevices")
+S3method("summary", "pbDevices")
