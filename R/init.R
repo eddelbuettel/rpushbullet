@@ -26,7 +26,8 @@
 
     curl <- Sys.which("curl")
     if (curl == "") {
-        warning("No curl binary found in your path. Please consider installing curl.")
+        warning("No curl binary found in your path. Please consider installing curl.",
+                call.=FALSE, immediate.=TRUE)
     } else {
         assign("curl", curl, envir=.pkgenv)
     }
@@ -37,8 +38,8 @@
         pb <- fromJSON(dotfile, simplify=FALSE)
         assign("pb", pb, envir=.pkgenv)
         if (is.null(pb[["key"]])) {
-          warning("Field 'key' is either empty or missing: ", dotfile,
-                  call.=FALSE, immediate.=TRUE)
+            warning("Field 'key' is either empty or missing: ", dotfile,
+                    call.=FALSE, immediate.=TRUE)
         }
         options("rpushbullet.key" = pb[["key"]])
         options("rpushbullet.devices" = pb[["devices"]])

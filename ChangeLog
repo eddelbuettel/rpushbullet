@@ -1,3 +1,8 @@
+2015-02-04  Henrik Bengtsson  <hb@biostat.ucsf.edu>
+
+	* R/init.R (.onAttach): Warn on non-existing key
+	* README.md: Typo fixes, added note that channels are public
+
 2015-01-20  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/pushes.R: Some improvements to logic and use of test variables
