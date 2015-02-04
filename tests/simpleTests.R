@@ -141,9 +141,9 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     } # if (hasChannel && hasDevices && hasEmail)
 
 
-    ## Pust closing note
+    ## Post closing note
     title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushBullet")))
-    body <- sprintf("In total %d posts where made including this one", count(FALSE))
+    body <- sprintf("In total %d posts were made including this one", count(FALSE))
     res <- fromJSON(pbPost("note", title, body)[[1]])
     str(res)
 
