@@ -1,7 +1,7 @@
 
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2014  Dirk Eddelbuettel <edd@debian.org>
+##  Copyright (C) 2014 - 2015  Dirk Eddelbuettel <edd@debian.org>
 ##
 ##  This file is part of RPushbullet.
 ##
