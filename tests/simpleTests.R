@@ -28,82 +28,124 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     require(RJSONIO)
     str(pbGetDevices())
 
+    ## Test destinations
+    devices <- unlist(RPushbullet:::.getNames())
+    email <- RPushbullet:::.getTestEmail()  ## or res$receiver_email?!?
+    channel <- RPushbullet:::.getTestChannel()
+
+    hasEmail <- (length(email) > 0L)
+    hasDevices <- (length(devices) > 0L)
+    hasChannel <- (length(channel) > 0L)
+
+    ## Function to add incremental counts to titles
+    count <- local({
+        counter <- 0L
+        function(msg=NULL) {
+            if (identical(msg, FALSE)) return(counter)
+            counter <<- counter + 1L
+            if (identical(msg, TRUE)) return(counter)
+            sprintf("%02d. %s", counter, msg)
+        }
+    })
+
+    ## Function to create incremental counted dummy files
+    testfile <- function(count=1L) {
+        filename <- sprintf("test_file_for_post_%02d.txt", count)
+        pathname <- file.path(tempdir(), filename)
+        cat(filename, file=pathname)
+        pathname
+    }
+
     ## Post a note item
     title <- "A Simple Test"
     body <- "We think this should work.\nWe really do."
-    res <- fromJSON(pbPost("note", title,
+    res <- fromJSON(pbPost("note", count(title),
                            "We think this should work.\nWe really do.")[[1]])
     str(res)
-    ## storing this test result to allow us to use active user's email for testing below. 
+    ## storing this test result to allow us to use active user's email for testing below.
 
 
     ## Post an address -- should open browser in Google Maps
-    str(fromJSON(pbPost(type="address", title="An Address",
+    str(fromJSON(pbPost(type="address", title=count("An Address"),
                         body="South Pole, Antarctica")[[1]]))
 
     ## Post a URL -- should open browser
-    str(fromJSON(pbPost(type="link", title="Some title", body="Some URL",
+    str(fromJSON(pbPost(type="link", title=count("Some title"), body="Some URL",
                         url="http://cran.r-project.org/package=RPushbullet")[[1]]))
 
     #### Posting Files with different arguments ####
 
-    ## we use this file several times below
-    descfile <- system.file("DESCRIPTION", package="RPushbullet")
-    
     ## Post a file with no recipients
-    str(fromJSON(pbPost(type="file", url=descfile)[[1]]))
+    file <- testfile(count(TRUE))
+    str(fromJSON(pbPost(type="file", url=file)[[1]]))
 
     ## Post a file with numeric recipient
-    str(fromJSON(pbPost(type="file", url=descfile, recipients = 1)[[1]]))
+    if (hasDevices) {
+        file <- testfile(count(TRUE))
+        str(fromJSON(pbPost(type="file", url=file, recipients = 1)[[1]]))
 
-    ## Post a file with device name of recipient specified
-    str(fromJSON(pbPost(type="file", url=descfile,
-                        recipients = RPushbullet:::.getNames()[1])[[1]]))
+        ## Post a file with device name of recipient specified
+        file <- testfile(count(TRUE))
+        str(fromJSON(pbPost(type="file", url=file, recipients = devices)[[1]]))
 
-    ## Post a file with an email recipient specified:
-    str(fromJSON(pbPost(type="file", url=descfile,
-                        email = res$receiver_email)[[1]]))
+        ## Post a file with an email recipient specified:
+        file <- testfile(count(TRUE))
+        str(fromJSON(pbPost(type="file", url=file,
+                           email = res$receiver_email)[[1]]))
 
-    ## Post file with both email and numeric recipient specified:
-    str(fromJSON(pbPost(type="file", url=descfile,
-                        recipients = RPushbullet:::.getNames()[1],
-                        email = res$receiver_email)[[1]]))
+        ## Post file with both email and numeric recipient specified:
+        file <- testfile(count(TRUE))
+        str(fromJSON(pbPost(type="file", url=file,
+                           recipients = devices[1],
+                           email = res$receiver_email)[[1]]))
+   } # if (hasDevices)
 
-    ## Test hierarchy of arguments with channel specified:
-    ## 1) All three should send to recipients.
-    ## 2) Email and channel should send to email.
-    ## 3) Recipients and channel should send to recipients
-    ## 4) Only channel should send to channel.
 
-    ## Post a note with recipients, email and channel specified.
-    result <- fromJSON(pbPost(type="note", title=title, body=body,
-                              recipients = RPushbullet:::.getNames()[1],
-                              email = RPushbullet:::.getTestEmail(),
-                              channel = RPushbullet:::.getTestChannel())[[1]])
-    if (is.null(result$target_device_iden)) {
-	stop("Test Failed.")
-    }
+    if (hasChannel && hasDevices && hasEmail) {
+        ## Test hierarchy of arguments with channel specified:
+        ## 1) All three should send to recipients.
+        ## 2) Email and channel should send to email.
+        ## 3) Recipients and channel should send to recipients
+        ## 4) Only channel should send to channel.
 
-    ## Post a note with email and channel specified.
-    result <- fromJSON(pbPost(type="note", title=title, body=body,
-                              email = RPushbullet:::.getTestEmail(),
-                              channel = RPushbullet:::.getTestChannel())[[1]])
-    if (is.null(result$receiver_email)) {
-	stop("Test Failed.")
-    }
+        ## Post a note with recipients, email and channel specified.
+        result <- fromJSON(pbPost(type="note", title=count(title), body=body,
+                                  recipients = devices[1],
+                                  email = email,
+                                  channel = channel)[[1]])
+        if (is.null(result$target_device_iden)) {
+            stop("Test Failed.")
+        }
 
-    ## Post a note with recipients and channel specified.
-    result <- fromJSON(pbPost(type="note", title=title, body=body,
-                              recipients = RPushbullet:::.getNames()[1],
-                              channel = RPushbullet:::.getTestChannel())[[1]])
-    if (is.null(result$target_device_iden)) {
-	stop("Test Failed.")
-    }
+        ## Post a note with email and channel specified.
+        result <- fromJSON(pbPost(type="note", title=count(title), body=body,
+                                  email = email,
+                                  channel = channel)[[1]])
+        if (is.null(result$receiver_email)) {
+            stop("Test Failed.")
+        }
 
-    ## Post a note with only the channel specified.
-    str(fromJSON(pbPost(type="note", title=title, body=body,
-                        channel = RPushbullet:::.getTestChannel(),
-                        verbose=TRUE)[[1]]))
-    # Returns empty list, but posts successfully. API seems to return empty JSON. (tested curl command)
+        ## Post a note with recipients and channel specified.
+        result <- fromJSON(pbPost(type="note", title=count(title), body=body,
+                                  recipients = devices[1],
+                                  channel = channel)[[1]])
+        if (is.null(result$target_device_iden)) {
+            stop("Test Failed.")
+        }
+
+        ## Post a note with only the channel specified.
+        str(fromJSON(pbPost(type="note", title=count(title), body=body,
+                            channel = channel,
+                            verbose=TRUE)[[1]]))
+        # Returns empty list, but posts successfully. API seems to return empty JSON. (tested curl command)
+    } # if (hasChannel && hasDevices && hasEmail)
+
+
+    ## Post closing note
+    title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushBullet")))
+    body <- sprintf("In total %d posts were made including this one", count(FALSE))
+    res <- fromJSON(pbPost("note", title, body)[[1]])
+    str(res)
+
 
 }
