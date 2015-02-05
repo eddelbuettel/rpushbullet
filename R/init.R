@@ -20,6 +20,23 @@
 
 .pkgenv <- new.env(parent=emptyenv())
 
+.parseResourceFile <- function(dotfile="~/.rpushbullet.json") {
+    pb <- fromJSON(dotfile, simplify=FALSE)
+    assign("pb", pb, envir=.pkgenv)
+    if (is.null(pb[["key"]])) {
+        warning("Field 'key' is either empty or missing: ", dotfile, call.=FALSE, immediate.=TRUE)
+    }
+    options("rpushbullet.key" = pb[["key"]])
+    options("rpushbullet.devices" = pb[["devices"]])
+    ## names is an optional entry, with fallback value of NULL
+    options("rpushbullet.names" = pb[["names"]])
+    ## defaultdevice is an optional entry, with fallback value of 0
+    options("rpushbullet.defaultdevice" = if ("defaultdevice" %in% names(pb)) pb[["defaultdevice"]] else 0)
+    ## these are for testing
+    options("rpushbullet.testemail" = if ("testemail" %in% names(pb)) pb[["testemail"]] else character())
+    options("rpushbullet.testchannel" = if ("testchannel" %in% names(pb)) pb[["testchannel"]] else character())
+}
+
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage("Attaching RPushbullet version ",
                           packageDescription("RPushbullet")$Version, ".")
@@ -35,24 +52,7 @@
     dotfile <- "~/.rpushbullet.json"
     if (file.exists(dotfile)) {
         packageStartupMessage("Reading ", dotfile)
-        pb <- fromJSON(dotfile, simplify=FALSE)
-        assign("pb", pb, envir=.pkgenv)
-        if (is.null(pb[["key"]])) {
-            warning("Field 'key' is either empty or missing: ", dotfile,
-                    call.=FALSE, immediate.=TRUE)
-        }
-        options("rpushbullet.key" = pb[["key"]])
-        options("rpushbullet.devices" = pb[["devices"]])
-        ## names is an optional entry, with fallback value of NULL
-        options("rpushbullet.names" = pb[["names"]])
-        ## defaultdevice is an optional entry, with fallback value of 0
-        options("rpushbullet.defaultdevice" =
-                    if ("defaultdevice" %in% names(pb)) pb[["defaultdevice"]] else 0)
-        ## these are for testing
-        options("rpushbullet.testemail" =
-                    if ("testemail" %in% names(pb)) pb[["testemail"]] else character())
-        options("rpushbullet.testchannel" =
-                    if ("testchannel" %in% names(pb)) pb[["testchannel"]] else character())
+        .parseResourceFile(dotfile)
     } else {
         txt <- paste("No file", dotfile, "found.\nConsider placing the",
                      "Pushbullet API key and your device id(s) there.")
