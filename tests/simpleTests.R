@@ -142,7 +142,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
 
     ## Post closing note
-    title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushBullet")))
+    title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushbullet")))
     body <- sprintf("In total %d posts were made including this one", count(FALSE))
     res <- fromJSON(pbPost("note", title, body)[[1]])
     str(res)

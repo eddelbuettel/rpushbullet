@@ -1,8 +1,12 @@
+2015-02-08  Dirk Eddelbuettel  <edd@debian.org>
+
+	* tests/simpleTests.R (testfile): Fix wrong case in package name
+
 2015-02-04  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/init.R (.parseResourceFile): Split off functionality from
 	.onAttach(), permitting later call by user if needed
-	* R/init.R (.onAttach): Call .parseResourceFile() 
+	* R/init.R (.onAttach): Call .parseResourceFile()
 
 2015-02-04  Henrik Bengtsson  <hb@biostat.ucsf.edu>
 
