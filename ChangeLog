@@ -1,6 +1,10 @@
-2015-02-08  Dirk Eddelbuettel  <edd@debian.org>
+2015-02-09  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION: Version 0.2.0
+
+	* DESCRIPTION (Description): Some minor last minute changes
+
+2015-02-08  Dirk Eddelbuettel  <edd@debian.org>
 
 	* inst/NEWS.Rd: Added
 

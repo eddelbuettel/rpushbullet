@@ -2,14 +2,13 @@ Package: RPushbullet
 Type: Package
 Title: R Interface to the Pushbullet Messaging Service
 Version: 0.2.0
-Date: 2015-02-08
+Date: 2015-02-09
 Author: Dirk Eddelbuettel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
-Description: This package provides an easy-to-use interface for the 
- Pushbullet messaging service which provides fast and efficient notifications
- (and file transfer) between computers, phones and tablets.  An account has
- to be registered at the site http://www.pushbullet.com site to obtain a
- (free) API key.
+Description: An R interface to the Pushbullet messaging service which
+ provides fast and efficient notifications (and file transfer) between
+ computers, phones and tablets.  An account has to be registered at the site
+ http://www.pushbullet.com site to obtain a (free) API key.
 Imports: utils, RJSONIO
 SystemRequirements: The 'curl' binary has to be in the path (and this is
  checked at package startup), a user API key (which can be obtained from
