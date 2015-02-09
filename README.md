@@ -8,7 +8,8 @@ which is perfect for alerting, and much more.
 
 To use it, just register as a user to obtain an 
 [API key](https://www.pushbullet.com/account), and maybe install
-the Android or iPhone app.  See the [Pushbullet](http://www.pushbullet.com)
+the Android or iPhone app, or one of the supported browser extension or
+desktop applications.  See the [Pushbullet](http://www.pushbullet.com)
 documentation for more, in particular
 
 - [Getting Started](https://www.pushbullet.com/guide/getting-started)
