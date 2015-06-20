@@ -72,7 +72,12 @@
   \code{rpushbullet.key}, \code{rpushbullet.devices}, \code{rpushbullet.names}, 
   and \code{rpushbullet.defaultdevice} corresponding to the entries in
   the JSON file shown above.
-  
+
+  The \code{curl} binary is required, and is located at package
+  initialization, along with the other load-time intializations
+  described here.  It is therefore strongly recommended to attach the
+  package in the normal way via \code{library(RPushbullet)} rather than
+  trying to access functions from the package namespace.
 }
 \author{
   Dirk Eddelbuettel 
