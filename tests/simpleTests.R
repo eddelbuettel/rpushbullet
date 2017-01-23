@@ -65,10 +65,6 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     ## storing this test result to allow us to use active user's email for testing below.
 
 
-    ## Post an address -- should open browser in Google Maps
-    str(fromJSON(pbPost(type="address", title=count("An Address"),
-                        body="South Pole, Antarctica")[[1]]))
-
     ## Post a URL -- should open browser
     str(fromJSON(pbPost(type="link", title=count("Some title"), body="Some URL",
                         url="http://cran.r-project.org/package=RPushbullet")[[1]]))

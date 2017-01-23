@@ -1,6 +1,7 @@
 
 import(RJSONIO)
 importFrom(utils, packageDescription)
+importFrom(curl, new_handle, curl_fetch_memory)
 
 exportPattern("^[[:alpha:]]+")
 
