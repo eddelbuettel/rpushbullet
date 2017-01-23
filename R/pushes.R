@@ -84,6 +84,7 @@
 ##' @param debug Boolean switch to add even more debugging output
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
+##' @importFrom curl handle_setform form_file curl_fetch_memory
 ##' @examples
 ##' \dontrun{
 ##' # A note
@@ -182,11 +183,11 @@ pbPost <- function(type=c("note", "link", "file"),
                               signature=uploadrequest$data['signature'],
                               policy=uploadrequest$data['policy'],
                               "content-type"=uploadrequest$data['content-type'],
-                              file=url)
+                              file=curl::form_file(url, filetype))
 
             curl::handle_setform(h, .list = form_list)
-            uploadresult <- curl::curl_fetch_memory(uploadrequest$upload_url)
-            if(uploadresult$status_code!=200){
+            uploadresult <- curl::curl_fetch_memory(uploadrequest$upload_url,h)
+            if(uploadresult$status_code!=204){
                 warning("file upload attempt failed with status code: ",uploadresult$status_code)
                 return(rawToChar(uploadresult$content))
             }
