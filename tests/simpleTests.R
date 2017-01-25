@@ -136,6 +136,44 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
         # Returns empty list, but posts successfully. API seems to return empty JSON. (tested curl command)
     } # if (hasChannel && hasDevices && hasEmail)
 
+    ## real channel bad token
+    if (hasChannel) {
+        warn_code <- getOption("warn")
+        options(warn=2)
+        err <- try(pbPost(type="note", title=count(title), body=body,
+                          channel = channel, apikey = "0123456789",
+                          verbose=TRUE))
+        if(!inherits(err, "try-error"))
+        {
+            options(warn=warn_code)
+            stop("Test Failed.")
+        }
+        if(!(grepl("401:",err[1])))
+        {
+            options(warn=warn_code)
+            stop("Test Failed. Expected error code 401")
+        }
+        options(warn=warn_code)
+    }
+
+    ## fake channel
+    warn_code <- getOption("warn")
+    options(warn=2)
+    err <- try(pbPost(type="note", title=count(title), body=body,
+                      channel = "0123456789-9876543210-{}",
+                      verbose=TRUE))
+    if(!inherits(err, "try-error"))
+    {
+        options(warn=warn_code)
+        stop("Test Failed.")
+    }
+    if(!(grepl("400:",err[1])))
+    {
+        options(warn=warn_code)
+        stop("Test Failed. Expected error code 400")
+    }
+    options(warn=warn_code)
+
 
     ## Post closing note
     title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushbullet")))

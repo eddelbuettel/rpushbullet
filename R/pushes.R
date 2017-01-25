@@ -257,5 +257,34 @@ pbPost <- function(type=c("note", "link", "file"),
     h <- .getCurlHandle(apikey)
     curl::handle_setform(h, .list = form_list )
     res <- curl::curl_fetch_memory(pburl, handle = h)
+    .check_return_code(res)
     return(rawToChar(res$content))
+}
+
+
+#' warn if return type is not okay
+#'
+#' the general idea is that the user can set options(warn=2)
+#' when simpleTests.R on travis or similar
+#'
+#' @param res the result of a call to curl::curl_fetch_memory
+#'
+#' @return NULL
+#' @noRd
+.check_return_code <- function(res) {
+    code <- res$status_code
+    if(code==200)
+        return()
+    msg <- switch(as.character(code),
+                  `400` = ": Bad Request - Usually this results from missing a required parameter.",
+                  `401` = ": Unauthorized - No valid access token provided.",
+                  `403` = ": Forbidden - The access token is not valid for that request.",
+                  `404` = ": Not Found - The requested item does not exist.",
+                  `429` = ": Too Many Requests - You have been ratelimited for making too many requests to the server.",
+                  ": Undocumented response code"
+               )
+    if(code>=500 && code<600)
+        msg <- ": Server Error - Something went wrong on Pushbullet's side. If this error is from an intermediate server, it may not be valid JSON."
+    warning(code,msg,call. = FALSE)
+    return()
 }
