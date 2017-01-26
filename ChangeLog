@@ -1,3 +1,24 @@
+2017-01-26  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Rolled minor version and date
+
+	* NAMESPACE: Also import str()importFrom("utils", "str")
+
+	* man/pbPost.Rd: Updated documentation
+	* R/pushes.R: Updated copyright
+
+2017-01-23  Seth S. Wenchel <wenchel@gmail.com>
+
+	* R/devices.R: Refactored and extended to use the 'curl' package
+	instead the external curl binary
+	* R/init.R: Idem
+	* R/pushes.R: Idem
+	* DESCRIPTION: Idem
+	* NAMESPACE: Idem
+	* .travis.yml: Idem
+
+	* tests/simpleTests.R: Updated and added channel tests
+
 2015-06-20  Dirk Eddelbuettel  <edd@debian.org>
 
 	* man/rpushbullet-package.Rd: Document that package initializes when
