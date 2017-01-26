@@ -38,10 +38,10 @@ pbGetDevices <- function(apikey=.getKey()) {
 
 ##' @rdname pbGetDevices
 pbGetDevices.default <- function(apikey=.getKey()) {
-    txt <- sprintf("%s -s %s -u %s:",
-                   .getCurl(), "https://api.pushbullet.com/v2/devices", apikey)
-    jsonres <- system(txt, intern=TRUE)
-    res <- fromJSON(jsonres)
+    # txt <- sprintf("%s -s %s -u %s:",
+    #                .getCurl(), "https://api.pushbullet.com/v2/devices", apikey)
+    jsonres <- curl::curl_fetch_memory("https://api.pushbullet.com/v2/devices", .getCurlHandle(apikey))
+    res <- fromJSON(rawToChar(jsonres$content))
     class(res) <- c("pbDevices", "list")
     invisible(res)
 }

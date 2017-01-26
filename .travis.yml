@@ -18,6 +18,7 @@ before_install:
 
 install:
   - ./travis-tool.sh install_r RJSONIO
+  - ./travis-tool.sh install_aptget r-cran-curl
 
 script:
   - ./travis-tool.sh run_tests
