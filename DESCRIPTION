@@ -9,7 +9,7 @@ Description: An R interface to the Pushbullet messaging service which
  provides fast and efficient notifications (and file transfer) between
  computers, phones and tablets.  An account has to be registered at the site
  http://www.pushbullet.com site to obtain a (free) API key.
-Imports: utils, RJSONIO, curl
+Imports: utils, jsonlite, curl
 SystemRequirements: A user API key (which one can request from the website at
  <http://www.pushbullet.com>), and one or more devices to push messages to
  which may be any one of an (Android or iOS) phone, the (Chrome or Firefox,
