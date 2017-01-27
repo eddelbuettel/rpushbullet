@@ -1,5 +1,5 @@
 
-import(RJSONIO)
+import(jsonlite)
 importFrom("utils", "packageDescription", "str")
 importFrom("curl", "new_handle", "curl_fetch_memory", "form_file")
 

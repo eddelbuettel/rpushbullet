@@ -178,12 +178,12 @@ pbPost <- function(type=c("note", "link", "file"),
 
             # Upload File
             h <- .getCurlHandle(apikey)
-            form_list <- list(awsaccesskeyid=uploadrequest$data['awsaccesskeyid'],
-                              acl=uploadrequest$data['acl'],
-                              key=uploadrequest$data['key'],
-                              signature=uploadrequest$data['signature'],
-                              policy=uploadrequest$data['policy'],
-                              "content-type"=uploadrequest$data['content-type'],
+            form_list <- list(awsaccesskeyid=uploadrequest$data[['awsaccesskeyid']],
+                              acl=uploadrequest$data[['acl']],
+                              key=uploadrequest$data[['key']],
+                              signature=uploadrequest$data[['signature']],
+                              policy=uploadrequest$data[['policy']],
+                              "content-type"=uploadrequest$data[['content-type']],
                               file=curl::form_file(url, filetype))
 
             curl::handle_setform(h, .list = form_list)

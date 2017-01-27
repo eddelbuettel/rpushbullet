@@ -17,8 +17,7 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
-  - ./travis-tool.sh install_r RJSONIO
-  - ./travis-tool.sh install_aptget r-cran-curl
+  - ./travis-tool.sh install_aptget r-cran-curl r-cran-jsonlite
 
 script:
   - ./travis-tool.sh run_tests
