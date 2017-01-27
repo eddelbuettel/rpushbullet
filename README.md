@@ -1,4 +1,4 @@
-## RPushbullet [![Build Status](https://travis-ci.org/eddelbuettel/rpushbullet.svg)](https://travis-ci.org/eddelbuettel/rpushbullet) [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) [![CRAN](http://www.r-pkg.org/badges/version/RPushbullet)](http://cran.rstudio.com/package=RPushbullet) [![Downloads](http://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen)](http://www.r-pkg.org/pkg/RPushbullet)
+## RPushbullet [![Build Status](https://travis-ci.org/eddelbuettel/rpushbullet.svg)](https://travis-ci.org/eddelbuettel/rpushbullet) [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) [![CRAN](http://www.r-pkg.org/badges/version/RPushbullet)](http://cran.rstudio.com/package=RPushbullet) [![Downloads](http://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen)](http://www.r-pkg.org/pkg/RPushbullet) [![Code Coverage](https://codecov.io/gh/eddelbuettel/rpushbullet/graph/badge.svg)](https://codecov.io/gh/eddelbuettel/rpushbullet)
 
 ### R interface to Pushbullet
 
@@ -10,23 +10,14 @@ To use it, just register as a user to obtain an
 [API key](https://www.pushbullet.com/account), and maybe install
 the Android or iPhone app, or one of the supported browser extension or
 desktop applications.  See the [Pushbullet](http://www.pushbullet.com)
-documentation for more, in particular
-
-- [Getting Started](https://www.pushbullet.com/guide/getting-started)
-- [Features](https://www.pushbullet.com/guide/getting-the-most-out-of-pushbullet)
+documentation for more information and details.
 
 ### Package Status
 
-The package is functional, yet still young and thus subject to change.
+The package is reasonably mature and functional. 
 
-Initial explorations at the end of March 2014 were not entirely successful:
-Using [RCurl](http://cran.rstudio.com/package=RCurl), one could retrieve
-device lists, and push notes but would never retrieve the proper JSON response
-from Pushbullet. I consulted with some of the RCurl experts (shoutout to Jeff
-G, Hadley W, and Duncan TL) but without resolution.
-
-So this is a simpler reboot. We simply call the `curl` binary, and retrieve
-the JSON response.
+Up until release 0.2.0, and external `curl` binary was used. We have since switched to using 
+the [curl](https://cran.r-project.org/package=curl) package.
 
 ### Initialization
 
@@ -102,7 +93,7 @@ information.
 
 ### Author
 
-Dirk Eddelbuettel
+Dirk Eddelbuettel with contributions by Mike Birdgeneau and Seth Wenchel
 
 ### License
 
