@@ -1,5 +1,7 @@
 2017-01-28  Dirk Eddelbuettel  <edd@debian.org>
 
+	* R/setup.R (pbSetup): New function, extending PR by Seth Wenchel
+
 	* R/init.R (.onLoad): Also load dotfile, permitted use for
 	un-attached package
 	(.onAttach): Improved message formatting, simpler environment use
