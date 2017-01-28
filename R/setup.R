@@ -46,15 +46,14 @@ pbSetup <- function(key, conffile) {
     if (missing(conffile)) conffile <- .getDotfile()
 
     pdgd <- pbGetDevices(key)
-    devices <- vapply(pdgd$devices,
-                      function(x) { ifelse(x[["active"]] && x[["pushable"]],
-                                           x[["iden"]],NA_character_) }, "")
-    names <- vapply(pdgd$devices,
-                    function(x) { ifelse(x[["active"]] && x[["pushable"]],
-                                         x[["nickname"]], NA_character_) }, "")
 
-    devices <- devices[!is.na(devices)]
-    names <- names[!is.na(names)]
+    devices <- names <- rep(NA_character_, nrow(pdgd$devices)) # default to NA
+    ind <- with(pdgd$devices, active & pushable)
+    devices[ind] <- pdgd$devices[ind, "iden"]
+    names[ind]   <- pdgd$devices[ind, "nickname"]
+
+    devices <- na.omit(devices)
+    names <- na.omit(names)
 
     for (i in seq_along(names)){
         print(paste0(i,". ",names[i]))
