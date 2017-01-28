@@ -1,7 +1,7 @@
 
 importFrom("utils", "packageDescription", "str")
 importFrom("curl", "new_handle", "curl_fetch_memory", "form_file")
-importFrom("jsonlite", "fromJSON")
+importFrom("jsonlite", "fromJSON", "toJSON")
 
 exportPattern("^[[:alpha:]]+")
 
