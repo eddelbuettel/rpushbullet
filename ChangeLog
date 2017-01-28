@@ -1,3 +1,17 @@
+2017-01-28  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .travis.yml: Switch to using run.sh for Travis CI
+	* NAMESPACE: Minor edit
+	* inst/NEWS: Updated
+
+2017-01-27  Seth S. Wenchel <wenchel@gmail.com>
+
+	* R/init.R: Refactored to use jsonlite instead of RJSONIO
+	* R/pushes.R: Idem
+	* DESCRIPTION: Idem
+	* NAMESPACE: Idem
+	* .travis.yml: Idem
+
 2017-01-27  Dirk Eddelbuettel  <edd@debian.org>
 
 	* README.md: Removed broken URLs to Pushbullet docs, mention Mike and
@@ -14,8 +28,9 @@
 
 2017-01-23  Seth S. Wenchel <wenchel@gmail.com>
 
-	* R/devices.R: Refactored and extended to use the 'curl' package
-	instead the external curl binary
+	* R/devices.R: Refactored and extended to use the curl package
+        instead the external curl binary; also removed no-longer supported
+        'address' pushes
 	* R/init.R: Idem
 	* R/pushes.R: Idem
 	* DESCRIPTION: Idem

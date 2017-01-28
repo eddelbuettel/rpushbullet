@@ -16,7 +16,7 @@ documentation for more information and details.
 
 The package is reasonably mature and functional. 
 
-Up until release 0.2.0, and external `curl` binary was used. We have since switched to using 
+Up until release 0.2.0, an external `curl` binary was used. We have since switched to using
 the [curl](https://cran.r-project.org/package=curl) package.
 
 ### Initialization

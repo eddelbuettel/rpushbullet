@@ -1,6 +1,18 @@
 \name{NEWS}
 \title{News for Package \pkg{RPushbullet}}
-\newcommand{\cpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
+\newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
+\newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
+
+\section{Changes in version 0.3.0 (2017-01-28)}{
+  \itemize{
+    \item The `curl` binary use was replaced by use of the
+    \CRANpkg{curl} package (PR \ghpr{30} by Seth)
+    \item Use of \CRANpkg{RJSONIO} was switched to use of
+    \CRANpkg{jsonlite} (PR \ghpr{32} by Seth)
+    \item Coverage support was added (in a 'on-demand' setting as
+    automated runs would need a Pushbullet API token)
+  }
+}
 
 \section{Changes in version 0.2.0 (2015-02-07)}{
   \itemize{
