@@ -1,5 +1,11 @@
 2017-01-28  Dirk Eddelbuettel  <edd@debian.org>
 
+	* R/init.R (.onLoad): Also load dotfile, permitted use for
+	un-attached package
+	(.onAttach): Improved message formatting, simpler environment use
+	(.getDotfile): New helper for default dotfile
+	(.parseResourceFile): Simpler environment use
+
 	* .travis.yml: Switch to using run.sh for Travis CI
 	* NAMESPACE: Minor edit
 	* inst/NEWS: Updated

@@ -1,7 +1,7 @@
 
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2014 - 2015  Dirk Eddelbuettel <edd@debian.org>
+##  Copyright (C) 2014 - 2017  Dirk Eddelbuettel <edd@debian.org>
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -22,7 +22,7 @@
 
 .parseResourceFile <- function(dotfile="~/.rpushbullet.json") {
     pb <- fromJSON(dotfile, simplifyVector = FALSE)
-    assign("pb", pb, envir=.pkgenv)
+    .pkgenv[["pb"]] <- pb
     if (is.null(pb[["key"]])) {
         warning("Field 'key' is either empty or missing: ", dotfile, call.=FALSE, immediate.=TRUE)
     }
@@ -37,19 +37,28 @@
     options("rpushbullet.testchannel" = if ("testchannel" %in% names(pb)) pb[["testchannel"]] else character())
 }
 
+.getDotfile <- function() {
+    getOption("rpushbullet.dotfile", default="~/.rpushbullet.json")
+}
+
+.onLoad <- function(libname, pkgname) {
+    dotfile <- .getDotfile()
+    if (file.exists(dotfile)) .parseResourceFile(dotfile)
+}
+
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage("Attaching RPushbullet version ",
                           packageDescription("RPushbullet")$Version, ".")
-
-    dotfile <- "~/.rpushbullet.json"
+    dotfile <- .getDotfile()
     if (file.exists(dotfile)) {
         packageStartupMessage("Reading ", dotfile)
         .parseResourceFile(dotfile)
     } else {
-        txt <- paste("No file", dotfile, "found.\nConsider placing the",
+        txt <- paste("No file", dotfile, "found. Consider placing the",
                      "Pushbullet API key and your device id(s) there.")
+        txt <- paste(strwrap(txt), collapse="\n")
         packageStartupMessage(txt)
-        assign("pb", NULL, envir=.pkgenv)
+        .pkgenv[["pb"]] <- NULL
     }
 }
 
