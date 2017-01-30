@@ -25,7 +25,8 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     RPushbullet:::.getDevices()
 
     ## Show the list of devices registered to the key
-    require(RJSONIO)
+    #require(RJSONIO)
+    require(jsonlite)
     str(pbGetDevices())
 
     ## Test destinations
@@ -64,10 +65,6 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     str(res)
     ## storing this test result to allow us to use active user's email for testing below.
 
-
-    ## Post an address -- should open browser in Google Maps
-    str(fromJSON(pbPost(type="address", title=count("An Address"),
-                        body="South Pole, Antarctica")[[1]]))
 
     ## Post a URL -- should open browser
     str(fromJSON(pbPost(type="link", title=count("Some title"), body="Some URL",
@@ -139,6 +136,44 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
                             verbose=TRUE)[[1]]))
         # Returns empty list, but posts successfully. API seems to return empty JSON. (tested curl command)
     } # if (hasChannel && hasDevices && hasEmail)
+
+    ## real channel bad token
+    if (hasChannel) {
+        warn_code <- getOption("warn")
+        options(warn=2)
+        err <- try(pbPost(type="note", title=count(title), body=body,
+                          channel = channel, apikey = "0123456789",
+                          verbose=TRUE))
+        if(!inherits(err, "try-error"))
+        {
+            options(warn=warn_code)
+            stop("Test Failed.")
+        }
+        if(!(grepl("401:",err[1])))
+        {
+            options(warn=warn_code)
+            stop("Test Failed. Expected error code 401")
+        }
+        options(warn=warn_code)
+    }
+
+    ## fake channel
+    warn_code <- getOption("warn")
+    options(warn=2)
+    err <- try(pbPost(type="note", title=count(title), body=body,
+                      channel = "0123456789-9876543210-{}",
+                      verbose=TRUE))
+    if(!inherits(err, "try-error"))
+    {
+        options(warn=warn_code)
+        stop("Test Failed.")
+    }
+    if(!(grepl("400:",err[1])))
+    {
+        options(warn=warn_code)
+        stop("Test Failed. Expected error code 400")
+    }
+    options(warn=warn_code)
 
 
     ## Post closing note

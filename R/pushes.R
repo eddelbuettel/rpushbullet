@@ -2,7 +2,8 @@
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
 ##  Copyright (C) 2014         Dirk Eddelbuettel <edd@debian.org>
-##  Copyright (C) 2014 - 2015  Dirk Eddelbuettel and Mike Birdgeneau
+##  Copyright (C) 2014 - 2016  Dirk Eddelbuettel and Mike Birdgeneau
+##  Copyright (C) 2014 - 2017  Dirk Eddelbuettel, Mike Birdgeneau and Seth Wenchel
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -50,16 +51,15 @@
 ##' The earlier argument \code{deviceind} is now deprecated and will
 ##' be removed in a later release.
 ##' @title Post a message via Pushbullet
-##' @param type The type of post: one of \sQuote{note}, \sQuote{link}, \sQuote{file}
-##' or \sQuote{address}.
-##' @param title The title of the note, or the name of the address, being posted.
-##' @param body The body of the note, or the address when \code{type}
-##' is \sQuote{address}, or the (optional) body when the \code{type}
+##' @param type The type of post: one of \sQuote{note}, \sQuote{link}, or \sQuote{file}.
+##' @param title The title of the note being posted.
+##' @param body The body of the note or the (optional) body when the \code{type}
 ##' is \sQuote{link}.
 ##' @param url The URL of \code{type} is \sQuote{link}, or the local
 ##' path of a file to be sent if \code{type} is \sQuote{file}.
 ##' @param filetype The MIME type for the file at \code{url} (if
-##' \code{type} is \sQuote{file}), defaults to \dQuote{text/plain}.
+##' \code{type} is \sQuote{file}) such as \dQuote{text/plain} or \dQuote{image/jpeg},
+##'  defaults to \dQuote{text/plain}.
 ##' @param recipients A character or numeric vector indicating the
 ##' devices this post should go to. If missing, the default device
 ##' is looked up from an optional setting, and if none has been set
@@ -85,13 +85,11 @@
 ##' @param debug Boolean switch to add even more debugging output
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
+##' @importFrom curl handle_setform form_file curl_fetch_memory
 ##' @examples
 ##' \dontrun{
 ##' # A note
 ##' pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")
-##'
-##' # An address -- should open browser in Google Maps
-##' pbPost(type="address", title="An Address", body="South Pole, Antarctica")
 ##'
 ##' # A URL -- should open browser
 ##' pbPost(type="link", title="Some title", body="Some URL",
@@ -100,7 +98,7 @@
 ##' # A file
 ##' pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))
 ##' }
-pbPost <- function(type=c("note", "link", "address", "file"),
+pbPost <- function(type=c("note", "link", "file"),
                    title="",             # also name for type='address'
                    body="",              # also address for type='address',
                                          # and items for type='list'
@@ -117,6 +115,12 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                    debug = FALSE) {
 
     type <- match.arg(type)
+
+    if (type == "address"){
+        warning("address pushes are no longer supported by Pushbullet service. Attempt to push \'",body,"\' failed.")
+        invisible(return(NA_character_))
+    }
+
 
     if (!missing(deviceind)) {
         if (missing(recipients) && missing(email) && missing(channel)) {
@@ -156,7 +160,6 @@ pbPost <- function(type=c("note", "link", "address", "file"),
     }
 
     pburl <- "https://api.pushbullet.com/v2/pushes"
-    curl <- .getCurl()
 
     ## if (is.null(deviceind))
     ##     deviceind <- .getDefaultDevice()
@@ -174,39 +177,44 @@ pbPost <- function(type=c("note", "link", "address", "file"),
             #fileurl <- uploadrequest$file_url
 
             # Upload File
-            txt <- sprintf(paste0("%s -s -i %s -F awsaccesskeyid='%s' -F acl='%s' ",
-                                  "-F key='%s' -F signature='%s' -F policy='%s' ",
-                                  "-F content-type='%s' -F 'file=@%s'"),
-                           curl,
-                           uploadrequest$upload_url,
-                           uploadrequest$data['awsaccesskeyid'],
-                           uploadrequest$data['acl'],
-                           uploadrequest$data['key'],
-                           uploadrequest$data['signature'],
-                           uploadrequest$data['policy'],
-                           uploadrequest$data['content-type'],
-                           url)
-            uploadresult <- system(txt, intern=TRUE)
+            h <- .getCurlHandle(apikey)
+            form_list <- list(awsaccesskeyid=uploadrequest$data[['awsaccesskeyid']],
+                              acl=uploadrequest$data[['acl']],
+                              key=uploadrequest$data[['key']],
+                              signature=uploadrequest$data[['signature']],
+                              policy=uploadrequest$data[['policy']],
+                              "content-type"=uploadrequest$data[['content-type']],
+                              file=curl::form_file(url, filetype))
+
+            curl::handle_setform(h, .list = form_list)
+            uploadresult <- curl::curl_fetch_memory(uploadrequest$upload_url,h)
+            if(uploadresult$status_code!=204){
+                warning("file upload attempt failed with status code: ",uploadresult$status_code)
+                return(rawToChar(uploadresult$content))
+            }
         }
     }
 
     ret <- lapply(dest, function(d) {
-        if (debug) message(sprintf("in lapply, d is: %s", d))   
+        if (debug) message(sprintf("in lapply, d is: %s", d))
         if (is.character(d)) {          # this is an email or channel.
             if (!is.na(email)){
-                tgt <- sprintf(' -d email="%s" ', d)
+                tgt <- list(email= d)
             } else {                    # hence assume channel
-                tgt <- sprintf(' -d channel_tag="%s" ', d)
+                tgt <- list(channel_tag= d)
             }
         } else if (is.numeric(d)) {     # this a listed device, now transfered to index
-            tgt <- ifelse(d == 0,       # if zero, then use all devices
-                          '',           # otherwise given specific device
-                          sprintf('-d device_iden="%s" ', devices[d]))
-        } else {                        # fallback, should not get reached
-            tgt <- ''
+            if (d==0)
+                tgt <- list() # if zero, then use all devices
+            else
+                tgt <-  list(device_iden=devices[[d]]) # otherwise given specific device
+         } else {                        # fallback, should not get reached
+            tgt <- list()
         }
 
-        txt <- switch(type,
+        form_list <- tgt
+
+        switch(type,
 
                       ## curl https://api.pushbullet.com/v2/pushes \
                       ##   -u <your_api_key_here>: \
@@ -215,19 +223,16 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                       ##   -d title="Note title" \
                       ##   -d body="note body" \
                       ##   -X POST
-                      note = sprintf(paste0('%s -s %s -u %s: %s ',
-                          '-d type="note" -d title="%s" -d body="%s" -X POST'),
-                          curl, pburl, apikey, tgt, title, body),
+                      note = {
+                          form_list[["type"]] <- "note";
+                          form_list[["title"]] <- title;
+                          form_list[["body"]] <- body;},
 
-                      link = sprintf(paste0('%s -s %s -u %s: %s ',
-                          '-d type="link" -d title="%s" -d body="%s" ',
-                          '-d url="%s" -X POST'),
-                          curl, pburl, apikey, tgt, title, body, url),
-
-                      address = sprintf(paste0('%s -s %s -u %s: %s ',
-                          '-d type="address" -d name="%s" -d address="%s" ',
-                          '-X POST'),
-                          curl, pburl, apikey, tgt, title, body),
+                      link = {
+                          form_list[["type"]] <- "link";
+                          form_list[["title"]] <- title;
+                          form_list[["body"]] <- body;
+                          form_list[["url"]] <- url;},
 
                       ## ## not quite sure what a list body would be
                       ## list = sprintf(paste0('curl -s %s -u %s: -d device_iden="%s" ',
@@ -236,17 +241,51 @@ pbPost <- function(type=c("note", "link", "address", "file"),
                       ##                pburl, apikey, device, title, body),
 
                       ## for file see docs, need to upload file first
-                      file = sprintf(paste0('%s -s %s -u %s: %s ',
-                                            '-d type="file" -d file_name="%s" ',
-                                            '-d file_type="%s" ',
-                                            '-d file_url="%s" ',
-                                            '-d body="%s" -X POST'),
-                                     curl, pburl, apikey, tgt,
-                                     basename(uploadrequest$file_name),
-                                     uploadrequest$file_type, uploadrequest$file_url, body)
+                      file = {
+                          form_list[["type"]] <- "file";
+                          form_list[["file_name"]] <- basename(uploadrequest$file_name);
+                          form_list[["file_type"]] <- uploadrequest$file_type;
+                          form_list[["file_url"]] <- uploadrequest$file_url;
+                          form_list[["body"]] <- body;}
                       )
-        if (verbose) print(txt)
-        system(txt, intern=TRUE)
+        if (verbose) print(form_list)
+        .create_push(pburl, apikey, form_list)
     })
     invisible(ret)
+}
+
+.create_push <- function(pburl, apikey, form_list){
+    h <- .getCurlHandle(apikey)
+    curl::handle_setform(h, .list = form_list )
+    res <- curl::curl_fetch_memory(pburl, handle = h)
+    .check_return_code(res)
+    return(rawToChar(res$content))
+}
+
+
+#' warn if return type is not okay
+#'
+#' the general idea is that the user can set options(warn=2)
+#' when simpleTests.R on travis or similar
+#'
+#' @param res the result of a call to curl::curl_fetch_memory
+#'
+#' @return NULL
+#' @noRd
+.check_return_code <- function(res) {
+    code <- res$status_code
+    if(code==200)
+        return()
+    msg <- switch(as.character(code),
+                  `400` = ": Bad Request - Usually this results from missing a required parameter.",
+                  `401` = ": Unauthorized - No valid access token provided.",
+                  `403` = ": Forbidden - The access token is not valid for that request.",
+                  `404` = ": Not Found - The requested item does not exist.",
+                  `429` = ": Too Many Requests - You have been ratelimited for making too many requests to the server.",
+                  ": Undocumented response code"
+               )
+    if(code>=500 && code<600)
+        msg <- ": Server Error - Something went wrong on Pushbullet's side. If this error is from an intermediate server, it may not be valid JSON."
+    warning(code,msg,call. = FALSE)
+    return()
 }

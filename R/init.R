@@ -1,7 +1,7 @@
 
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2014 - 2015  Dirk Eddelbuettel <edd@debian.org>
+##  Copyright (C) 2014 - 2017  Dirk Eddelbuettel <edd@debian.org>
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -21,8 +21,8 @@
 .pkgenv <- new.env(parent=emptyenv())
 
 .parseResourceFile <- function(dotfile="~/.rpushbullet.json") {
-    pb <- fromJSON(dotfile, simplify=FALSE)
-    assign("pb", pb, envir=.pkgenv)
+    pb <- fromJSON(dotfile, simplifyVector = FALSE)
+    .pkgenv[["pb"]] <- pb
     if (is.null(pb[["key"]])) {
         warning("Field 'key' is either empty or missing: ", dotfile, call.=FALSE, immediate.=TRUE)
     }
@@ -37,27 +37,28 @@
     options("rpushbullet.testchannel" = if ("testchannel" %in% names(pb)) pb[["testchannel"]] else character())
 }
 
+.getDotfile <- function() {
+    getOption("rpushbullet.dotfile", default="~/.rpushbullet.json")
+}
+
+.onLoad <- function(libname, pkgname) {
+    dotfile <- .getDotfile()
+    if (file.exists(dotfile)) .parseResourceFile(dotfile)
+}
+
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage("Attaching RPushbullet version ",
                           packageDescription("RPushbullet")$Version, ".")
-
-    curl <- Sys.which("curl")
-    if (curl == "") {
-        warning("No curl binary found in your path. Please consider installing curl.",
-                call.=FALSE, immediate.=TRUE)
-    } else {
-        assign("curl", curl, envir=.pkgenv)
-    }
-
-    dotfile <- "~/.rpushbullet.json"
+    dotfile <- .getDotfile()
     if (file.exists(dotfile)) {
         packageStartupMessage("Reading ", dotfile)
         .parseResourceFile(dotfile)
     } else {
-        txt <- paste("No file", dotfile, "found.\nConsider placing the",
+        txt <- paste("No file", dotfile, "found. Consider placing the",
                      "Pushbullet API key and your device id(s) there.")
+        txt <- paste(strwrap(txt), collapse="\n")
         packageStartupMessage(txt)
-        assign("pb", NULL, envir=.pkgenv)
+        .pkgenv[["pb"]] <- NULL
     }
 }
 
@@ -85,12 +86,10 @@
               else 0)                           # as code for all devices
 }
 
-.getCurl <- function() {
-    curl <- .pkgenv$curl
-    if (curl == "")
-        stop(paste("No curl binary registered. ",
-                   "Install curl, and restart R and reload package"), call.=FALSE)
-    curl
+.getCurlHandle <- function(apikey){
+    h <- curl::new_handle()
+    curl::handle_setheaders(h, .list=list('Access-Token' = apikey))
+    return(h)
 }
 
 .getNames <- function() {
@@ -103,13 +102,16 @@
 
 .getUploadRequest <- function(filename, filetype="img/png", apikey = .getKey()) {
 
-    curl <- .getCurl()
+    h <- .getCurlHandle(apikey)
     pburl <- "https://api.pushbullet.com/v2/upload-request"
 
-    txt <- sprintf('%s -s -u %s: %s -d file_name="%s" -d file_type=%s',
-                   curl, apikey, pburl, filename, filetype)
+    # txt <- sprintf('%s -s -u %s: %s -d file_name="%s" -d file_type=%s',
+    #                curl, apikey, pburl, filename, filetype)
 
-    result <- fromJSON(system(txt, intern=TRUE))
+    form_list <- list(file_name=filename, file_type=filetype)
+    curl::handle_setform(h, .list = form_list)
+    res <- curl::curl_fetch_memory(pburl, h)
+    result <- fromJSON(rawToChar(res$content))
     result
 }
 

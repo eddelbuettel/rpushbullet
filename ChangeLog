@@ -1,3 +1,52 @@
+2017-01-28  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/setup.R (pbSetup): New function, extending PR by Seth Wenchel
+
+	* R/init.R (.onLoad): Also load dotfile, permitted use for
+	un-attached package
+	(.onAttach): Improved message formatting, simpler environment use
+	(.getDotfile): New helper for default dotfile
+	(.parseResourceFile): Simpler environment use
+
+	* .travis.yml: Switch to using run.sh for Travis CI
+	* NAMESPACE: Minor edit
+	* inst/NEWS: Updated
+
+2017-01-27  Seth S. Wenchel <wenchel@gmail.com>
+
+	* R/init.R: Refactored to use jsonlite instead of RJSONIO
+	* R/pushes.R: Idem
+	* DESCRIPTION: Idem
+	* NAMESPACE: Idem
+	* .travis.yml: Idem
+
+2017-01-27  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Removed broken URLs to Pushbullet docs, mention Mike and
+	Seth in Authors, and add coverage badge
+
+2017-01-26  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Rolled minor version and date
+
+	* NAMESPACE: Also import str()importFrom("utils", "str")
+
+	* man/pbPost.Rd: Updated documentation
+	* R/pushes.R: Updated copyright
+
+2017-01-23  Seth S. Wenchel <wenchel@gmail.com>
+
+	* R/devices.R: Refactored and extended to use the curl package
+        instead the external curl binary; also removed no-longer supported
+        'address' pushes
+	* R/init.R: Idem
+	* R/pushes.R: Idem
+	* DESCRIPTION: Idem
+	* NAMESPACE: Idem
+	* .travis.yml: Idem
+
+	* tests/simpleTests.R: Updated and added channel tests
+
 2015-06-20  Dirk Eddelbuettel  <edd@debian.org>
 
 	* man/rpushbullet-package.Rd: Document that package initializes when
