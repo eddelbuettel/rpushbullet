@@ -4,36 +4,40 @@
 \alias{pbSetup}
 \title{Create a JSON config file}
 \usage{
-pbSetup(apikey = NULL, config_file = "~/.rpushbullet.json")
+pbSetup(key, conffile)
 }
 \arguments{
 \item{apikey}{An \emph{Access Token} provided by Pushbullet (see details). If not
 provided in the function call, the user will be prompted to enter one.}
 
 \item{config_file}{A string giving the path where the configuration file will
-be written. RPushbullet will automatically attempt load
-\code{~/.rpushbullet.json} (the default)}
+be written. RPushbullet will automatically attempt load from the default location
+\code{~/.rpushbullet.json} (which can be changed via a \code{rpushbullet.dotfile})
+entry in \code{options}).}
+}
+\value{
+\code{NULL} is returned invisibly, but the function is called for its side
+effect of creating the configuration file.
 }
 \description{
 Create a JSON config file
 }
 \details{
 This function writes a simple default configuration file based
-  on a given apikey.  It is intended to be run once to help new users setup
-  RPushbullet. Running multiple times without overriding the
-  \code{config_file} parameter will overwrite the default file. An \emph{Access
-  Token} may be obtained for free by logging into the Pushbullet website,
-  going to \url{https://www.pushbullet.com/#settings}, and clicking on
-  "Create Access Token".
+on a given apikey.  It is intended to be run once to help new users setup
+RPushbullet. Running multiple times without overriding the
+\code{config_file} parameter will overwrite the default file. An \emph{Access
+Token} may be obtained for free by logging into the Pushbullet website,
+going to \url{https://www.pushbullet.com/#settings}, and clicking on
+"Create Access Token".
 }
 \examples{
 \dontrun{
-
 # Interactive mode.  Just follow the prompts.
 pbSetup()
 }
 }
 \author{
-Seth Wenchel
+Seth Wenchel and Dirk Eddelbuettel
 }
 

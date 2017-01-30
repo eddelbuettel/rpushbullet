@@ -23,7 +23,7 @@
 ##' provided in the function call, the user will be prompted to enter one.
 ##' @param config_file A string giving the path where the configuration file will
 ##' be written. RPushbullet will automatically attempt load from the default location
-##' \code{~/.rpushbullet.json} (which can be changed via a \code{rpushbullet.dotfile)
+##' \code{~/.rpushbullet.json} (which can be changed via a \code{rpushbullet.dotfile})
 ##' entry in \code{options}).
 ##' @return \code{NULL} is returned invisibly, but the function is called for its side
 ##' effect of creating the configuration file.
@@ -47,6 +47,9 @@ pbSetup <- function(key, conffile) {
 
     pdgd <- pbGetDevices(key)
 
+    if(!length(pdgd$devices)){
+        stop("no devices found for ", key)
+    }
     devices <- names <- rep(NA_character_, nrow(pdgd$devices)) # default to NA
     ind <- with(pdgd$devices, active & pushable)
     devices[ind] <- pdgd$devices[ind, "iden"]
