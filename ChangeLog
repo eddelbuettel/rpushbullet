@@ -8,8 +8,8 @@
 
 2017-01-30  Seth S. Wenchel  <wenchel@gmail.com>
 
-	* R/setup.R (pbSetup): Check return code from pbGetDevices(); flag
-	an error if no device associate with the supplied key; fixed typo
+	* R/setup.R (pbSetup): Check return code from pbGetDevices(); flag an
+	error if no device is associated with the supplied key; fixed typo
 
 	* R/init.R (.checkReturnCode): Move function here
 
