@@ -1,3 +1,14 @@
+2017-01-30  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): New minor version and date
+
+2017-01-30  Seth S. Wenchel  <wenchel@gmail.com>
+
+	* R/setup.R (pbSetup): Check return code from pbGetDevices(); flag
+	an error is no device associate with the supplied key; fixed typo
+
+	* R/init.R (.checkReturnCode): Move function here
+
 2017-01-28  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/setup.R (pbSetup): New function, extending PR by Seth Wenchel
@@ -12,7 +23,7 @@
 	* NAMESPACE: Minor edit
 	* inst/NEWS: Updated
 
-2017-01-27  Seth S. Wenchel <wenchel@gmail.com>
+2017-01-27  Seth S. Wenchel  <wenchel@gmail.com>
 
 	* R/init.R: Refactored to use jsonlite instead of RJSONIO
 	* R/pushes.R: Idem
@@ -34,7 +45,7 @@
 	* man/pbPost.Rd: Updated documentation
 	* R/pushes.R: Updated copyright
 
-2017-01-23  Seth S. Wenchel <wenchel@gmail.com>
+2017-01-23  Seth S. Wenchel  <wenchel@gmail.com>
 
 	* R/devices.R: Refactored and extended to use the curl package
         instead the external curl binary; also removed no-longer supported

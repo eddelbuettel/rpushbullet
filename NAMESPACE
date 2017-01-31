@@ -2,6 +2,7 @@
 importFrom("utils", "packageDescription", "str")
 importFrom("curl", "new_handle", "curl_fetch_memory", "form_file")
 importFrom("jsonlite", "fromJSON", "toJSON")
+importFrom("stats", "na.omit")
 
 exportPattern("^[[:alpha:]]+")
 
