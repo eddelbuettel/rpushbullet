@@ -21,7 +21,7 @@
 ##'
 ##' @param apikey An \emph{Access Token} provided by Pushbullet (see details). If not
 ##' provided in the function call, the user will be prompted to enter one.
-##' @param config_file A string giving the path where the configuration file will
+##' @param conffile A string giving the path where the configuration file will
 ##' be written. RPushbullet will automatically attempt load from the default location
 ##' \code{~/.rpushbullet.json} (which can be changed via a \code{rpushbullet.dotfile})
 ##' entry in \code{options}).
@@ -40,16 +40,15 @@
 ##' pbSetup()
 ##' }
 ##' @author Seth Wenchel and Dirk Eddelbuettel
-pbSetup <- function(key, conffile) {
+pbSetup <- function(apikey, conffile) {
 
-    if (missing(key)) key <- readline("Please enter your API key (aka 'Access Token': ")
+    if (missing(apikey)) apikey <- readline("Please enter your API key (aka 'Access Token': ")
     if (missing(conffile)) conffile <- .getDotfile()
 
-    pdgd <- pbGetDevices(key)
+    pdgd <- pbGetDevices(apikey)
 
-    if(!length(pdgd$devices)){
-        stop("no devices found for ", key)
-    }
+    if (!length(pdgd$devices)) stop("no devices found for ", apikey, call.=FALSE)
+
     devices <- names <- rep(NA_character_, nrow(pdgd$devices)) # default to NA
     ind <- with(pdgd$devices, active & pushable)
     devices[ind] <- pdgd$devices[ind, "iden"]
@@ -58,12 +57,12 @@ pbSetup <- function(key, conffile) {
     devices <- na.omit(devices)
     names <- na.omit(names)
 
-    for (i in seq_along(names)){
+    for (i in seq_along(names)) {
         print(paste0(i,". ",names[i]))
     }
     defdev <- readline("Select a default device (0 for none): ")
 
-    reslist <- list(key=key, devices = devices, names = names)
+    reslist <- list(key=apikey, devices = devices, names = names)
     if (defdev %in% as.character(seq_along(names)))
         reslist$defaultdevice <- names[as.integer(defdev)]
 

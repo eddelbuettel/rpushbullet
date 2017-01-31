@@ -145,7 +145,7 @@
 ##' @noRd
 .checkReturnCode <- function(res) {
     code <- res$status_code
-    if(code==200)
+    if (code==200)
         return()
     msg <- switch(as.character(code),
                   `400` = ": Bad Request - Usually this results from missing a required parameter.",
@@ -155,8 +155,8 @@
                   `429` = ": Too Many Requests - You have been ratelimited for making too many requests to the server.",
                   ": Undocumented response code"
     )
-    if(code>=500 && code<600)
+    if (code>=500 && code<600)
         msg <- ": Server Error - Something went wrong on Pushbullet's side. If this error is from an intermediate server, it may not be valid JSON."
-    warning(code,msg,call. = FALSE)
+    warning(code, msg, call. = FALSE)
     return()
 }

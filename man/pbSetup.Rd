@@ -4,13 +4,13 @@
 \alias{pbSetup}
 \title{Create a JSON config file}
 \usage{
-pbSetup(key, conffile)
+pbSetup(apikey, conffile)
 }
 \arguments{
 \item{apikey}{An \emph{Access Token} provided by Pushbullet (see details). If not
 provided in the function call, the user will be prompted to enter one.}
 
-\item{config_file}{A string giving the path where the configuration file will
+\item{conffile}{A string giving the path where the configuration file will
 be written. RPushbullet will automatically attempt load from the default location
 \code{~/.rpushbullet.json} (which can be changed via a \code{rpushbullet.dotfile})
 entry in \code{options}).}
