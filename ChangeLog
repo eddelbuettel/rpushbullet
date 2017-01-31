@@ -1,3 +1,7 @@
+2017-01-31  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Minor edits, more canonical URLs
+
 2017-01-30  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): New minor version and date
@@ -5,7 +9,7 @@
 2017-01-30  Seth S. Wenchel  <wenchel@gmail.com>
 
 	* R/setup.R (pbSetup): Check return code from pbGetDevices(); flag
-	an error is no device associate with the supplied key; fixed typo
+	an error if no device associate with the supplied key; fixed typo
 
 	* R/init.R (.checkReturnCode): Move function here
 
