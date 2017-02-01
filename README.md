@@ -3,10 +3,10 @@
 ### R interface to Pushbullet
 
 [Pushbullet](http://www.pushbullet.com) is an awesome (and free) service to
-pass messages between your computer, phone and tablet.  It offers immediacy
+pass messages between your computer(s), phone(s) and tablet(s).  It offers immediacy
 which is perfect for alerting, and much more.
 
-To use it, just register as a user to obtain an 
+To use it, first register to obtain an 
 [API key](https://www.pushbullet.com), and maybe install
 the Android or iPhone app, or one of the supported browser extension or
 desktop applications.  See the [Pushbullet](https://www.pushbullet.com)
@@ -55,7 +55,7 @@ cat(jsonline::toJSON(list(key="..key here..", devices=c("..aa..", "..bb.."))))
 
 and write that content to the file `~/.rpushbullet.json`.
 
-And starting with release 0.3.0, a new helper function `pbSetup()` is
+Starting with release 0.3.0, a new helper function `pbSetup()` is also
 available to create the file.
 
 You can also retrieve the ids of your devices with the `pbGetDevices()`

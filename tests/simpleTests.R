@@ -67,8 +67,8 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
 
     ## Post a URL -- should open browser
-    str(fromJSON(pbPost(type="link", title=count("Some title"), body="Some URL",
-                        url="http://cran.r-project.org/package=RPushbullet")[[1]]))
+    str(fromJSON(pbPost(type="link", title=count("Some title"), body="Some URL to click on",
+                        url="https://cran.r-project.org/package=RPushbullet")[[1]]))
 
     #### Posting Files with different arguments ####
 
@@ -76,8 +76,9 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     file <- testfile(count(TRUE))
     str(fromJSON(pbPost(type="file", url=file)[[1]]))
 
-    ## Post a file with numeric recipient
     if (hasDevices) {
+
+        ## Post a file with numeric recipient
         file <- testfile(count(TRUE))
         str(fromJSON(pbPost(type="file", url=file, recipients = 1)[[1]]))
 
