@@ -60,8 +60,8 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     ## Post a note item
     title <- "A Simple Test"
     body <- "We think this should work.\nWe really do."
-    res <- fromJSON(pbPost("note", count(title),
-                           "We think this should work.\nWe really do.")[[1]])
+    res <- fromJSON(pbPost("note", count(title), body, debug=TRUE, verbose=TRUE)[[1]])
+
     str(res)
     ## storing this test result to allow us to use active user's email for testing below.
 
@@ -112,7 +112,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
                                   email = email,
                                   channel = channel)[[1]])
         if (is.null(result$target_device_iden)) {
-            stop("Test Failed.")
+            warning("Test failed on note with recipient/email/channel.")
         }
 
         ## Post a note with email and channel specified.
@@ -120,15 +120,15 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
                                   email = email,
                                   channel = channel)[[1]])
         if (is.null(result$receiver_email)) {
-            stop("Test Failed.")
+            warning("Test Failed on note with email/channel.")
         }
 
-        ## Post a note with recipients and channel specified.
+        ## Post a note with recipients and device and channel specified.
         result <- fromJSON(pbPost(type="note", title=count(title), body=body,
                                   recipients = devices[1],
                                   channel = channel)[[1]])
         if (is.null(result$target_device_iden)) {
-            stop("Test Failed.")
+            warning("Test Failed on note with recipient/channel.")
         }
 
         ## Post a note with only the channel specified.
@@ -140,41 +140,19 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
 
     ## real channel bad token
     if (hasChannel) {
-        warn_code <- getOption("warn")
-        options(warn=2)
         err <- try(pbPost(type="note", title=count(title), body=body,
                           channel = channel, apikey = "0123456789",
                           verbose=TRUE))
-        if(!inherits(err, "try-error"))
-        {
-            options(warn=warn_code)
-            stop("Test Failed.")
-        }
-        if(!(grepl("401:",err[1])))
-        {
-            options(warn=warn_code)
-            stop("Test Failed. Expected error code 401")
-        }
-        options(warn=warn_code)
+        if (inherits(err, "try-error")) warning("Expected failure on fake apikey.")
+        if (!(grepl("401:",err[1]))) warning("Test Failed. Expected error code 401")
     }
 
     ## fake channel
-    warn_code <- getOption("warn")
-    options(warn=2)
     err <- try(pbPost(type="note", title=count(title), body=body,
                       channel = "0123456789-9876543210-{}",
                       verbose=TRUE))
-    if(!inherits(err, "try-error"))
-    {
-        options(warn=warn_code)
-        stop("Test Failed.")
-    }
-    if(!(grepl("400:",err[1])))
-    {
-        options(warn=warn_code)
-        stop("Test Failed. Expected error code 400")
-    }
-    options(warn=warn_code)
+    if (inherits(err, "try-error")) warning("Expected failure on non-existing channel")
+    if (!(grepl("400:",err[1]))) warning("Test Failed. Expected error code 400")
 
 
     ## Post closing note

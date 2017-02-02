@@ -4,6 +4,8 @@
 
 	* R/setup.R (pbSetup): Use 'pretty=TRUE' for nicer output
 
+	* tests/simpleTests.R: Use warnings not stop 
+
 2017-01-31  Dirk Eddelbuettel  <edd@debian.org>
 
 	* README.md: Minor edits, more canonical URLs
