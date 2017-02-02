@@ -50,7 +50,7 @@ help page for more details.
 You can also create the file programmatically via
 
 ```
-cat(jsonline::toJSON(list(key="..key here..", devices=c("..aa..", "..bb.."))))
+cat(jsonlite::toJSON(list(key="..key here..", devices=c("..aa..", "..bb.."))))
 ```
 
 and write that content to the file `~/.rpushbullet.json`.
