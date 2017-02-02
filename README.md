@@ -12,12 +12,33 @@ the Android or iPhone app, or one of the supported browser extension or
 desktop applications.  See the [Pushbullet](https://www.pushbullet.com)
 documentation for more information and details.
 
+### Example 
+
+With a resource file (see below) properly setup, you can just do something like the following
+
+```r
+R> msg   # just an example, can be driven by real simulation results  
+[1] "DONE after 10000 simulations taking 42.43 minutes reducing RMSE by  7.89 percent"  
+R>  
+R> RPushbullet::pbPost("note", title="Simulation complete", body=msg)  
+R> pbPost("note", title="Simulation complete", body=msg)  
+R>  
+```
+
+and a message like the image following below should pop up (if messaging directed to the browser):
+
+![](https://github.com/eddelbuettel/rpushbullet/raw/master/attic/rpushbullet_message.png)
+
 ### Package Status
 
 The package is reasonably mature and functional. 
 
 Up until release 0.2.0, an external `curl` binary was used. We have since switched to using
 the [curl](https://cran.r-project.org/package=curl) package.
+
+Given that the [Pushbullet API](https://docs.pushbullet.com/) has other nice features, future 
+extensions are certainly possible and encouragement.  Interested contributors should file issue 
+tickets first to discuss before going off on pull requests.
 
 ### Initialization
 
@@ -49,7 +70,7 @@ help page for more details.
 
 You can also create the file programmatically via
 
-```
+```r
 cat(jsonlite::toJSON(list(key="..key here..", devices=c("..aa..", "..bb.."))))
 ```
 
