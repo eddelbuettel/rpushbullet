@@ -9,6 +9,9 @@
 	* man/pbPost.Rd: Remove reference to unsupported type 'address'
 	* man/rpushbullet-package.Rd: Idem
 
+	* tests/simpleTests.R: Changed to be less agressive and run failing
+	tests only if environment variable Run_RPushbullet_Tests_All is 'yes'
+
 2017-01-31  Dirk Eddelbuettel  <edd@debian.org>
 
 	* README.md: Minor edits, more canonical URLs

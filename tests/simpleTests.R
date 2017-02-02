@@ -99,7 +99,8 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
    } # if (hasDevices)
 
 
-    if (hasChannel && hasDevices && hasEmail) {
+    if (Sys.getenv("Run_RPushbullet_Tests_All")=="yes" &&
+        hasChannel && hasDevices && hasEmail) {
         ## Test hierarchy of arguments with channel specified:
         ## 1) All three should send to recipients.
         ## 2) Email and channel should send to email.
@@ -135,25 +136,28 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
         str(fromJSON(pbPost(type="note", title=count(title), body=body,
                             channel = channel,
                             verbose=TRUE)[[1]]))
-        # Returns empty list, but posts successfully. API seems to return empty JSON. (tested curl command)
-    } # if (hasChannel && hasDevices && hasEmail)
+        ## Returns empty list, but posts successfully.
+        ## API seems to return empty JSON. (tested curl command)
+        
+    } # if ('runAll' && hasChannel && hasDevices && hasEmail)
 
-    ## real channel bad token
-    if (hasChannel) {
+    if (Sys.getenv("Run_RPushbullet_Tests_All")=="yes") {
+        ## real channel bad token
+        if (hasChannel) {
+            err <- try(pbPost(type="note", title=count(title), body=body,
+                              channel = channel, apikey = "0123456789",
+                              verbose=TRUE))
+            if (inherits(err, "try-error")) warning("Expected failure on fake apikey.")
+            if (!(grepl("401:",err[1]))) warning("Test Failed. Expected error code 401")
+        }
+
+        ## fake channel
         err <- try(pbPost(type="note", title=count(title), body=body,
-                          channel = channel, apikey = "0123456789",
+                          channel = "0123456789-9876543210-{}",
                           verbose=TRUE))
-        if (inherits(err, "try-error")) warning("Expected failure on fake apikey.")
-        if (!(grepl("401:",err[1]))) warning("Test Failed. Expected error code 401")
+        if (inherits(err, "try-error")) warning("Expected failure on non-existing channel")
+        if (!(grepl("400:",err[1]))) warning("Test Failed. Expected error code 400")
     }
-
-    ## fake channel
-    err <- try(pbPost(type="note", title=count(title), body=body,
-                      channel = "0123456789-9876543210-{}",
-                      verbose=TRUE))
-    if (inherits(err, "try-error")) warning("Expected failure on non-existing channel")
-    if (!(grepl("400:",err[1]))) warning("Test Failed. Expected error code 400")
-
 
     ## Post closing note
     title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushbullet")))
