@@ -57,9 +57,7 @@ pbSetup <- function(apikey, conffile) {
     devices <- na.omit(devices)
     names <- na.omit(names)
 
-    for (i in seq_along(names)) {
-        print(paste0(i,". ",names[i]))
-    }
+    for (i in seq_along(names)) print(paste0(i,". ",names[i]))
     defdev <- readline("Select a default device (0 for none): ")
 
     reslist <- list(key=apikey, devices = devices, names = names)

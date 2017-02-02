@@ -99,20 +99,19 @@
 ##' pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))
 ##' }
 pbPost <- function(type=c("note", "link", "file"),
-                   title="",             # also name for type='address'
-                   body="",              # also address for type='address',
-                                         # and items for type='list'
-                   url="",               # url if post is of type link, or
-                                         # local path to file for type='file'
-                   filetype="text/plain",# file type for upload of type='file'
-                   recipients,           # devices to post to
-                   email,                # alternatively use an email
-                   channel,              # alternatively specify a channel
-                   deviceind,            # deprecated, see detail
-                   apikey = .getKey(),
-                   devices = .getDevices(),
-                   verbose = FALSE,
-                   debug = FALSE) {
+                   title="",            # title of message
+                   body="",             # also item items for type='list'
+                   url="",              # url if post is of type link, or
+                                        # local path to file for type='file'
+                   filetype="text/plain", # file type for upload of type='file'
+                   recipients,          # devices to post to
+                   email,               # alternatively use an email
+                   channel,             # alternatively specify a channel
+                   deviceind,           # deprecated, see details
+                   apikey = .getKey(),	# required API key with default provided
+                   devices = .getDevices(),  # device(s) to post to, default providd
+                   verbose = FALSE,	# verbose operations, default is quiet
+                   debug = FALSE) {     # additional debugging output, default is quiet
 
     type <- match.arg(type)
 
@@ -128,8 +127,8 @@ pbPost <- function(type=c("note", "link", "file"),
             warning("Agument 'deviceind' is deprecated. Please use 'recipients'.", call.=FALSE)
             recipients <- deviceind
         } else {
-            warning("Using 'recipients' (or 'email' or 'channel') and ignoring deprecated 'deviceinds'.",
-                    call.=FALSE)
+            warning("Using 'recipients' (or 'email' or 'channel') and ",
+                    "ignoring deprecated 'deviceinds'.", call.=FALSE)
         }
     }
 
@@ -151,11 +150,11 @@ pbPost <- function(type=c("note", "link", "file"),
             }
             email <- NA
         } else {                        # either email or channel present
-            if(!missing(email)) {
+            if (!missing(email)) {
                 dest <- email
             } else {                    # hence channel present
                 dest <- channel
-                email <- NA # Set e-mail to NA, missing() is unreliable
+                email <- NA 		# Set e-mail to NA, missing() is unreliable
             }
        }
     }
@@ -176,7 +175,6 @@ pbPost <- function(type=c("note", "link", "file"),
         if (url != "" && filetype != "") {             # Request Upload
             url <- normalizePath(url)                  # abs/rel path, tilde expansion, ...
             uploadrequest <- .getUploadRequest(filename = url, filetype = filetype)
-            #fileurl <- uploadrequest$file_url
 
             # Upload File
             h <- .getCurlHandle(apikey)
@@ -190,7 +188,7 @@ pbPost <- function(type=c("note", "link", "file"),
 
             curl::handle_setform(h, .list = form_list)
             uploadresult <- curl::curl_fetch_memory(uploadrequest$upload_url,h)
-            if(uploadresult$status_code!=204){
+            if (uploadresult$status_code!=204) {
                 warning("file upload attempt failed with status code: ",uploadresult$status_code)
                 return(rawToChar(uploadresult$content))
             }
