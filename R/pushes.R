@@ -116,8 +116,9 @@ pbPost <- function(type=c("note", "link", "file"),
 
     type <- match.arg(type)
 
-    if (type == "address"){
-        warning("address pushes are no longer supported by Pushbullet service. Attempt to push \'",body,"\' failed.")
+    if (type == "address") {
+        warning("Pushes of type 'address' are no longer supported by the Pushbullet ",
+                "service. Attempt to push \'",body,"\' failed.")
         invisible(return(NA_character_))
     }
 
@@ -207,7 +208,7 @@ pbPost <- function(type=c("note", "link", "file"),
             if (d==0)
                 tgt <- list() # if zero, then use all devices
             else
-                tgt <-  list(device_iden=devices[[d]]) # otherwise given specific device
+                tgt <-  list(target_device_iden=devices[[d]]) # otherwise given specific device
          } else {                        # fallback, should not get reached
             tgt <- list()
         }
