@@ -60,8 +60,7 @@ A JSON result record is return invisibly
 }
 \description{
 This function posts a message to Pushbullet. Different types of
-messages are supported: \sQuote{note}, \sQuote{link},
-\sQuote{address}, or \sQuote{file}.
+messages are supported: \sQuote{note}, \sQuote{link}, or \sQuote{file}.
 }
 \details{
 This function invokes the \sQuote{pushes} functionality of
@@ -70,9 +69,7 @@ details.
 
 When a \sQuote{note} is pushed, the recipient receives the
 title and body of the note.  If a \sQuote{link} is pushed, the recipient's web
-browser is opened at the given URL.  If an \sQuote{address} is
-pushed, the recipient's web browser is opened in map mode at the
-given address.
+browser is opened at the given URL.  
 
 If \sQuote{recipients} argument is missing, the post is pushed to
 \emph{all} devices in accordance with the API definition. If

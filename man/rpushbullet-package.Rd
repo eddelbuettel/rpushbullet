@@ -23,7 +23,7 @@
 
   The main function is \code{\link{pbPost}} which can be used to send a
   message comprising a note (with free-form body and title), link (for
-  sending a URL), address or even a file. The message recipients is
+  sending a URL), or even a file. The message recipients is
   typically one (or several) of the devices known to the user (see the
   next section for details), it can also be an email address in which
   case \href{http://www.pushbullet.com}{Pushbullet} creates and sends an
