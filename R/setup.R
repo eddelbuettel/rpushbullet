@@ -66,7 +66,7 @@ pbSetup <- function(apikey, conffile) {
     if (defdev %in% as.character(seq_along(names)))
         reslist$defaultdevice <- names[as.integer(defdev)]
 
-    json <- toJSON(reslist, auto_unbox = TRUE)
+    json <- toJSON(reslist, auto_unbox=TRUE, pretty=TRUE)
 
     f <- file(conffile,open = "w")
     cat(json,file = f)
