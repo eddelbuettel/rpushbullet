@@ -2,12 +2,14 @@
 
 ### R interface to Pushbullet
 
-[Pushbullet](http://www.pushbullet.com) is an awesome (and free) service to
-pass messages between your computer(s), phone(s) and tablet(s).  It offers immediacy
-which is perfect for alerting, and much more.
+[Pushbullet](http://www.pushbullet.com) is an awesome (and still free
+for a very useful set of features with additional premium service for
+extras) service to pass messages between your computer(s), phone(s) and
+tablet(s).  It offers immediacy which is perfect for alerting, and
+much more.
 
-To use it, first register to obtain an 
-[API key](https://www.pushbullet.com), and maybe install
+To use it, first register to obtain an API key from the 
+[Pushbullet](https://www.pushbullet.com) site, and maybe install
 the Android or iPhone app, or one of the supported browser extension or
 desktop applications.  See the [Pushbullet](https://www.pushbullet.com)
 documentation for more information and details.
@@ -41,7 +43,7 @@ options(error = function() {
 ```
 
 There was one noteworthy follow-up for which I lost the source: it suggested to make the message 
-somewhat saltier by relying on the helpful [rfoaa](http://dirk.eddelbuettel.com/code/rfoaas.html) package.
+somewhat saltier by relying on the helpful [rfoaas](http://dirk.eddelbuettel.com/code/rfoaas.html) package.
 
 ### Package Status
 
