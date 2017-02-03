@@ -3,12 +3,24 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
 
-\section{Changes in version 0.3.0 (2017-01-28)}{
+\section{Changes in version 0.3.0 (2017-02-03)}{
   \itemize{
-    \item The `curl` binary use was replaced by use of the
-    \CRANpkg{curl} package (PR \ghpr{30} by Seth)
-    \item Use of \CRANpkg{RJSONIO} was switched to use of
-    \CRANpkg{jsonlite} (PR \ghpr{32} by Seth)
+    \item The \code{curl} binary use was replaced by use of the
+    \CRANpkg{curl} package; several new helper functions added (PRs
+    \ghpr{30}, \ghpr{36} by Seth closing \ghit{29}) 
+    \item Use of \CRANpkg{RJSONIO} was replaced by use of
+    \CRANpkg{jsonlite} (PR \ghpr{32} by Seth closing \ghit{31})
+    \item A new function \code{pbSetup} was added to aid creating the
+    resource file (PRs \ghpr{34}, \ghpr{37} by Seth and Dirk)
+    \item The package intialization was refactored so that non-loading
+    calls such as \code{RPushbullet::pbPost(...)} now work (\ghpr{33}
+    closing \ghit{26})
+    \item The test suite was updated and extended
+    \item The Travis script was updated use run.sh
+    \item DESCRIPTION, README.md and other foiles were updated for
+    current R CMDq check standards
+    \item Deprecated parts such as 'type=address' were removed, and the
+    documentation was updated accordingly.
     \item Coverage support was added (in a 'on-demand' setting as
     automated runs would need a Pushbullet API token)
   }
@@ -17,7 +29,7 @@
 \section{Changes in version 0.2.0 (2015-02-07)}{
   \itemize{
     \item Added support for Pushbullet 'channels' (once again thanks to
-    Mike Birdgeneau for the initial push on this)
+    Mike Birdgeneau for the initial push on this; cf \ghit{18})
     \item Support for pushes was solidified: proper choices of either
     device, email or channel should work in all cases
     \item S3 methods are now properly exports (thanks to Henrik

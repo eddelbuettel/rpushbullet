@@ -27,7 +27,21 @@ R>
 
 and a message like the image following below should pop up (if messaging directed to the browser):
 
-![](https://github.com/eddelbuettel/rpushbullet/raw/master/attic/rpushbullet_message.png)
+![](https://github.com/eddelbuettel/rpushbullet/raw/master/attic/rpushbullet_message.png)  
+
+Another excellent use case was suggested years ago by [Karl Broman](http://kbroman.org/) in 
+[this blog post](https://kbroman.wordpress.com/2014/09/04/error-notifications-from-r/). We can 
+improve on his version a little as one no longer needs to load the package:
+
+```r
+options(error = function() { 
+    RPushbullet::pbPost("note", "Error", geterrmessage())
+    if(!interactive()) stop(geterrmessage())
+})
+```
+
+There was one noteworthy follow-up for which I lost the source: it suggested to make the message 
+somewhat saltier by relying on the helpful [rfoaa](http://dirk.eddelbuettel.com/code/rfoaas.html) package.
 
 ### Package Status
 
@@ -111,13 +125,13 @@ One method to generate a hard-to-guess tag is `digest::digest(rnorm(1))`.
 Channels can be used by passing a `channel` argument to the `pbPost`
 function. The Pushbullet API identifies a channel via the
 supplied `channel_tag` value of this argument. See the
-[Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for +more
+[Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for more
 information.
 
 
 ### Author
 
-Dirk Eddelbuettel with contributions by Mike Birdgeneau and Seth Wenchel
+Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, Henrik Bengtsson, and Seth Wenchel
 
 ### License
 
