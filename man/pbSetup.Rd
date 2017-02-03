@@ -40,4 +40,3 @@ pbSetup()
 \author{
 Seth Wenchel and Dirk Eddelbuettel
 }
-

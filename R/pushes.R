@@ -85,7 +85,6 @@
 ##' @param debug Boolean switch to add even more debugging output
 ##' @return A JSON result record is return invisibly
 ##' @author Dirk Eddelbuettel
-##' @importFrom curl handle_setform form_file curl_fetch_memory
 ##' @examples
 ##' \dontrun{
 ##' # A note

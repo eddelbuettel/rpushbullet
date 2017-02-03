@@ -43,4 +43,3 @@ details.
 \author{
 Dirk Eddelbuettel
 }
-
