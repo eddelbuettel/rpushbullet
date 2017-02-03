@@ -17,8 +17,8 @@
     closing \ghit{26})
     \item The test suite was updated and extended
     \item The Travis script was updated use run.sh
-    \item DESCRIPTION, README.md and other foiles were updated for
-    current R CMDq check standards
+    \item DESCRIPTION, README.md and other files were updated for
+    current \code{R CMD check} standards
     \item Deprecated parts such as 'type=address' were removed, and the
     documentation was updated accordingly.
     \item Coverage support was added (in a 'on-demand' setting as
