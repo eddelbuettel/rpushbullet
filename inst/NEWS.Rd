@@ -3,6 +3,12 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
 
+\section{Changes in version 0.3.1 (2017-xx-yy)}{
+  \itemize{
+    \item The target device designation was corrected and works again
+  }
+}
+
 \section{Changes in version 0.3.0 (2017-02-03)}{
   \itemize{
     \item The \code{curl} binary use was replaced by use of the

@@ -206,7 +206,7 @@ pbPost <- function(type=c("note", "link", "file"),
             if (d==0)
                 tgt <- list() # if zero, then use all devices
             else
-                tgt <- list(target_device_iden=devices[[d]]) # otherwise given specific device
+                tgt <- list(device_iden=devices[[d]]) # otherwise given specific device
          } else {                        # fallback, should not get reached
             tgt <- list()
         }
