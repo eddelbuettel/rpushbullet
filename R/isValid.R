@@ -31,7 +31,7 @@
     devs <- pbGetDevices(apikey)
     idx <- which(devs$devices$iden==device)
     if(length(idx)>0){
-        if(!devs$devices$active)
+        if(!all(devs$devices$active[idx]))
             warning("The device with ID ",device,
                     " is associated with this account,",
                     "but it is not active.")
