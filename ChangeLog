@@ -1,3 +1,8 @@
+2017-02-06  Seth S. Wenchel  <wenchel@gmail.com>
+
+	* R/isValid.R: New (unexported) helper functions .isValidLey,
+	.isValidDevice, .isValidChannel
+
 2017-02-04  Dirk Eddelbuettel  <edd@max.eddelbuettel.com>
 
 	* DESCRIPTION (Version, Date): Roll minor version

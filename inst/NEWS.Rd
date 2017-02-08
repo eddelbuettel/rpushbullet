@@ -6,6 +6,8 @@
 \section{Changes in version 0.3.1 (2017-xx-yy)}{
   \itemize{
     \item The target device designation was corrected and works again
+    \item Three new (unexported) helper functions test now test the
+    validity of the api key, device and channel.
   }
 }
 
