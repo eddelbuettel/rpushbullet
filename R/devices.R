@@ -60,8 +60,8 @@ print.pbDevices <- function(x, ...) {
 ##' @rdname pbGetDevices
 ##' @param object Default object for \code{summary} method
 summary.pbDevices <- function(object, ...) {
-    cat("Pushbullet device summary for", length(object[["devices"]]), "devices ")
-    cat("with these ids:\n", paste(sapply(object[["devices"]], "[", "iden"), collape=""), "\n")
+    cat("Pushbullet device summary for", nrow(object[["devices"]]), "devices ")
+    cat("with these ids:\n", paste(object[["devices"]][["iden"]], collape=""), "\n")
     invisible(object)
 }
 
