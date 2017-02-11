@@ -71,3 +71,39 @@ pbSetup <- function(apikey, conffile) {
     close(f)
     invisible(NULL)
 }
+
+
+##' Check if a configuration is valid
+##'
+##' @param conf Either a file path (like \code{~/.rpushbullet.json}) or a JSON string.
+##' If \code{NULL} (the default), the value of \code{getOption("rpushbullet.dotfile")}
+##' will be used.
+##'
+##' @return \code{TRUE} if both the api key and \emph{all} devices are vaild. \code{FALSE} otherwise.
+##' @export
+##'
+##' @examples
+##' pbValidateConf('{"key":"a_fake_key","devices":["dev_iden1","dev_iden2"]}')
+##'
+pbValidateConf <- function(conf=NULL){
+    if (is.null(conf)) {
+        conf <- .getDotfile()
+        message("No configuration specified.  Assuming user meant: ",conf)
+    }
+    params <- try(jsonlite::fromJSON(conf))
+    if (inherits(params, "try-error")) {
+        warning(conf, " is not a valid JSON string or a file containing such.")
+        return(FALSE)
+    }
+    message("key is ",ifelse(validKey <- .isValidKey(params$key),"VALID","INVALID"))
+    if (validKey) {
+        validDevs <- vapply(params$devices,
+                            function(x, k){message("device ",x," is ",
+                                                   ifelse(validDev <- .isValidDevice(x,k),
+                                                          "VALID","INVALID"));return(validDev)},
+                            TRUE, params$key)
+        return(all(validDevs))
+    }
+    return(FALSE)
+
+}

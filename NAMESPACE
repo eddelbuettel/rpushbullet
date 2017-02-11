@@ -9,3 +9,11 @@ exportPattern("^[[:alpha:]]+")
 S3method("pbGetDevices", "default")
 S3method("print", "pbDevices")
 S3method("summary", "pbDevices")
+
+S3method("pbGetUser", "default")
+S3method("print", "pbUser")
+S3method("summary", "pbUser")
+
+S3method("pbGetChannelInfo", "default")
+S3method("print", "pbChannelInfo")
+S3method("summary", "pbChannelInfo")
