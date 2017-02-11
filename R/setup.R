@@ -25,6 +25,8 @@
 ##' be written. RPushbullet will automatically attempt load from the default location
 ##' \code{~/.rpushbullet.json} (which can be changed via a \code{rpushbullet.dotfile})
 ##' entry in \code{options}).
+##' @param defdev An optional value for the default device; if missing (or \code{NA})
+##' then an interactive prompt is used.
 ##' @return \code{NULL} is returned invisibly, but the function is called for its side
 ##' effect of creating the configuration file.
 ##' @details This function writes a simple default configuration file based
@@ -40,10 +42,11 @@
 ##' pbSetup()
 ##' }
 ##' @author Seth Wenchel and Dirk Eddelbuettel
-pbSetup <- function(apikey, conffile) {
+pbSetup <- function(apikey, conffile, defdev) {
 
     if (missing(apikey)) apikey <- readline("Please enter your API key (aka 'Access Token': ")
     if (missing(conffile)) conffile <- .getDotfile()
+    if (missing(defdev)) defdev <- NA
 
     pdgd <- pbGetDevices(apikey)
 
@@ -58,7 +61,7 @@ pbSetup <- function(apikey, conffile) {
     names <- na.omit(names)
 
     for (i in seq_along(names)) print(paste0(i,". ",names[i]))
-    defdev <- readline("Select a default device (0 for none): ")
+    if (is.na(defdev)) defdev <- readline("Select a default device (0 for none): ")
 
     reslist <- list(key=apikey, devices = devices, names = names)
     if (defdev %in% as.character(seq_along(names)))

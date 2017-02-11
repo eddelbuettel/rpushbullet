@@ -138,7 +138,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
                             verbose=TRUE)[[1]]))
         ## Returns empty list, but posts successfully.
         ## API seems to return empty JSON. (tested curl command)
-        
+
     } # if ('runAll' && hasChannel && hasDevices && hasEmail)
 
     if (Sys.getenv("Run_RPushbullet_Tests_All")=="yes") {
@@ -158,6 +158,23 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
         if (inherits(err, "try-error")) warning("Expected failure on non-existing channel")
         if (!(grepl("400:",err[1]))) warning("Test Failed. Expected error code 400")
     }
+
+    ## basic device info
+    devs <- pbGetDevices()
+    print(devs)
+    summary(devs)
+
+    ## basic channel info
+    res <- pbGetChannelInfo("xkcd", TRUE)
+    print(res)
+    summary(res)
+
+    ## basic validity
+    RPushbullet:::.isValidKey(RPushbullet:::.getKey())
+    RPushbullet:::.isValidDevice(devs$devices[1, "iden"], RPushbullet:::.getKey())
+    RPushbullet:::.isValidChannel("xkcd")
+
+    pbSetup(RPushbullet:::.getKey(), tempfile())
 
     ## Post closing note
     title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushbullet")))

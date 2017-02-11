@@ -3,6 +3,11 @@
 	* .rpushbullet.json.enc: Encoded configuration
 	* .travis.yml: Decode configuration and run tests and coverage
 
+	* R/setup.R (pbSetup): Support an optional default device
+	* man/pbSetup.Rd: Documentation
+
+	* tests/simpleTests.R: More calls to game test coverage statistics
+
 2017-02-10  Seth S. Wenchel  <wenchel@gmail.com>
 
 	* R/channel.R: Added S3 class pbChannelInfo with default, print, and

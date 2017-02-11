@@ -4,7 +4,7 @@
 \alias{pbSetup}
 \title{Create a JSON config file}
 \usage{
-pbSetup(apikey, conffile)
+pbSetup(apikey, conffile, defdev)
 }
 \arguments{
 \item{apikey}{An \emph{Access Token} provided by Pushbullet (see details). If not
@@ -14,6 +14,9 @@ provided in the function call, the user will be prompted to enter one.}
 be written. RPushbullet will automatically attempt load from the default location
 \code{~/.rpushbullet.json} (which can be changed via a \code{rpushbullet.dotfile})
 entry in \code{options}).}
+
+\item{defdev}{An optional value for the default device; if missing (or \code{NA})
+then an interactive prompt is used.}
 }
 \value{
 \code{NULL} is returned invisibly, but the function is called for its side
