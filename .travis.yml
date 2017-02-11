@@ -9,6 +9,7 @@ dist: trusty
 env:
   global:
     - Run_RPushbullet_Tests="yes"
+    - Run_RPushbullet_Tests_All="yes"
 
 before_install:
   - curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
