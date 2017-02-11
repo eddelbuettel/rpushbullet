@@ -6,10 +6,16 @@ sudo: required
 
 dist: trusty
 
+env:
+  global:
+    - Run_RPushbullet_Tests="yes"
+
 before_install:
   - curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
   - ./run.sh bootstrap
-
+  # decrypt the file .rpushbullet.json, cf https://docs.travis-ci.com/user/encrypting-files/
+  - openssl aes-256-cbc -K $encrypted_988d19a907a0_key -iv $encrypted_988d19a907a0_iv -in .rpushbullet.json.enc -out ~/.rpushbullet.json -d
+  
 install:
   - ./run.sh install_aptget r-cran-curl r-cran-jsonlite
 
@@ -19,9 +25,8 @@ script:
 after_failure:
   - ./run.sh dump_logs
 
-# tests require tokens so ...  
-#after_success:
-#  - ./run.sh coverage
+after_success:
+  - ./run.sh coverage
    
 notifications:
   email:
