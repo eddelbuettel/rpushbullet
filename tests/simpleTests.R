@@ -174,7 +174,9 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     RPushbullet:::.isValidDevice(devs$devices[1, "iden"], RPushbullet:::.getKey())
     RPushbullet:::.isValidChannel("xkcd")
 
-    pbSetup(RPushbullet:::.getKey(), tempfile())
+    jsonfile <- tempfile(pattern="pb", fileext=".json")
+    pbSetup(RPushbullet:::.getKey(), jsonfile, 0)
+    pbValidateConf(jsonfile)
 
     ## Post closing note
     title <- count(sprintf("Test of RPushbullet %s completed", packageVersion("RPushbullet")))
