@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 .travis.yml
 attic
+^.rpushbullet.json.enc$
+^.rpushbullet.json$
