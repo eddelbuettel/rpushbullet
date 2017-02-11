@@ -80,7 +80,6 @@ pbSetup <- function(apikey, conffile) {
 ##' will be used.
 ##'
 ##' @return \code{TRUE} if both the api key and \emph{all} devices are vaild. \code{FALSE} otherwise.
-##' @export
 ##'
 ##' @examples
 ##' pbValidateConf('{"key":"a_fake_key","devices":["dev_iden1","dev_iden2"]}')

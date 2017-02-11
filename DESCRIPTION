@@ -1,8 +1,8 @@
 Package: RPushbullet
 Type: Package
 Title: R Interface to the Pushbullet Messaging Service
-Version: 0.3.0.2
-Date: 2017-02-07
+Version: 0.3.0.3
+Date: 2017-02-11
 Author: Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, 
  Henrik Bengtsson, and Seth Wenchel
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
@@ -18,4 +18,4 @@ SystemRequirements: A user API key (which one can request from the website at
  the corresponding Pushbullet 'app' has been installed on any one of these.
 NeedsCompilation: no
 License: GPL (>= 2)
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1

@@ -24,7 +24,6 @@
 ##' \code{FALSE} (the default) will return up to 10 pushes. \code{TRUE} will exclude them
 ##'
 ##' @return a list with infoabout a channel
-##' @export
 ##'
 ##' @examples
 ##' xkcd <- pbGetChannelInfo("xkcd", TRUE)

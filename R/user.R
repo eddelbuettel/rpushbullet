@@ -20,7 +20,6 @@
 ##' Get info about a user
 ##' @inheritParams pbGetDevices
 ##' @return Invisibly returns info about a user
-##' @export
 ##' @examples
 ##' me <- pbGetUser()
 ##' summary(me)
