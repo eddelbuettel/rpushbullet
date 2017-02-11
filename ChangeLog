@@ -3,6 +3,19 @@
 	* .rpushbullet.json.enc: Encoded configuration
 	* .travis.yml: Decode configuration and run tests and coverage
 
+2017-02-10  Seth S. Wenchel  <wenchel@gmail.com>
+
+	* R/channel.R: Added S3 class pbChannelInfo with default, print, and
+	summary methods
+	* R/user.R: Added S3 class pbUser with default, print and summary
+	methods
+	* R/setup.R: New function pbValidateConf
+	* R/isValid.R: Added missing header
+
+2017-02-08  Seth S. Wenchel  <wenchel@gmail.com>
+
+	* R/devices.R: Fix for another RJSONIO / jsonlite transition
+
 2017-02-06  Seth S. Wenchel  <wenchel@gmail.com>
 
 	* R/isValid.R: New (unexported) helper functions .isValidLey,
