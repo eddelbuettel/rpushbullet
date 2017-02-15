@@ -56,7 +56,7 @@
                     "but it is not active.")
         return(TRUE)
     }
-    return(FALSE)
+    return(FALSE)					#nocov
 }
 
 ##' Test if channel is valid

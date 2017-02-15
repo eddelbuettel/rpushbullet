@@ -1,3 +1,12 @@
+2017-02-14  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/init.R: Additional #nocov tags
+	* R/isValid.R: Idem
+	* R/pushes.R: Idem
+	* R/setup.R: Idem
+
+	* tests/simpleTests.R: Added calls to pbGetUser() etc
+
 2017-02-11  Dirk Eddelbuettel  <edd@debian.org>
 
 	* .rpushbullet.json.enc: Encoded configuration

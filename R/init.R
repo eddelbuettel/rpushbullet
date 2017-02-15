@@ -24,7 +24,7 @@
     pb <- fromJSON(dotfile, simplifyVector = FALSE)
     .pkgenv[["pb"]] <- pb
     if (is.null(pb[["key"]])) {
-        warning("Field 'key' is either empty or missing: ", dotfile, call.=FALSE, immediate.=TRUE)
+        warning("Field 'key' is either empty or missing: ", dotfile, call.=FALSE, immediate.=TRUE) #nocov
     }
     options("rpushbullet.key" = pb[["key"]])
     options("rpushbullet.devices" = pb[["devices"]])
@@ -42,8 +42,8 @@
 }
 
 .onLoad <- function(libname, pkgname) {
-    dotfile <- .getDotfile()
-    if (file.exists(dotfile)) .parseResourceFile(dotfile)
+    dotfile <- .getDotfile()                            		#nocov
+    if (file.exists(dotfile)) .parseResourceFile(dotfile)		#nocov
 }
 
 .onAttach <- function(libname, pkgname) {
@@ -54,11 +54,11 @@
         packageStartupMessage("Reading ", dotfile)
         .parseResourceFile(dotfile)
     } else {
-        txt <- paste("No file", dotfile, "found. Consider placing the",
+        txt <- paste("No file", dotfile, "found. Consider placing the",	#nocov start
                      "Pushbullet API key and your device id(s) there.")
         txt <- paste(strwrap(txt), collapse="\n")
         packageStartupMessage(txt)
-        .pkgenv[["pb"]] <- NULL
+        .pkgenv[["pb"]] <- NULL						#nocov end
     }
 }
 

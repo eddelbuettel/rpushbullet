@@ -115,27 +115,27 @@ pbPost <- function(type=c("note", "link", "file"),
     type <- match.arg(type)
 
     if (type == "address") {
-        warning("Pushes of type 'address' are no longer supported by the Pushbullet ",
+        warning("Pushes of type 'address' are no longer supported by the Pushbullet ",	#nocov start
                 "service. Attempt to push \'",body,"\' failed.")
-        invisible(return(NA_character_))
+        invisible(return(NA_character_))						#nocov end
     }
 
 
     if (!missing(deviceind)) {
-        if (missing(recipients) && missing(email) && missing(channel)) {
+        if (missing(recipients) && missing(email) && missing(channel)) {		#nocov start
             warning("Agument 'deviceind' is deprecated. Please use 'recipients'.", call.=FALSE)
             recipients <- deviceind
         } else {
             warning("Using 'recipients' (or 'email' or 'channel') and ",
                     "ignoring deprecated 'deviceinds'.", call.=FALSE)
-        }
+        }										#nocov end
     }
 
     if (missing(recipients) && missing(email) && missing(channel)) {
         if (debug) message("missing recipient and email and channel")
         recipients <- .getDefaultDevice() # either supplied, or 0 as fallback
         if (recipients==0) {
-            dest <- ''
+            dest <- ''									#nocov
         } else {
             dest <- match(recipients, .getNames())
         }
@@ -188,8 +188,9 @@ pbPost <- function(type=c("note", "link", "file"),
             curl::handle_setform(h, .list = form_list)
             uploadresult <- curl::curl_fetch_memory(uploadrequest$upload_url,h)
             if (uploadresult$status_code!=204) {
-                warning("file upload attempt failed with status code: ",uploadresult$status_code)
-                return(rawToChar(uploadresult$content))
+                warning("file upload attempt failed with status code: ",	#nocov start
+                        uploadresult$status_code)
+                return(rawToChar(uploadresult$content))				#nocov end
             }
         }
     }
@@ -208,7 +209,7 @@ pbPost <- function(type=c("note", "link", "file"),
             else
                 tgt <- list(device_iden=devices[[d]]) # otherwise given specific device
          } else {                        # fallback, should not get reached
-            tgt <- list()
+            tgt <- list()							#nocov
         }
 
         form_list <- tgt

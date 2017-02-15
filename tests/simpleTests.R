@@ -169,6 +169,11 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     print(res)
     summary(res)
 
+    ## basic user info
+    usr <- pbGetUser()
+    print(usr)
+    summary(usr)
+    
     ## basic validity
     RPushbullet:::.isValidKey(RPushbullet:::.getKey())
     RPushbullet:::.isValidDevice(devs$devices[1, "iden"], RPushbullet:::.getKey())

@@ -89,13 +89,13 @@ pbSetup <- function(apikey, conffile, defdev) {
 ##'
 pbValidateConf <- function(conf=NULL){
     if (is.null(conf)) {
-        conf <- .getDotfile()
-        message("No configuration specified.  Assuming user meant: ",conf)
+        conf <- .getDotfile()							#nocov 
+        message("No configuration specified.  Assuming user meant: ",conf)	#nocov 
     }
     params <- try(jsonlite::fromJSON(conf))
     if (inherits(params, "try-error")) {
-        warning(conf, " is not a valid JSON string or a file containing such.")
-        return(FALSE)
+        warning(conf, " is not a valid JSON string or a file containing such.")	#nocov 
+        return(FALSE)  								#nocov 
     }
     message("key is ",ifelse(validKey <- .isValidKey(params$key),"VALID","INVALID"))
     if (validKey) {
@@ -106,6 +106,6 @@ pbValidateConf <- function(conf=NULL){
                             TRUE, params$key)
         return(all(validDevs))
     }
-    return(FALSE)
+    return(FALSE)								#nocov
 
 }
