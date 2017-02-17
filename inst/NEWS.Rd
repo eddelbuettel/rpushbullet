@@ -13,7 +13,7 @@
     \item New helper functions \code{pbValidateConf}, \code{pbGetUser},
     \code{pbGetChannelInfo} were added (Seth in \ghpr{44} closing
     \ghit{40}).
-    \item New classes \code{pbUser} and \code{pbChannelInfo were added
+    \item New classes \code{pbUser} and \code{pbChannelInfo} were added
     (Seth in \ghpr{44}).
     \item Travis CI tests (and \CRANpkg{covr} coverage analysis) are now
     enabled via an encrypted config file (\ghpr{45}).  
