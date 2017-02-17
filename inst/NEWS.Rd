@@ -3,11 +3,18 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
 
-\section{Changes in version 0.3.1 (2017-xx-yy)}{
+\section{Changes in version 0.3.1 (2017-02-17)}{
   \itemize{
-    \item The target device designation was corrected and works again
+    \item The target device designation was corrected (\ghpr{39}).
     \item Three new (unexported) helper functions test now test the
-    validity of the api key, device and channel.
+    validity of the api key, device and channel (Seth in \ghpr{41}).
+    \item The \code{summary} method for the \code{pbDevices} class was
+    corrected (Seth in \ghpr{43}).
+    \item New helper classes \code{pbValidateConf}, \code{pbUser},
+    \code{pbChannelInfo} were added (Seth in \ghpr{44} closing
+    \ghit{40}).
+    \item Travis CI tests (and \CRANpkg{covr} coverage analysis) are now
+    enabled via an encrypted config file (\ghpr{45}).  
   }
 }
 
