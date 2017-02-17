@@ -10,9 +10,11 @@
     validity of the api key, device and channel (Seth in \ghpr{41}).
     \item The \code{summary} method for the \code{pbDevices} class was
     corrected (Seth in \ghpr{43}).
-    \item New helper classes \code{pbValidateConf}, \code{pbUser},
-    \code{pbChannelInfo} were added (Seth in \ghpr{44} closing
+    \item New helper functions \code{pbValidateConf}, \code{pbGetUser},
+    \code{pbGetChannelInfo} were added (Seth in \ghpr{44} closing
     \ghit{40}).
+    \item New classes \code{pbUser} and \code{pbChannelInfo were added
+    (Seth in \ghpr{44}).
     \item Travis CI tests (and \CRANpkg{covr} coverage analysis) are now
     enabled via an encrypted config file (\ghpr{45}).  
   }
