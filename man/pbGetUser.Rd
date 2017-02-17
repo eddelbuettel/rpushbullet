@@ -34,6 +34,8 @@ Invisibly returns info about a user
 Get info about a user
 }
 \examples{
+\dontrun{
 me <- pbGetUser()
 summary(me)
+}
 }

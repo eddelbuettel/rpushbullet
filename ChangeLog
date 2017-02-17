@@ -2,6 +2,9 @@
 
 	* DESCRIPTION (Version, Date): Release 0.3.1
 
+	* R/user.R: Do not run example
+	* man/pbGetUser.Rd: Idem
+
 2017-02-14  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/init.R: Additional #nocov tags

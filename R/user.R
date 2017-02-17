@@ -21,8 +21,10 @@
 ##' @inheritParams pbGetDevices
 ##' @return Invisibly returns info about a user
 ##' @examples
+##' \dontrun{
 ##' me <- pbGetUser()
 ##' summary(me)
+##' }
 pbGetUser <- function(apikey=.getKey()) {
     UseMethod("pbGetUser")
 }
