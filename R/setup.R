@@ -44,7 +44,7 @@
 ##' @author Seth Wenchel and Dirk Eddelbuettel
 pbSetup <- function(apikey, conffile, defdev) {
 
-    if (missing(apikey)) apikey <- readline("Please enter your API key (aka 'Access Token': ")
+    if (missing(apikey)) apikey <- readline("Please enter your API key (aka 'Access Token'): ")
     if (missing(conffile)) conffile <- .getDotfile()
     if (missing(defdev)) defdev <- NA
 
@@ -70,7 +70,8 @@ pbSetup <- function(apikey, conffile, defdev) {
     json <- toJSON(reslist, auto_unbox=TRUE, pretty=TRUE)
 
     f <- file(conffile,open = "w")
-    cat(json,file = f)
+    cat(json, file = f)
+    cat('\n', file = f)
     close(f)
     invisible(NULL)
 }
