@@ -1,3 +1,10 @@
+2017-04-13  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .travis.yml (env): Condition tests on having env.vars which PRs
+	from forks will not have to not expose the secret token
+
+	* R/setup.R (pbSetup): Typo/spelling fix suggested by Michael Chirico
+
 2017-02-17  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Release 0.3.1

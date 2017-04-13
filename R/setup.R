@@ -44,7 +44,7 @@
 ##' @author Seth Wenchel and Dirk Eddelbuettel
 pbSetup <- function(apikey, conffile, defdev) {
 
-    if (missing(apikey)) apikey <- readline("Please enter your API key (aka 'Access Token': ")
+    if (missing(apikey)) apikey <- readline("Please enter your API key (aka 'Access Token'): ")
     if (missing(conffile)) conffile <- .getDotfile()
     if (missing(defdev)) defdev <- NA
 
