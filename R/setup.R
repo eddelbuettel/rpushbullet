@@ -70,7 +70,8 @@ pbSetup <- function(apikey, conffile, defdev) {
     json <- toJSON(reslist, auto_unbox=TRUE, pretty=TRUE)
 
     f <- file(conffile,open = "w")
-    cat(json,file = f)
+    cat(json, file = f)
+    cat('\n', file = f)
     close(f)
     invisible(NULL)
 }
