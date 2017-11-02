@@ -20,19 +20,19 @@ before_install:
   # condition this on have secure environment variables which PRs off forks do not
   # cf https://docs.travis-ci.com/user/environment-variables/
   - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then openssl aes-256-cbc -K $encrypted_988d19a907a0_key -iv $encrypted_988d19a907a0_iv -in .rpushbullet.json.enc -out ~/.rpushbullet.json -d; fi
-  
+
 install:
   - ./run.sh install_aptget r-cran-curl r-cran-jsonlite
 
 script:
-  - ./run.sh run_tests
+  - if ["$TRAVIS_PULL_REQUEST" == "false"]; then ./run.sh run_tests; fi
 
 after_failure:
   - ./run.sh dump_logs
 
 after_success:
   - ./run.sh coverage
-   
+
 notifications:
   email:
     on_success: change

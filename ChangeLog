@@ -1,3 +1,7 @@
+2017-11-02  Colin Gillespie  <colin@jumpingrivers.com>
+
+    * R/setup.R: Set conffile to be readable only by the user
+
 2017-04-13  Dirk Eddelbuettel  <edd@debian.org>
 
 	* .travis.yml (env): Condition tests on having env.vars which PRs
