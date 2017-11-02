@@ -72,6 +72,8 @@ pbSetup <- function(apikey, conffile, defdev) {
     f <- file(conffile,open = "w")
     cat(json,file = f)
     close(f)
+    ## User Read only
+    Sys.chmod(conffile, mode = "600")
     invisible(NULL)
 }
 
@@ -89,13 +91,13 @@ pbSetup <- function(apikey, conffile, defdev) {
 ##'
 pbValidateConf <- function(conf=NULL){
     if (is.null(conf)) {
-        conf <- .getDotfile()							#nocov 
-        message("No configuration specified.  Assuming user meant: ",conf)	#nocov 
+        conf <- .getDotfile()							#nocov
+        message("No configuration specified.  Assuming user meant: ",conf)	#nocov
     }
     params <- try(jsonlite::fromJSON(conf))
     if (inherits(params, "try-error")) {
-        warning(conf, " is not a valid JSON string or a file containing such.")	#nocov 
-        return(FALSE)  								#nocov 
+        warning(conf, " is not a valid JSON string or a file containing such.")	#nocov
+        return(FALSE)  								#nocov
     }
     message("key is ",ifelse(validKey <- .isValidKey(params$key),"VALID","INVALID"))
     if (validKey) {
