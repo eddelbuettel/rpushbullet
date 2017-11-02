@@ -25,7 +25,7 @@ install:
   - ./run.sh install_aptget r-cran-curl r-cran-jsonlite
 
 script:
-  - if ["$TRAVIS_PULL_REQUEST" == "false"]; ./run.sh run_tests; fi
+  - if ["$TRAVIS_PULL_REQUEST" == "false"]; then ./run.sh run_tests; fi
 
 after_failure:
   - ./run.sh dump_logs
