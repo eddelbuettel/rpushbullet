@@ -73,7 +73,7 @@ pbSetup <- function(apikey, conffile, defdev) {
     cat(json,file = f)
     close(f)
     ## User Read only
-    #Sys.chmod(conffile, mode = "600")
+    Sys.chmod(conffile, mode = "600")
     invisible(NULL)
 }
 
