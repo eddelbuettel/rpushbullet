@@ -23,8 +23,6 @@ R> msg   # just an example, can be driven by real simulation results
 [1] "DONE after 10000 simulations taking 42.43 minutes reducing RMSE by  7.89 percent"  
 R>  
 R> RPushbullet::pbPost("note", title="Simulation complete", body=msg)  
-R> pbPost("note", title="Simulation complete", body=msg)  
-R>  
 ```
 
 and a message like the image following below should pop up (if messaging directed to the browser):
