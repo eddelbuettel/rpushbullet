@@ -74,6 +74,7 @@ pbSetup <- function(apikey, conffile, defdev) {
     close(f)
     ## User Read only
     Sys.chmod(conffile, mode = "600")
+    .parseResourceFile(conffile)
     invisible(NULL)
 }
 
