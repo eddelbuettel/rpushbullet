@@ -254,9 +254,37 @@ pbPost <- function(type=c("note", "link", "file"),
     invisible(ret)
 }
 
-.createPush <- function(pburl, apikey, form_list){
+
+##' This function get messages posted to Pushbullet.
+##'
+##' @title Get messages posted via Pushbullet
+##' @param apikey The API key used to access the service. It can be
+##' supplied as an argument here, via the global option
+##' \code{rpushbullet.key}, or via the file \code{~/.rpushbullet.json}
+##' which is read at package initialization (and, if found, also sets
+##' the global option).
+##' \code{~/.rpushbullet.json} which is read at package
+##' initialization.
+##' @param limit Limit number of post. Default is 10.
+##' @return A data.frame result record is return
+##' @author Chanyub Park
+##' @examples
+##' \dontrun{
+##' pbGetPost()
+##' }
+pbGetPost <- function(apikey = .getKey(),
+                      limit = 10) {
+    pburl <- paste0("https://api.pushbullet.com/v2/pushes?limit=", limit)
+    res <- .createPush(pburl, apikey, hopt = "GET")
+    jsonlite::fromJSON(res)$pushes
+}
+
+.createPush <- function(pburl, apikey, form_list = NULL, hopt = "POST"){
     h <- .getCurlHandle(apikey)
-    curl::handle_setform(h, .list = form_list )
+    curl::handle_setopt(h, customrequest = hopt)
+    if (!is.null(form_list)) {
+        curl::handle_setform(h, .list = form_list)
+    }
     res <- curl::curl_fetch_memory(pburl, handle = h)
     .checkReturnCode(res)
     return(rawToChar(res$content))
