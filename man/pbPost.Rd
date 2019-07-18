@@ -5,9 +5,9 @@
 \title{Post a message via Pushbullet}
 \usage{
 pbPost(type = c("note", "link", "file"), title = "", body = "",
-  url = "", filetype = "text/plain", recipients, email, channel, deviceind,
-  apikey = .getKey(), devices = .getDevices(), verbose = FALSE,
-  debug = FALSE)
+  url = "", filetype = "text/plain", recipients, email, channel,
+  deviceind, apikey = .getKey(), devices = .getDevices(),
+  verbose = FALSE, debug = FALSE)
 }
 \arguments{
 \item{type}{The type of post: one of \sQuote{note}, \sQuote{link}, or \sQuote{file}.}
