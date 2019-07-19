@@ -1,6 +1,6 @@
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2017  Seth Wenchel and Dirk Eddelbuettel
+##  Copyright (C) 2017 - 2019  Seth Wenchel and Dirk Eddelbuettel
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -44,13 +44,14 @@
 ##' @author Seth Wenchel and Dirk Eddelbuettel
 pbSetup <- function(apikey, conffile, defdev) {
 
-    if (missing(apikey)) apikey <- readline("Please enter your API key (aka 'Access Token'): ")
+    if (missing(apikey))   				#nocov start
+        apikey <- readline("Please enter your API key (aka 'Access Token'): ")
     if (missing(conffile)) conffile <- .getDotfile()
-    if (missing(defdev)) defdev <- NA
+    if (missing(defdev)) defdev <- NA			#nocov end
 
     pdgd <- pbGetDevices(apikey)
 
-    if (!length(pdgd$devices)) stop("no devices found for ", apikey, call.=FALSE)
+    if (!length(pdgd$devices)) stop("no devices found for ", apikey, call.=FALSE)  #nocov
 
     devices <- names <- rep(NA_character_, nrow(pdgd$devices)) # default to NA
     ind <- with(pdgd$devices, active & pushable)
@@ -65,7 +66,7 @@ pbSetup <- function(apikey, conffile, defdev) {
 
     reslist <- list(key=apikey, devices = devices, names = names)
     if (defdev %in% as.character(seq_along(names)))
-        reslist$defaultdevice <- names[as.integer(defdev)]
+        reslist$defaultdevice <- names[as.integer(defdev)]			#nocov
 
     json <- toJSON(reslist, auto_unbox=TRUE, pretty=TRUE)
 
