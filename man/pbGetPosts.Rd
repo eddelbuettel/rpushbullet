@@ -25,7 +25,7 @@ This function gets messages posted to Pushbullet.
 }
 \examples{
 \dontrun{
-pbGetPost()
+pbGetPosts()
 }
 }
 \author{

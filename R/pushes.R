@@ -205,7 +205,7 @@ pbPost <- function(type=c("note", "link", "file"),
             }
         } else if (is.numeric(d)) {     # this a listed device, now transfered to index
             if (d==0)
-                tgt <- list() # if zero, then use all devices
+                tgt <- list() # if zero, then use all devices  			#nocov
             else
                 tgt <- list(device_iden=devices[[d]]) # otherwise given specific device
          } else {                        # fallback, should not get reached
@@ -270,14 +270,13 @@ pbPost <- function(type=c("note", "link", "file"),
 ##' @author Chanyub Park
 ##' @examples
 ##' \dontrun{
-##' pbGetPost()
+##' pbGetPosts()
 ##' }
-pbGetPosts <- function(apikey = .getKey(),
-                      limit = 10) {
+pbGetPosts <- function(apikey = .getKey(), limit = 10) {			#nocov start
     pburl <- paste0("https://api.pushbullet.com/v2/pushes?limit=", limit)
     res <- .createPush(pburl, apikey, hopt = "GET")
     jsonlite::fromJSON(res)$pushes
-}
+}										#nocov ends
 
 .createPush <- function(pburl, apikey, form_list = NULL, hopt = "POST"){
     h <- .getCurlHandle(apikey)
