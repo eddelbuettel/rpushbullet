@@ -12,7 +12,8 @@
     \item At startup initialization is now more consistent (Colin
     Gillespie in \ghpr{53} fixing \ghit{52})
     \item A new function to fetch prior posts was added (Chanyub Park in
-    \ghpr{54}). 
+    \ghpr{54}).
+  }
 }
 
 \section{Changes in version 0.3.1 (2017-02-17)}{
