@@ -1,3 +1,13 @@
+2019-07-18  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R: Renamed to pbGetPosts
+	* man/pbGetPosts.Rd: Idem
+
+2019-07-17  Chanyub Park  <mrchypark@gmail.com>
+
+	* R/pushes.R: Add pbGetPost function, modify .createPush
+	* man/pbGetPost.Rd: Updated documentation
+
 2019-07-11  Colin Gillespie  <colin@jumpingrivers.com>
 
     * R/setup.R (pbSetup): Read conffile after pbSetup

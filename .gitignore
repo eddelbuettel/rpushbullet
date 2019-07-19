@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 \.rpushbullet\.json
+GPATH
+GRTAGS
+GTAGS
