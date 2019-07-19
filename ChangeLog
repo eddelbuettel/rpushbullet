@@ -1,5 +1,7 @@
 2019-07-18  Dirk Eddelbuettel  <edd@debian.org>
 
+	* DESCRIPTION (Version, Date): Roll minor version
+
 	* R/pushes.R: Renamed to pbGetPosts
 	* man/pbGetPosts.Rd: Idem
 
@@ -10,13 +12,13 @@
 
 2019-07-11  Colin Gillespie  <colin@jumpingrivers.com>
 
-    * R/setup.R (pbSetup): Read conffile after pbSetup
+	* R/setup.R (pbSetup): Read conffile after pbSetup
 
-    * .gitignore: Ignore .rpushbullet.json
+	* .gitignore: Ignore .rpushbullet.json
 
 2017-11-02  Colin Gillespie  <colin@jumpingrivers.com>
 
-    * R/setup.R: Set conffile to be readable only by the user
+	* R/setup.R: Set conffile to be readable only by the user
 
 2017-04-13  Dirk Eddelbuettel  <edd@debian.org>
 

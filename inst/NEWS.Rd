@@ -3,6 +3,18 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
 
+\section{Changes in version 0.3.2 (2019-07-xx)}{
+  \itemize{
+    \item The Travis setup was robustified with respect to the token
+    need to run tests (Dirk in \ghpr{48})
+    \item The configuration file is now readable only by the user (Colin
+    Gillespie in \ghpr{50})
+    \item At startup initialization is now more consistent (Colin
+    Gillespie in \ghpr{53} fixing \ghit{52})
+    \item A new function to fetch prior posts was added (Chanyub Park in
+    \ghpr{54}). 
+}
+
 \section{Changes in version 0.3.1 (2017-02-17)}{
   \itemize{
     \item The target device designation was corrected (\ghpr{39}).
