@@ -1,3 +1,7 @@
+2019-07-20  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/setup.R: One more #nocov tag
+
 2019-07-19  Dirk Eddelbuettel  <edd@debian.org>
 
 	* R/setup.R: A few more #nocov tags

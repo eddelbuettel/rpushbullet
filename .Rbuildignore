@@ -4,3 +4,7 @@
 attic
 ^.rpushbullet.json.enc$
 ^.rpushbullet.json$
+GPATH
+GRTAGS
+GTAGS
+^.*\.tar\.gz$

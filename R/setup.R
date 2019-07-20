@@ -62,7 +62,7 @@ pbSetup <- function(apikey, conffile, defdev) {
     names <- na.omit(names)
 
     for (i in seq_along(names)) print(paste0(i,". ",names[i]))
-    if (is.na(defdev)) defdev <- readline("Select a default device (0 for none): ")
+    if (is.na(defdev)) defdev <- readline("Select a default device (0 for none): ")  #nocov
 
     reslist <- list(key=apikey, devices = devices, names = names)
     if (defdev %in% as.character(seq_along(names)))
