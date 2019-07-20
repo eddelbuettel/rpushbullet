@@ -1,5 +1,8 @@
 2019-07-20  Dirk Eddelbuettel  <edd@debian.org>
 
+	* DESCRIPTION: Expand authors / contributors list
+	* README.md: Idem
+
 	* R/setup.R: One more #nocov tag
 
 2019-07-19  Dirk Eddelbuettel  <edd@debian.org>

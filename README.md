@@ -131,7 +131,8 @@ information.
 
 ### Author
 
-Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, Henrik Bengtsson, and Seth Wenchel
+Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, Henrik
+Bengtsson, Seth Wenchel, Colin Gillespie and Chanyub Park.
 
 ### License
 
