@@ -1,7 +1,7 @@
 
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2014 - 2017  Dirk Eddelbuettel <edd@debian.org>
+##  Copyright (C) 2014 - 2019  Dirk Eddelbuettel <edd@debian.org>
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -156,7 +156,7 @@
                   ": Undocumented response code"
     )
     if (code>=500 && code<600)
-        msg <- ": Server Error - Something went wrong on Pushbullet's side. If this error is from an intermediate server, it may not be valid JSON."
+        msg <- ": Server Error - Something went wrong on Pushbullet's side. If this error is from an intermediate server, it may not be valid JSON."  #nocov
     warning(code, msg, call. = FALSE)
     return()
 }

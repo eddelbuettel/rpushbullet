@@ -3,7 +3,7 @@
 ##
 ##  Copyright (C) 2014         Dirk Eddelbuettel <edd@debian.org>
 ##  Copyright (C) 2014 - 2016  Dirk Eddelbuettel and Mike Birdgeneau
-##  Copyright (C) 2014 - 2017  Dirk Eddelbuettel, Mike Birdgeneau and Seth Wenchel
+##  Copyright (C) 2014 - 2019  Dirk Eddelbuettel, Mike Birdgeneau and Seth Wenchel
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -205,7 +205,7 @@ pbPost <- function(type=c("note", "link", "file"),
             }
         } else if (is.numeric(d)) {     # this a listed device, now transfered to index
             if (d==0)
-                tgt <- list() # if zero, then use all devices
+                tgt <- list() # if zero, then use all devices  			#nocov
             else
                 tgt <- list(device_iden=devices[[d]]) # otherwise given specific device
          } else {                        # fallback, should not get reached
@@ -255,7 +255,7 @@ pbPost <- function(type=c("note", "link", "file"),
 }
 
 
-##' This function get messages posted to Pushbullet.
+##' This function gets messages posted to Pushbullet.
 ##'
 ##' @title Get messages posted via Pushbullet
 ##' @param apikey The API key used to access the service. It can be
@@ -266,19 +266,18 @@ pbPost <- function(type=c("note", "link", "file"),
 ##' \code{~/.rpushbullet.json} which is read at package
 ##' initialization.
 ##' @param limit Limit number of post. Default is 10.
-##' @return A data.frame result record is return
+##' @return A data.frame result record is returned
 ##' @author Chanyub Park
 ##' @examples
 ##' \dontrun{
 ##' pbGetPosts()
 ##' }
-pbGetPosts <- function(apikey = .getKey(),
-                      limit = 10) {
+pbGetPosts <- function(apikey = .getKey(), limit = 10) {			#nocov start
     pburl <- paste0("https://api.pushbullet.com/v2/pushes?limit=", limit)
     res <- .createPush(pburl, apikey, hopt = "GET")
     Encoding(res) <- "UTF-8"
     jsonlite::fromJSON(res)$pushes
-}
+}										#nocov ends
 
 .createPush <- function(pburl, apikey, form_list = NULL, hopt = "POST"){
     h <- .getCurlHandle(apikey)
@@ -290,5 +289,3 @@ pbGetPosts <- function(apikey = .getKey(),
     .checkReturnCode(res)
     return(rawToChar(res$content))
 }
-
-
