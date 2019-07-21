@@ -270,12 +270,13 @@ pbPost <- function(type=c("note", "link", "file"),
 ##' @author Chanyub Park
 ##' @examples
 ##' \dontrun{
-##' pbGetPost()
+##' pbGetPosts()
 ##' }
-pbGetPost <- function(apikey = .getKey(),
+pbGetPosts <- function(apikey = .getKey(),
                       limit = 10) {
     pburl <- paste0("https://api.pushbullet.com/v2/pushes?limit=", limit)
     res <- .createPush(pburl, apikey, hopt = "GET")
+    Encoding(res) <- "UTF-8"
     jsonlite::fromJSON(res)$pushes
 }
 
