@@ -4,6 +4,8 @@
 ##  Copyright (C) 2014         Dirk Eddelbuettel <edd@debian.org>
 ##  Copyright (C) 2014 - 2016  Dirk Eddelbuettel and Mike Birdgeneau
 ##  Copyright (C) 2014 - 2019  Dirk Eddelbuettel, Mike Birdgeneau and Seth Wenchel
+##  Copyright (C) 2019 -       Dirk Eddelbuettel, Mike Birdgeneau, Seth Wenchel
+##                             and Chan-Yub Park
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -267,7 +269,7 @@ pbPost <- function(type=c("note", "link", "file"),
 ##' initialization.
 ##' @param limit Limit number of post. Default is 10.
 ##' @return A data.frame result record is returned
-##' @author Chanyub Park
+##' @author Chan-Yub Park
 ##' @examples
 ##' \dontrun{
 ##' pbGetPosts()

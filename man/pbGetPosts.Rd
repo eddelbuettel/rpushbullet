@@ -29,5 +29,5 @@ pbGetPosts()
 }
 }
 \author{
-Chanyub Park
+Chan-Yub Park
 }

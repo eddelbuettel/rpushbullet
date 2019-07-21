@@ -132,7 +132,7 @@ information.
 ### Author
 
 Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, Henrik
-Bengtsson, Seth Wenchel, Colin Gillespie and Chanyub Park.
+Bengtsson, Seth Wenchel, Colin Gillespie and Chan-Yub Park.
 
 ### License
 

@@ -1,10 +1,10 @@
 Package: RPushbullet
 Type: Package
 Title: R Interface to the Pushbullet Messaging Service
-Version: 0.3.1.1
-Date: 2019-07-18
+Version: 0.3.2
+Date: 2019-07-21
 Author: Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, 
- Henrik Bengtsson, Seth Wenchel, Colin Gillespie and Chanyub Park
+ Henrik Bengtsson, Seth Wenchel, Colin Gillespie and Chan-Yub Park
 Maintainer: Dirk Eddelbuettel <edd@debian.org>
 Description: An R interface to the Pushbullet messaging service which
  provides fast and efficient notifications (and file transfer) between
