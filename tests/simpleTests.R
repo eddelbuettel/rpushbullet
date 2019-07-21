@@ -65,7 +65,6 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     str(res)
     ## storing this test result to allow us to use active user's email for testing below.
 
-
     ## Post a URL -- should open browser
     str(fromJSON(pbPost(type="link", title=count("Some title"), body="Some URL to click on",
                         url="https://cran.r-project.org/package=RPushbullet")[[1]]))
@@ -173,7 +172,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     usr <- pbGetUser()
     print(usr)
     summary(usr)
-    
+
     ## basic validity
     RPushbullet:::.isValidKey(RPushbullet:::.getKey())
     RPushbullet:::.isValidDevice(devs$devices[1, "iden"], RPushbullet:::.getKey())

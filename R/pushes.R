@@ -275,6 +275,7 @@ pbPost <- function(type=c("note", "link", "file"),
 pbGetPosts <- function(apikey = .getKey(), limit = 10) {			#nocov start
     pburl <- paste0("https://api.pushbullet.com/v2/pushes?limit=", limit)
     res <- .createPush(pburl, apikey, hopt = "GET")
+    Encoding(res) <- "UTF-8"
     jsonlite::fromJSON(res)$pushes
 }										#nocov ends
 
