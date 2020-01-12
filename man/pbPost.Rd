@@ -89,6 +89,11 @@ is used as a code to imply \sQuote{all} devices.
 
 The earlier argument \code{deviceind} is now deprecated and will
 be removed in a later release.
+
+In some cases servers may prefer the older \sQuote{HTTP 1.1}
+standard (as opposed to the newer \sQuote{HTTP 2.0} set by
+\code{curl}). Setting the option \dQuote{rpushbullet.useHTTP11} to
+\code{TRUE} will enable use of \sQuote{HTTP 1.1}.
 }
 \examples{
 \dontrun{
