@@ -91,7 +91,7 @@
     curl::handle_setheaders(h, .list=list('Access-Token' = apikey))
     if (isTRUE(getOption("rpushbullet.useHTTP11", FALSE))) {
         ## enable this via  options("rpushbullet.useHTTP11"=TRUE)
-        curl::handle_setopt(h,http_version = 2)
+        curl::handle_setopt(h,http_version = 2) # #nocov
     }
     return(h)
 }
