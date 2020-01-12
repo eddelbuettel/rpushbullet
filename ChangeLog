@@ -1,5 +1,9 @@
+2020-01-06  Alexandre Shannon  <alexandre.shannon@gmail.com>
+
+	* R/init.R: Use curl::handle_setopt to set HTTP/1.1
+
 2019-07-21  Chan-Yub Park  <mrchypark@gmail.com>
-	
+
 	* R/pushes.R: Set UTF-8 encoding in pbGetPosts
 
 2019-07-21  Dirk Eddelbuettel  <edd@debian.org>

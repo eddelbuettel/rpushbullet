@@ -12,7 +12,7 @@ env:
     # cf https://docs.travis-ci.com/user/environment-variables/
     - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then Run_RPushbullet_Tests="yes"; fi
     - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then Run_RPushbullet_Tests_All="yes"; fi
-
+    
 before_install:
   - curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
   - ./run.sh bootstrap
