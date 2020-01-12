@@ -1,5 +1,7 @@
 2020-01-12  Dirk Eddelbuettel  <edd@debian.org>
 
+	* DESCRIPTION (Version, Date): Roll minor version
+
 	* R/init.R (.getCurlHandle): Setting HTTP/1.1 is now conditional on a
 	new option "rpushbullet.useHTTP11" being set to TRUE
 	* R/pushes.R: Document new option
