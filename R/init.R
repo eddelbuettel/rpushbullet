@@ -1,7 +1,7 @@
 
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2014 - 2019  Dirk Eddelbuettel <edd@debian.org>
+##  Copyright (C) 2014 - 2020  Dirk Eddelbuettel <edd@debian.org>
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -89,7 +89,10 @@
 .getCurlHandle <- function(apikey){
     h <- curl::new_handle()
     curl::handle_setheaders(h, .list=list('Access-Token' = apikey))
-    curl::handle_setopt(h,http_version = 2)   
+    if (isTRUE(getOption("rpushbullet.useHTTP11", FALSE))) {
+        ## enable this via  options("rpushbullet.useHTTP11"=TRUE)
+        curl::handle_setopt(h,http_version = 2) # #nocov
+    }
     return(h)
 }
 
