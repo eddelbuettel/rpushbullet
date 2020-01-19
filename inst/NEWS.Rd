@@ -3,11 +3,11 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
 
-\section{Changes in version 0.3.3 (2020-01-xx)}{
+\section{Changes in version 0.3.3 (2020-01-18)}{
   \itemize{
     \item UTF-8 encoding is now used (Chan-Yub Park in \ghpr{55}).
-    \item Curl is set to use HTTP/1.1 (Alexandre Shannon in \ghpr{59}
-    fixing \ghit{57}).
+    \item Curl can use HTTP/1.1 (Alexandre Shannon in \ghpr{59} fixing
+    \ghit{57}, plus Dirk in \ghpr{60} making it optional).
   }
 }
 
