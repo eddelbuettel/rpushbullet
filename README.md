@@ -51,7 +51,7 @@ Up until release 0.2.0, an external `curl` binary was used. We have since switch
 the [curl](https://cran.r-project.org/package=curl) package.
 
 Given that the [Pushbullet API](https://docs.pushbullet.com/) has other nice features, future 
-extensions are certainly possible and encouragement.  Interested contributors should file issue 
+extensions are certainly possible and encouraged.  Interested contributors should file issue 
 tickets first to discuss before going off on pull requests.
 
 ### Initialization
