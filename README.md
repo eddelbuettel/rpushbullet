@@ -1,18 +1,27 @@
-## RPushbullet [![Build Status](https://travis-ci.org/eddelbuettel/rpushbullet.svg)](https://travis-ci.org/eddelbuettel/rpushbullet) [![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html) [![CRAN](http://www.r-pkg.org/badges/version/RPushbullet)](https://cran.r-project.org/package=RPushbullet) [![Dependencies](https://tinyverse.netlify.com/badge/RPushbullet)](https://cran.r-project.org/package=RPushbullet) [![Downloads](http://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen)](http://www.r-pkg.org/pkg/RPushbullet) [![Code Coverage](https://codecov.io/gh/eddelbuettel/rpushbullet/graph/badge.svg)](https://codecov.io/gh/eddelbuettel/rpushbullet)
+## RPushbullet: R interface to Pushbullet
 
-### R interface to Pushbullet
+[![Build Status](https://travis-ci.org/eddelbuettel/rpushbullet.svg)](https://travis-ci.org/eddelbuettel/rpushbullet) 
+[![License](http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![CRAN](http://www.r-pkg.org/badges/version/RPushbullet)](https://cran.r-project.org/package=RPushbullet)
+[![Dependencies](https://tinyverse.netlify.com/badge/RPushbullet)](https://cran.r-project.org/package=RPushbullet)
+[![Downloads](http://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen)](http://www.r-pkg.org/pkg/RPushbullet)
+[![Code Coverage](https://codecov.io/gh/eddelbuettel/rpushbullet/graph/badge.svg)](https://codecov.io/gh/eddelbuettel/rpushbullet)
+[![Last Commit](https://img.shields.io/github/last-commit/eddelbuettel/rpushbullet)](https://github.com/eddelbuettel/rpushbullet)
 
-[Pushbullet](http://www.pushbullet.com) is an awesome (and still free
-for a very useful set of features with additional premium service for
-extras) service to pass messages between your computer(s), phone(s) and
-tablet(s).  It offers immediacy which is perfect for alerting, and
-much more.
+### What is this?
 
-To use it, first register to obtain an API key from the 
-[Pushbullet](https://www.pushbullet.com) site, and maybe install
-the Android or iPhone app, or one of the supported browser extension or
-desktop applications.  See the [Pushbullet](https://www.pushbullet.com)
-documentation for more information and details.
+RPushbullet is an R client for the wonderful
+[Pushbullet](http://www.pushbullet.com) messaging / notification system.
+
+### So what is Pushbullet?
+
+[Pushbullet](http://www.pushbullet.com) is an awesome (and free) little
+service that acts as a message broker. You sign up, and get a key to use the
+API.  You then install the "app" on your smartphone or Chrome browser (and
+obtain a device id for of these). You can also query your account with the
+`pbDevices()` function to retrieve these ids.
+
+Presto. Now you can send messages between them by invoking `pbPost()`.
 
 ### Example 
 
@@ -127,7 +136,6 @@ function. The Pushbullet API identifies a channel via the
 supplied `channel_tag` value of this argument. See the
 [Pushes API documentation](https://docs.pushbullet.com/v2/pushes/) for more
 information.
-
 
 ### Author
 
