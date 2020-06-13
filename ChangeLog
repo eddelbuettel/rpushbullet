@@ -1,3 +1,7 @@
+2020-06-13  Thomas Shafer  <thomasjshafer@gmail.com>
+
+	* R/init.R (.checkReturnCode): Refactore error code check
+
 2020-04-11  Dirk Eddelbuettel  <edd@debian.org>
 
 	* README.md: Added 'last commit' badge, small edits
