@@ -1,3 +1,9 @@
+2020-06-13  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version
+	
+	* tests/simpleTests.R: Add tests for .checkReturnCode
+
 2020-06-13  Thomas Shafer  <thomasjshafer@gmail.com>
 
 	* R/init.R (.checkReturnCode): Refactore error code check

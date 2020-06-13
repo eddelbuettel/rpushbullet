@@ -95,7 +95,7 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
         str(fromJSON(pbPost(type="file", url=file,
                            recipients = devices[1],
                            email = res$receiver_email)[[1]]))
-   } # if (hasDevices)
+    } # end of if (hasDevices)
 
 
     if (Sys.getenv("Run_RPushbullet_Tests_All")=="yes" &&
@@ -188,5 +188,35 @@ if (Sys.getenv("Run_RPushbullet_Tests")=="yes") {
     res <- fromJSON(pbPost("note", title, body)[[1]])
     str(res)
 
+
+    ## Return code checking -- from an earlier draft of #64 but without imposing new depends
+    ## Full credit to Thomas Shafer for the test logic.
+    ## No credit though for insisting on a unit test framework.
+
+    ## Tests for init.checkReturnCode
+    fakeRes <- function(status_code = 200, message = "") {
+        res <- list(
+            status_code = status_code,
+            content = charToRaw(message)
+        )
+        return(res)
+    }
+    .checkReturnCode <- RPushbullet:::.checkReturnCode
+
+    ## .checkReturnCode does not warn and returns null for 200 response"
+    res <- fakeRes()
+    actual <- suppressWarnings(.checkReturnCode(res))
+    stopifnot(is.null(actual))
+
+
+    ## .checkReturnCode warns and returns null for 400 response"
+    res <- fakeRes(status_code = 400)
+    actual <- suppressWarnings(.checkReturnCode(res), "Bad Request - Usually")
+    stopifnot(is.null(actual))
+
+    ## .checkReturnCode warns and returns null for 400 response with content"
+    res <- fakeRes(status_code = 400, message = "test content")
+    actual <- suppressWarnings(.checkReturnCode(res), "test content")
+    stopifnot(is.null(actual))
 
 }
