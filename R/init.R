@@ -151,16 +151,20 @@
     code <- res$status_code
     if (code==200)
         return()
-    msg <- switch(as.character(code),
-                  `400` = ": Bad Request - Usually this results from missing a required parameter.",
-                  `401` = ": Unauthorized - No valid access token provided.",
-                  `403` = ": Forbidden - The access token is not valid for that request.",
-                  `404` = ": Not Found - The requested item does not exist.",
-                  `429` = ": Too Many Requests - You have been ratelimited for making too many requests to the server.",
-                  ": Undocumented response code"
-    )
-    if (code>=500 && code<600)
-        msg <- ": Server Error - Something went wrong on Pushbullet's side. If this error is from an intermediate server, it may not be valid JSON."  #nocov
+
+    msg <- rawToChar(res$content)
+    if (msg == "") {
+        msg <- switch(as.character(code),
+                      `400` = ": Bad Request - Usually this results from missing a required parameter.",
+                      `401` = ": Unauthorized - No valid access token provided.",
+                      `403` = ": Forbidden - The access token is not valid for that request.",
+                      `404` = ": Not Found - The requested item does not exist.",
+                      `429` = ": Too Many Requests - You have been ratelimited for making too many requests to the server.",
+                      ": Undocumented response code"
+        )
+        if (code>=500 && code<600)
+            msg <- ": Server Error - Something went wrong on Pushbullet's side. If this error is from an intermediate server, it may not be valid JSON."  #nocov
+        }
     warning(code, msg, call. = FALSE)
     return()
 }
