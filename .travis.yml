@@ -33,13 +33,13 @@ install:
   - ./run.sh install_aptget r-cran-curl r-cran-jsonlite
 
 script:
-  - if [ "$TRAVIS_PULL_REQUEST" == "false"]; then ./run.sh run_tests; fi
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./run.sh run_tests; fi
 
 after_failure:
   - ./run.sh dump_logs
 
 after_success:
-  - if [ "$TRAVIS_PULL_REQUEST" == "false"]; then ./run.sh coverage; fi
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./run.sh coverage; fi
 
 notifications:
   email:
