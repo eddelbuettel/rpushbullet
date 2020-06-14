@@ -8,6 +8,7 @@ env:
   global:
     # this should already be set per https://docs.travis-ci.com/user/environment-variables/
     - TRAVIS_SECURE_ENV_VARS="true"
+    - Run_RPushbullet_Tests="yes"
     # condition this on have secure environment variables which PRs off forks do not
     # cf https://docs.travis-ci.com/user/environment-variables/
     - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then Run_RPushbullet_Tests="yes"; fi
