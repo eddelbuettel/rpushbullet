@@ -160,8 +160,8 @@ pbPost <- function(type=c("note", "link", "file"),
             if (!missing(email)) {
                 dest <- email
             } else {                    # hence channel present
-                dest <- channel
-                email <- NA 		# Set e-mail to NA, missing() is unreliable
+                dest <- channel								#nocov
+                email <- NA 		# Set e-mail to NA, missing() is unreliable     #nocov
             }
        }
     }
