@@ -1,7 +1,12 @@
+2020-06-14  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .travis.yml (sudo): Switch to 'bionic' and R 4.0.0; set
+	TRAVIS_SECURE_ENV_VARS="true", condition coverage
+
 2020-06-13  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Roll minor version
-	
+
 	* tests/simpleTests.R: Add tests for .checkReturnCode
 
 2020-06-13  Thomas Shafer  <thomasjshafer@gmail.com>

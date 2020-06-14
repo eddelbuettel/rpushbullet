@@ -1,17 +1,25 @@
 # Run Travis CI for R using https://eddelbuettel.github.io/r-travis/
 
 language: c
-
 sudo: required
-
-dist: trusty
+dist: bionic
 
 env:
   global:
+    # this should already be set per https://docs.travis-ci.com/user/environment-variables/
+    - TRAVIS_SECURE_ENV_VARS="true"
     # condition this on have secure environment variables which PRs off forks do not
     # cf https://docs.travis-ci.com/user/environment-variables/
     - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then Run_RPushbullet_Tests="yes"; fi
     - if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then Run_RPushbullet_Tests_All="yes"; fi
+
+jobs:
+  include:
+    #- name: r-3.5
+    #  env: R_VERSION="3.5"
+    - name: r-4.0
+      env: R_VERSION="4.0"
+
     
 before_install:
   - curl -OLs https://eddelbuettel.github.io/r-travis/run.sh && chmod 0755 run.sh
@@ -31,7 +39,7 @@ after_failure:
   - ./run.sh dump_logs
 
 after_success:
-  - ./run.sh coverage
+  - if ["$TRAVIS_PULL_REQUEST" == "false"]; then ./run.sh coverage; fi
 
 notifications:
   email:
