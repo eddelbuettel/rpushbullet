@@ -4,6 +4,10 @@
 	* .Rbuildignore: Added .github
 	* .travis.yml: Minor edit
 
+	* .rpushbullet.json.gpg: New gpg-encrypted tokenfile
+	* .github/scripts/decrypt_tokenfile.sh: Added helper to decrypt
+	* .github/workflows/ci.yaml: Use helper and token via secret
+
 2020-06-14  Dirk Eddelbuettel  <edd@debian.org>
 
 	* .travis.yml (sudo): Switch to 'bionic' and R 4.0.0; set

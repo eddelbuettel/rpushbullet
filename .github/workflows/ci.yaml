@@ -9,7 +9,11 @@ on:
 env:
   USE_BSPM: "true"
   _R_CHECK_FORCE_SUGGESTS_: "false"
-
+  # setting this one below in the steps did not work
+  TOKENFILE_PASSWORD: ${{ secrets.TOKENFILE_PASSWORD }}
+  # explicit opt-in: turn tests on (just to make sure by browser extension gets spammed ...)
+  Run_RPushbullet_Tests: "yes"
+  
 jobs:
   ci:
     strategy:
@@ -31,6 +35,17 @@ jobs:
 
       - name: Dependencies
         run: ./run.sh install_deps
+
+      #- name: Environment
+      #  shell: bash
+      #  run: env | cut -d= -f1 | sort
+        
+      - name: Decrypt token file
+        shell: bash
+        run: ./.github/scripts/decrypt_tokenfile.sh
+
+      #- name: Check token
+      #  run: md5sum .rpushbullet.json
 
       - name: Test
         run: ./run.sh run_tests

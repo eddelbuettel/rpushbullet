@@ -4,6 +4,7 @@
 attic
 ^.rpushbullet.json.enc$
 ^.rpushbullet.json$
+^.rpushbullet.json.gpg$
 GPATH
 GRTAGS
 GTAGS
