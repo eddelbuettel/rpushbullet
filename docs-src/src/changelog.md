@@ -1,0 +1,421 @@
+###  2021 
+
+2021-02-27  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * .github/workflows/ci.yaml: Added run.sh from r-ci 
+        * .Rbuildignore: Added .github 
+        * .travis.yml: Minor edit 
+ 
+        * .rpushbullet.json.gpg: New gpg-encrypted tokenfile 
+        * .github/scripts/decrypt_tokenfile.sh: Added helper to decrypt 
+        * .github/workflows/ci.yaml: Use helper and token via secret 
+ 
+###  2020 
+
+2020-06-14  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * .travis.yml (sudo): Switch to 'bionic' and R 4.0.0; set 
+        TRAVIS_SECURE_ENV_VARS="true", condition coverage 
+ 
+2020-06-13  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Roll minor version 
+ 
+        * tests/simpleTests.R: Add tests for .checkReturnCode 
+ 
+2020-06-13  Thomas Shafer  <thomasjshafer@gmail.com> 
+ 
+        * R/init.R (.checkReturnCode): Refactored error code check 
+ 
+2020-04-11  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * README.md: Added 'last commit' badge, small edits 
+ 
+2020-01-18  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Release 0.3.3 
+ 
+2020-01-12  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Roll minor version 
+ 
+        * R/init.R (.getCurlHandle): Setting HTTP/1.1 is now conditional on a 
+        new option "rpushbullet.useHTTP11" being set to TRUE 
+        * R/pushes.R: Document new option 
+        * man/pbPost.Rd: Idem 
+ 
+2020-01-06  Alexandre Shannon  <alexandre.shannon@gmail.com> 
+ 
+        * R/init.R: Use curl::handle_setopt to set HTTP/1.1 
+ 
+###  2019 
+
+2019-07-21  Chan-Yub Park  <mrchypark@gmail.com> 
+ 
+        * R/pushes.R: Set UTF-8 encoding in pbGetPosts 
+ 
+2019-07-21  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Release 0.3.2 
+ 
+        * README.md: Add dependencies badge 
+ 
+2019-07-20  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION: Expand authors / contributors list 
+        * README.md: Idem 
+ 
+        * R/setup.R: One more #nocov tag 
+ 
+2019-07-19  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/setup.R: A few more #nocov tags 
+ 
+2019-07-18  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Roll minor version 
+ 
+        * R/init.R: Added #nocov tags 
+        * R/pushes.R: Renamed to pbGetPosts, added #nocov tags 
+        * man/pbGetPosts.Rd: Renamed 
+ 
+2019-07-17  Chan-Yub Park  <mrchypark@gmail.com> 
+ 
+        * R/pushes.R: Add pbGetPost function, modify .createPush 
+        * man/pbGetPost.Rd: Updated documentation 
+ 
+2019-07-11  Colin Gillespie  <colin@jumpingrivers.com> 
+ 
+        * R/setup.R (pbSetup): Read conffile after pbSetup 
+ 
+        * .gitignore: Ignore .rpushbullet.json 
+ 
+###  2017 
+
+2017-11-02  Colin Gillespie  <colin@jumpingrivers.com> 
+ 
+        * R/setup.R: Set conffile to be readable only by the user 
+ 
+2017-04-13  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * .travis.yml (env): Condition tests on having env.vars which PRs 
+        from forks will not have to not expose the secret token 
+ 
+        * R/setup.R (pbSetup): Typo/spelling fix suggested by Michael Chirico 
+ 
+2017-02-17  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Release 0.3.1 
+ 
+        * R/user.R: Do not run example 
+        * man/pbGetUser.Rd: Idem 
+ 
+2017-02-14  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/init.R: Additional #nocov tags 
+        * R/isValid.R: Idem 
+        * R/pushes.R: Idem 
+        * R/setup.R: Idem 
+ 
+        * tests/simpleTests.R: Added calls to pbGetUser() etc 
+ 
+2017-02-11  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * .rpushbullet.json.enc: Encoded configuration 
+        * .travis.yml: Decode configuration and run tests and coverage 
+ 
+        * R/setup.R (pbSetup): Support an optional default device 
+        * man/pbSetup.Rd: Documentation 
+ 
+        * tests/simpleTests.R: More calls to game test coverage statistics 
+ 
+2017-02-10  Seth S. Wenchel  <wenchel@gmail.com> 
+ 
+        * R/channel.R: Added S3 class pbChannelInfo with default, print, and 
+        summary methods 
+        * R/user.R: Added S3 class pbUser with default, print and summary 
+        methods 
+        * R/setup.R: New function pbValidateConf 
+        * R/isValid.R: Added missing header 
+ 
+2017-02-08  Seth S. Wenchel  <wenchel@gmail.com> 
+ 
+        * R/devices.R: Fix for another RJSONIO / jsonlite transition 
+ 
+2017-02-06  Seth S. Wenchel  <wenchel@gmail.com> 
+ 
+        * R/isValid.R: New (unexported) helper functions .isValidLey, 
+        .isValidDevice, .isValidChannel 
+ 
+2017-02-04  Dirk Eddelbuettel  <edd@max.eddelbuettel.com> 
+ 
+        * DESCRIPTION (Version, Date): Roll minor version 
+ 
+        * R/pushes.R (pbPost): Correct target device designation 
+ 
+        * attic/pbpost.r (localPbPost): Test script by Seth, slight mod'ed 
+ 
+2017-02-03  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Release 0.3.0 
+ 
+2017-02-02  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R (pbPost): Use 'target_device_ind', not 'device_ind' 
+ 
+        * R/setup.R (pbSetup): Use 'pretty=TRUE' for nicer output 
+ 
+        * man/pbPost.Rd: Remove reference to unsupported type 'address' 
+        * man/rpushbullet-package.Rd: Idem 
+ 
+        * tests/simpleTests.R: Changed to be less agressive and run failing 
+        tests only if environment variable Run_RPushbullet_Tests_All is 'yes' 
+ 
+        * README.md: Updated and expanded 
+ 
+2017-02-01  Seth S. Wenchel  <wenchel@gmail.com> 
+ 
+        * R/setup.R: Write single elements as vectors instead of lists 
+ 
+2017-01-31  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * README.md: Minor edits, more canonical URLs 
+ 
+        * .travis.yml: Use https for curl download 
+ 
+2017-01-30  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): New minor version and date 
+ 
+2017-01-30  Seth S. Wenchel  <wenchel@gmail.com> 
+ 
+        * R/setup.R (pbSetup): Check return code from pbGetDevices(); flag an 
+        error if no device is associated with the supplied key; fixed typo 
+ 
+        * R/init.R (.checkReturnCode): Move function here 
+ 
+2017-01-28  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/setup.R (pbSetup): New function, extending PR by Seth Wenchel 
+ 
+        * R/init.R (.onLoad): Also load dotfile, permitted use for 
+        un-attached package 
+        (.onAttach): Improved message formatting, simpler environment use 
+        (.getDotfile): New helper for default dotfile 
+        (.parseResourceFile): Simpler environment use 
+ 
+        * .travis.yml: Switch to using run.sh for Travis CI 
+        * NAMESPACE: Minor edit 
+        * inst/NEWS: Updated 
+ 
+2017-01-27  Seth S. Wenchel  <wenchel@gmail.com> 
+ 
+        * R/init.R: Refactored to use jsonlite instead of RJSONIO 
+        * R/pushes.R: Idem 
+        * DESCRIPTION: Idem 
+        * NAMESPACE: Idem 
+        * .travis.yml: Idem 
+ 
+2017-01-27  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * README.md: Removed broken URLs to Pushbullet docs, mention Mike and 
+        Seth in Authors, and add coverage badge 
+ 
+2017-01-26  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Rolled minor version and date 
+ 
+        * NAMESPACE: Also import str()importFrom("utils", "str") 
+ 
+        * man/pbPost.Rd: Updated documentation 
+        * R/pushes.R: Updated copyright 
+ 
+2017-01-23  Seth S. Wenchel  <wenchel@gmail.com> 
+ 
+        * R/devices.R: Refactored and extended to use the curl package 
+        instead the external curl binary; also removed no-longer supported 
+        'address' pushes 
+        * R/init.R: Idem 
+        * R/pushes.R: Idem 
+        * DESCRIPTION: Idem 
+        * NAMESPACE: Idem 
+        * .travis.yml: Idem 
+ 
+        * tests/simpleTests.R: Updated and added channel tests 
+ 
+###  2015 
+
+2015-06-20  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * man/rpushbullet-package.Rd: Document that package initializes when 
+        being attached, making package load the recommened usage pattern. 
+ 
+2015-02-09  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION: Version 0.2.0 
+ 
+        * DESCRIPTION (Description): Some minor last minute changes 
+ 
+2015-02-08  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * inst/NEWS.Rd: Added 
+ 
+        * tests/simpleTests.R (testfile): Fix wrong case in package name 
+ 
+2015-02-04  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/init.R (.parseResourceFile): Split off functionality from 
+        .onAttach(), permitting later call by user if needed 
+        * R/init.R (.onAttach): Call .parseResourceFile() 
+ 
+2015-02-04  Henrik Bengtsson  <hb@biostat.ucsf.edu> 
+ 
+        * R/init.R (.onAttach): Warn on non-existing key 
+        * README.md: Typo fixes, added note that channels are public 
+        * NAMESPACE: Export S3 methods 
+        * tests/simpleTests.R: Internal improvements and typo fixes 
+ 
+2015-01-20  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R: Some improvements to logic and use of test variables 
+ 
+2015-01-19  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/init.R: Support option testemail and testchannel 
+ 
+        * DESCRIPTION: Bump Version: and Date: 
+ 
+2015-01-18  Mike Birdgeneau  <mike.birdgeneau@gmail.com> 
+ 
+        * R/pushes.R (pbPost): Support for channels 
+ 
+        * tests/simpleTests.R: Added tests for channels 
+ 
+###  2014 
+
+2014-12-30  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * tests/simpleTests.R: A few minor edits 
+ 
+2014-12-29  Mike Birdgeneau  <mike.birdgeneau@gmail.com> 
+ 
+        * R/pushes.R: Corrections to file transfer mode 
+ 
+        * tests/simpleTests.R: Added more tests 
+ 
+2014-11-03  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION: Version 0.1.1 
+ 
+        * DESCRIPTION: Updated the text in Description: 
+ 
+2014-11-02  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R: Correct file upload method 
+ 
+        * R/init.R: Protect filename by spaces 
+ 
+2014-10-10  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION: Version 0.1.0 
+ 
+2014-10-09  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * man/rpushbullet-package.Rd: Added a new section on intialization 
+        detailing how api key, device key(s) and name(s) and defaultdevice 
+        can be specified via a dotfile, options or function arguments. 
+ 
+        * R/pushes.R: Minor correction 
+ 
+2014-10-08  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R: New (optional) argument 'email' in pbPost 
+        * man/pbPost.Rd: Corresponding manual page updates 
+ 
+2014-10-06  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R: Minor typo correction by Mike Birdgeneau 
+ 
+        * R/pushes.R: Made file operations silent, minor tweak to docs 
+        * R/init.R: Made file operations silent 
+ 
+        * R/init.R: Also set 'names' option from init file 
+ 
+        * tests/simpleTests.R: Added two examples for type='link' 
+        and type='file' 
+ 
+2014-09-10  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R: Documentation clarified for 'recipient' option 
+ 
+2014-06-15  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R: Applied pull request #7 by Mike Birdgeneau which 
+        implements pushes of type 'file' 
+        * R/init.R: Ditto 
+ 
+        * R/pushes: Minor postprocessing of pull request 
+        * R/init.R: Ditto 
+ 
+2014-06-10  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R: Rewritten in terms of new argument 'recipients' with 
+        the default being sent to all devices; old argument 'deviceind' now 
+        deprecated. 
+ 
+        * R/init.R: New internal helper function .getNames() 
+        * R/init.R: The .getDefaultDevice() now defaults to 'zero' implying 
+        all devices should be used. 
+ 
+2014-06-07  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/devices.R: pgGetDevices() converted to an S3 object with proper 
+        print and summary methods for the returned class 'pbDevices' 
+ 
+2014-06-06  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/init.R: Applied pull request #3 by Bill Evans 
+        * R/push.R: Ditto 
+ 
+        * R/init.R: Minor tweak using 'defaultdevice' 
+        * R/push.R: Ditto 
+ 
+2014-06-05  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/init.R: Fixed two more references to pushbutton which should of 
+        course have been pushbullet 
+        * R/pushes.R: And another one here 
+ 
+2014-06-02  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION: Version 0.0.2 
+ 
+        * R/init.R: Detect curl binary in PATH at startup 
+        * R/pushes.R: Use curl binary identified at startup 
+        * R/devices.R: Ditto 
+ 
+        * .Rbuildignore: Add attic/ directory with file configure and 
+        configure.ac which is no longer needed at init.R checks for curl 
+ 
+        * R/init.R: Package environment is now .pkgenv 
+        * tests/simpleTests.R: Ditto 
+ 
+2014-05-27  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * R/pushes.R (pbPost): Added new optional argument 'debug', and minor 
+        refactoring in pbPost() making url string a common variable 
+ 
+2014-05-25  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * configure.ac: Added with simple test for curl 
+        * configure: Idem 
+ 
+        * tests/simpleTests.R: Added simple test script 
+ 
+        * R/init.R: Improved init. with new helper functions 
+ 
+2014-05-24  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION: Initial commit as version 0.0.1 
+ 
+        * .travis.yml: Added Travis support 

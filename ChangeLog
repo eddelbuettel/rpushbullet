@@ -21,7 +21,7 @@
 
 2020-06-13  Thomas Shafer  <thomasjshafer@gmail.com>
 
-	* R/init.R (.checkReturnCode): Refactore error code check
+	* R/init.R (.checkReturnCode): Refactored error code check
 
 2020-04-11  Dirk Eddelbuettel  <edd@debian.org>
 

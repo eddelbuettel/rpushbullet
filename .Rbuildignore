@@ -10,3 +10,5 @@ GRTAGS
 GTAGS
 ^.*\.tar\.gz$
 ^\.github
+^docs
+^docs-src
