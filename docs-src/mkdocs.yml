@@ -1,0 +1,40 @@
+site_name: RPushbullet
+site_url: https://github.com/eddelbuettel/rpushbullet
+docs_dir: src
+site_dir: docs
+
+theme:
+  name: material
+  custom_dir: overrides
+  features:
+    - navigation.tabs
+    - navigation.instant
+  font:
+    text: Lato
+  favicon: assets/Rlogo.png
+  logo: assets/Rlogo.svg
+
+extra_css:
+  - assets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/eddelbuettel/rpushbullet
+
+nav:
+  - Home:
+    - index.md
+  - Reference:
+    - man/rpushbullet-package.md
+    - man/pbGetChannelInfo.md
+    - man/pbGetDevices.md
+    - man/pbGetPosts.md
+    - man/pbGetUser.md
+    - man/pbPost.md
+    - man/pbSetup.md
+    - man/pbValidateConf.md
+  - News:
+    - news.md
+  - Changelog:
+    - changelog.md

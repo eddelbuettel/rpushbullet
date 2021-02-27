@@ -5,8 +5,10 @@
 
 \section{Changes in version 0.3.4 (2020-xx-yy)}{
   \itemize{
-    \item Return code checking using error code content if it exisist
+    \item Return code checking using error code content if it exists
     (Thomas Shafer in \ghpr{64}).
+    \item Enabled GitHub Actions with encrypted JSON file for API access
+    \item Added a package documentation website
   }
 }
 
