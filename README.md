@@ -7,6 +7,7 @@
 [![Downloads](http://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen)](http://www.r-pkg.org/pkg/RPushbullet)
 [![Code Coverage](https://codecov.io/gh/eddelbuettel/rpushbullet/graph/badge.svg)](https://codecov.io/gh/eddelbuettel/rpushbullet)
 [![Last Commit](https://img.shields.io/github/last-commit/eddelbuettel/rpushbullet)](https://github.com/eddelbuettel/rpushbullet)
+[![Documentation](https://img.shields.io/badge/documentation-is_here-blue)](https://eddelbuettel.github.io/rpushbullet/)
 
 ### What is this?
 
@@ -51,6 +52,12 @@ options(error = function() {
 
 There was one noteworthy follow-up for which I lost the source: it suggested to make the message 
 somewhat saltier by relying on the helpful [rfoaas](http://dirk.eddelbuettel.com/code/rfoaas.html) package.
+
+### Documentation
+
+Package documentation, help pages, a vignette, and more is available
+[here](https://eddelbuettel.github.io/rpushbullet/).
+
 
 ### Package Status
 
