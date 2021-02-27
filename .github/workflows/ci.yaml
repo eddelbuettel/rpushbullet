@@ -1,0 +1,55 @@
+# Run CI for R using https://eddelbuettel.github.io/r-ci/
+
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  USE_BSPM: "true"
+  _R_CHECK_FORCE_SUGGESTS_: "false"
+  # setting this one below in the steps did not work
+  TOKENFILE_PASSWORD: ${{ secrets.TOKENFILE_PASSWORD }}
+  # explicit opt-in: turn tests on (just to make sure by browser extension gets spammed ...)
+  Run_RPushbullet_Tests: "yes"
+  
+jobs:
+  ci:
+    strategy:
+      matrix:
+        include:
+          #- {os: macOS-latest}
+          - {os: ubuntu-latest}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Bootstrap
+        run: |
+          curl -OLs https://eddelbuettel.github.io/r-ci/run.sh
+          chmod 0755 run.sh
+          ./run.sh bootstrap
+
+      - name: Dependencies
+        run: ./run.sh install_deps
+
+      #- name: Environment
+      #  shell: bash
+      #  run: env | cut -d= -f1 | sort
+        
+      - name: Decrypt token file
+        shell: bash
+        run: ./.github/scripts/decrypt_tokenfile.sh
+
+      #- name: Check token
+      #  run: md5sum .rpushbullet.json
+
+      - name: Test
+        run: ./run.sh run_tests
+
+      #- name: Coverage
+      #  if: ${{ matrix.os == 'ubuntu-latest' }}
+      #  run: ./run.sh coverage
