@@ -1,3 +1,9 @@
+2021-02-27  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .github/workflows/ci.yaml: Added run.sh from r-ci
+	* .Rbuildignore: Added .github
+	* .travis.yml: Minor edit
+
 2020-06-14  Dirk Eddelbuettel  <edd@debian.org>
 
 	* .travis.yml (sudo): Switch to 'bionic' and R 4.0.0; set

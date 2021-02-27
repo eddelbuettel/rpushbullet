@@ -8,3 +8,4 @@ GPATH
 GRTAGS
 GTAGS
 ^.*\.tar\.gz$
+^\.github
