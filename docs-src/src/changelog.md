@@ -1,5 +1,17 @@
 ###  2021 
 
+2021-02-28  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * README.md: Updated http:// links to https:// 
+        * DESCRIPTION: Idem 
+        * R/devices.R: Idem 
+        * R/pushes.R: Idem 
+        * man/pbGetDevices.Rd: Idem 
+        * man/pbPost.Rd: Idem 
+        * man/rpushbullet-package.Rd: Idem 
+ 
+        * .Rbuildignore: Add .nojekyll 
+ 
 2021-02-27  Dirk Eddelbuettel  <edd@debian.org> 
  
         * .github/workflows/ci.yaml: Added run.sh from r-ci 
@@ -9,6 +21,11 @@
         * .rpushbullet.json.gpg: New gpg-encrypted tokenfile 
         * .github/scripts/decrypt_tokenfile.sh: Added helper to decrypt 
         * .github/workflows/ci.yaml: Use helper and token via secret 
+ 
+        * docs/: Added package website 
+        * docs-src/: Added package website inputs 
+ 
+        * README.md: Added badge and short paragraph linking to documentation 
  
 ###  2020 
 

@@ -3,7 +3,7 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
 
-\section{Changes in version 0.3.4 (2020-xx-yy)}{
+\section{Changes in version 0.3.4 (2021-xx-yy)}{
   \itemize{
     \item Return code checking using error code content if it exists
     (Thomas Shafer in \ghpr{64}).

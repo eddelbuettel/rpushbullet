@@ -29,7 +29,7 @@ Retrieve the list of devices registered for the given API key.
 ### Details
 
 This function invokes the ‘devices’ functionality of the Pushbullet API;
-see <https://docs.pushbullet.com/v2/devices> for more details.
+see <https://docs.pushbullet.com> for more details.
 
 ### Value
 

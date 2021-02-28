@@ -1,12 +1,12 @@
-### Version 0.3.4 (2020-xx-yy)
+### Version 0.3.4 (2021-xx-yy)
 
 -   Return code checking using error code content if it exists (Thomas
     Shafer in
     [\#64](https://github.com/eddelbuettel/rpushbullet/pull/64)).
 
--   Enabled GitHub Actions with encrypted JSON file for API access
+-   Enabled GitHub Actions with encrypted JSON file for API access.
 
--   Added a package documentation website
+-   Added a package documentation website.
 
 ### Version 0.3.3 (2020-01-18)
 

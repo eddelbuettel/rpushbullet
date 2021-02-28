@@ -33,7 +33,7 @@ are supported: ‘note’, ‘link’, ‘address’, or ‘file’.
 ### Details
 
 This function invokes the ‘pushes’ functionality of the Pushbullet API;
-see <https://docs.pushbullet.com/v2/pushes> for more details.
+see <https://docs.pushbullet.com/> for more details.
 
 When a ‘note’ is pushed, the recipient receives the title and body of
 the note. If a ‘link’ is pushed, the recipient's web browser is opened
@@ -75,7 +75,7 @@ Dirk Eddelbuettel
 
     # A URL -- should open browser
     pbPost(type="link", title="Some title", body="Some URL",
-           url="http://cran.r-project.org/package=RPushbullet")
+           url="https://cran.r-project.org/package=RPushbullet")
 
     # A file
     pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))

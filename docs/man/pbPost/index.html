@@ -762,7 +762,7 @@ are supported: ‘note’, ‘link’, ‘address’, or ‘file’.</p>
 </table>
 <h3 id="details">Details</h3>
 <p>This function invokes the ‘pushes’ functionality of the Pushbullet API;
-see <a href="https://docs.pushbullet.com/v2/pushes">https://docs.pushbullet.com/v2/pushes</a> for more details.</p>
+see <a href="https://docs.pushbullet.com/">https://docs.pushbullet.com/</a> for more details.</p>
 <p>When a ‘note’ is pushed, the recipient receives the title and body of
 the note. If a ‘link’ is pushed, the recipient's web browser is opened
 at the given URL. If an ‘address’ is pushed, the recipient's web browser
@@ -793,7 +793,7 @@ pbPost("note", "A Simple Test", "We think this should work.\nWe really do.")
 
 # A URL -- should open browser
 pbPost(type="link", title="Some title", body="Some URL",
-       url="http://cran.r-project.org/package=RPushbullet")
+       url="https://cran.r-project.org/package=RPushbullet")
 
 # A file
 pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))

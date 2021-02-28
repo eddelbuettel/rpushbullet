@@ -2,7 +2,7 @@
 
 ### Description
 
-The [Pushbullet](http://www.pushbullet.com) service permits users to
+The [Pushbullet](https://www.pushbullet.com) service permits users to
 pass messenges between their computers, phones and other devices such as
 tablets. It offers immediacy which is perfect for alerting, and much
 more.
@@ -22,7 +22,7 @@ comprising a note (with free-form body and title), link (for sending a
 URL), or even a file. The message recipients is typically one (or
 several) of the devices known to the user (see the next section for
 details), it can also be an email address in which case
-[Pushbullet](http://www.pushbullet.com) creates and sends an email to
+[Pushbullet](https://www.pushbullet.com) creates and sends an email to
 the given address.
 
 ### Initialization
@@ -79,7 +79,7 @@ Dirk Eddelbuettel
 ### References
 
 See the Pushbullet documentation at the [Pushbullet
-website](http://www.pushbullet.com).
+website](https://www.pushbullet.com).
 
 ### See Also
 
