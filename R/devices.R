@@ -1,7 +1,7 @@
 
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2014  Dirk Eddelbuettel <edd@debian.org>
+##  Copyright (C) 2014-2021  Dirk Eddelbuettel <edd@debian.org>
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -21,7 +21,7 @@
 ##' Retrieve the list of devices registered for the given API key.
 ##'
 ##' This function invokes the \sQuote{devices} functionality of
-##' the Pushbullet API; see \url{https://docs.pushbullet.com/v2/devices} for more
+##' the Pushbullet API; see \url{https://docs.pushbullet.com} for more
 ##' details.
 ##' @title Get registered Pushbullet devices
 ##' @param apikey The API key used to access the service. It can be

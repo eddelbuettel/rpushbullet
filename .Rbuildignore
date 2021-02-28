@@ -12,3 +12,4 @@ GTAGS
 ^\.github
 ^docs
 ^docs-src
+^\.nojekyll

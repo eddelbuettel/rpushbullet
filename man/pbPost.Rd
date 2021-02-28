@@ -65,7 +65,7 @@ messages are supported: \sQuote{note}, \sQuote{link},
 }
 \details{
 This function invokes the \sQuote{pushes} functionality of
-the Pushbullet API; see \url{https://docs.pushbullet.com/v2/pushes} for more
+the Pushbullet API; see \url{https://docs.pushbullet.com/} for more
 details.
 
 When a \sQuote{note} is pushed, the recipient receives the
@@ -102,7 +102,7 @@ pbPost("note", "A Simple Test", "We think this should work.\\nWe really do.")
 
 # A URL -- should open browser
 pbPost(type="link", title="Some title", body="Some URL",
-       url="http://cran.r-project.org/package=RPushbullet")
+       url="https://cran.r-project.org/package=RPushbullet")
 
 # A file
 pbPost(type="file", url=system.file("DESCRIPTION", package="RPushbullet"))

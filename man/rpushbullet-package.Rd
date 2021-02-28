@@ -6,7 +6,7 @@
   R interface to the Pushbullet service
 }
 \description{
-  The \href{http://www.pushbullet.com}{Pushbullet} service
+  The \href{https://www.pushbullet.com}{Pushbullet} service
   permits users to pass messenges between their computers, phones and
   other devices such as tablets.  It offers immediacy
   which is perfect for alerting, and much more.
@@ -26,7 +26,7 @@
   sending a URL), or even a file. The message recipients is
   typically one (or several) of the devices known to the user (see the
   next section for details), it can also be an email address in which
-  case \href{http://www.pushbullet.com}{Pushbullet} creates and sends an
+  case \href{https://www.pushbullet.com}{Pushbullet} creates and sends an
   email to the given address.
 }
 \section{Initialization}{
@@ -88,6 +88,6 @@
 }
 \references{
   See the Pushbullet documentation at the
-  \href{http://www.pushbullet.com}{Pushbullet website}.
+  \href{https://www.pushbullet.com}{Pushbullet website}.
 }
 \keyword{package}

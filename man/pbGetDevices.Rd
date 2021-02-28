@@ -37,7 +37,7 @@ Retrieve the list of devices registered for the given API key.
 }
 \details{
 This function invokes the \sQuote{devices} functionality of
-the Pushbullet API; see \url{https://docs.pushbullet.com/v2/devices} for more
+the Pushbullet API; see \url{https://docs.pushbullet.com} for more
 details.
 }
 \author{
