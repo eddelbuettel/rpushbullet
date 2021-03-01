@@ -1,3 +1,19 @@
+2021-03-01  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.3.4
+
+2021-02-28  Dirk Eddelbuettel  <edd@debian.org>
+
+	* README.md: Updated http:// links to https://
+	* DESCRIPTION: Idem
+	* R/devices.R: Idem
+	* R/pushes.R: Idem
+	* man/pbGetDevices.Rd: Idem
+	* man/pbPost.Rd: Idem
+	* man/rpushbullet-package.Rd: Idem
+
+	* .Rbuildignore: Add .nojekyll
+
 2021-02-27  Dirk Eddelbuettel  <edd@debian.org>
 
 	* .github/workflows/ci.yaml: Added run.sh from r-ci
