@@ -1,5 +1,9 @@
 ###  2021 
 
+2021-03-01  Dirk Eddelbuettel  <edd@debian.org> 
+ 
+        * DESCRIPTION (Version, Date): Release 0.3.4 
+ 
 2021-02-28  Dirk Eddelbuettel  <edd@debian.org> 
  
         * README.md: Updated http:// links to https:// 

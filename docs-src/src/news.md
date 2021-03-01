@@ -1,4 +1,4 @@
-### Version 0.3.4 (2021-xx-yy)
+### Version 0.3.4 (2021-03-01)
 
 -   Return code checking using error code content if it exists (Thomas
     Shafer in

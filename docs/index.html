@@ -717,18 +717,18 @@
                 
                 <h2 id="rpushbullet-r-interface-to-pushbullet">RPushbullet: R interface to Pushbullet</h2>
 <p><a href="https://travis-ci.org/eddelbuettel/rpushbullet"><img alt="Build Status" src="https://travis-ci.org/eddelbuettel/rpushbullet.svg" /></a> 
-<a href="http://www.gnu.org/licenses/gpl-2.0.html"><img alt="License" src="http://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat" /></a>
-<a href="https://cran.r-project.org/package=RPushbullet"><img alt="CRAN" src="http://www.r-pkg.org/badges/version/RPushbullet" /></a>
+<a href="https://www.gnu.org/licenses/gpl-2.0.html"><img alt="License" src="https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat" /></a>
+<a href="https://cran.r-project.org/package=RPushbullet"><img alt="CRAN" src="https://www.r-pkg.org/badges/version/RPushbullet" /></a>
 <a href="https://cran.r-project.org/package=RPushbullet"><img alt="Dependencies" src="https://tinyverse.netlify.com/badge/RPushbullet" /></a>
-<a href="http://www.r-pkg.org/pkg/RPushbullet"><img alt="Downloads" src="http://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen" /></a>
+<a href="https://www.r-pkg.org/pkg/RPushbullet"><img alt="Downloads" src="https://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen" /></a>
 <a href="https://codecov.io/gh/eddelbuettel/rpushbullet"><img alt="Code Coverage" src="https://codecov.io/gh/eddelbuettel/rpushbullet/graph/badge.svg" /></a>
 <a href="https://github.com/eddelbuettel/rpushbullet"><img alt="Last Commit" src="https://img.shields.io/github/last-commit/eddelbuettel/rpushbullet" /></a>
 <a href="https://eddelbuettel.github.io/rpushbullet/"><img alt="Documentation" src="https://img.shields.io/badge/documentation-is_here-blue" /></a></p>
 <h3 id="what-is-this">What is this?</h3>
 <p>RPushbullet is an R client for the wonderful
-<a href="http://www.pushbullet.com">Pushbullet</a> messaging / notification system.</p>
+<a href="https://www.pushbullet.com">Pushbullet</a> messaging / notification system.</p>
 <h3 id="so-what-is-pushbullet">So what is Pushbullet?</h3>
-<p><a href="http://www.pushbullet.com">Pushbullet</a> is an awesome (and free) little
+<p><a href="https://www.pushbullet.com">Pushbullet</a> is an awesome (and free) little
 service that acts as a message broker. You sign up, and get a key to use the
 API.  You then install the "app" on your smartphone or Chrome browser (and
 obtain a device id for of these). You can also query your account with the
@@ -743,7 +743,7 @@ R&gt; RPushbullet::pbPost(&quot;note&quot;, title=&quot;Simulation complete&quot
 </code></pre>
 <p>and a message like the image following below should pop up (if messaging directed to the browser):</p>
 <p><img alt="" src="https://github.com/eddelbuettel/rpushbullet/raw/master/attic/rpushbullet_message.png" />  </p>
-<p>Another excellent use case was suggested years ago by <a href="http://kbroman.org/">Karl Broman</a> in 
+<p>Another excellent use case was suggested years ago by <a href="https://kbroman.org/">Karl Broman</a> in 
 <a href="https://kbroman.wordpress.com/2014/09/04/error-notifications-from-r/">this blog post</a>. We can 
 improve on his version a little as one no longer needs to load the package:</p>
 <pre><code class="language-r">options(error = function() { 
@@ -752,7 +752,7 @@ improve on his version a little as one no longer needs to load the package:</p>
 })
 </code></pre>
 <p>There was one noteworthy follow-up for which I lost the source: it suggested to make the message 
-somewhat saltier by relying on the helpful <a href="http://dirk.eddelbuettel.com/code/rfoaas.html">rfoaas</a> package.</p>
+somewhat saltier by relying on the helpful <a href="https://dirk.eddelbuettel.com/code/rfoaas.html">rfoaas</a> package.</p>
 <h3 id="documentation">Documentation</h3>
 <p>Package documentation, help pages, a vignette, and more is available
 <a href="https://eddelbuettel.github.io/rpushbullet/">here</a>.</p>
@@ -820,7 +820,7 @@ One method to generate a hard-to-guess tag is <code>digest::digest(rnorm(1))</co
 <p>Channels can be used by passing a <code>channel</code> argument to the <code>pbPost</code>
 function. The Pushbullet API identifies a channel via the
 supplied <code>channel_tag</code> value of this argument. See the
-<a href="https://docs.pushbullet.com/v2/pushes/">Pushes API documentation</a> for more
+<a href="https://docs.pushbullet.com/">Pushes API documentation</a> for more
 information.</p>
 <h3 id="author">Author</h3>
 <p>Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, Henrik
