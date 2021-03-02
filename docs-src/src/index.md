@@ -1,6 +1,7 @@
 ## RPushbullet: R interface to Pushbullet
 
 [![Build Status](https://travis-ci.org/eddelbuettel/rpushbullet.svg)](https://travis-ci.org/eddelbuettel/rpushbullet) 
+[![CI](https://github.com/eddelbuettel/rpushbullet/workflows/ci/badge.svg)](https://github.com/eddelbuettel/rpushbullet/actions?query=workflow%3Aci)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![CRAN](https://www.r-pkg.org/badges/version/RPushbullet)](https://cran.r-project.org/package=RPushbullet)
 [![Dependencies](https://tinyverse.netlify.com/badge/RPushbullet)](https://cran.r-project.org/package=RPushbullet)
