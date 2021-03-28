@@ -1,3 +1,7 @@
+2021-03-28  Dirk Eddelbuettel  <edd@debian.org>
+
+	* docs/mkdmt-src/: Moved mkdocs-material input
+
 2021-03-01  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Release 0.3.4
