@@ -17,5 +17,7 @@ SystemRequirements: A user API key (which one can request from the website at
  or Opera or Safari) browser or the (Windows or Mac) desktop application provided
  the corresponding Pushbullet 'app' has been installed on any one of these.
 NeedsCompilation: no
+BugReports: https://github.com/eddelbuettel/rpushbullet/issues
+URL: https://github.com/eddelbuettel/rpushbullet, https://dirk.eddelbuettel.com/code/rpushbullet.html
 License: GPL (>= 2)
 RoxygenNote: 6.0.1
