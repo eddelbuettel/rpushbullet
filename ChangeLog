@@ -1,5 +1,7 @@
 2021-10-20  Dirk Eddelbuettel  <edd@debian.org>
 
+	* DESCRIPTION (Version, Date): Roll minor version
+
 	* R/pushes.R (pbPost): Suppress a warning from comparison in case of
 	multiple emails (thanks Josh Ulrich for the heads-up)
 
