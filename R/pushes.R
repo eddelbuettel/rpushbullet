@@ -206,7 +206,7 @@ pbPost <- function(type=c("note", "link", "file"),
     ret <- lapply(dest, function(d) {
         if (debug) message(sprintf("in lapply, d is: %s", d))
         if (is.character(d)) {          # this is an email or channel.
-            if (!is.na(email)){
+            if (!is.na(email[1])){      # TODO deal with NAs in positions other than first
                 tgt <- list(email= d)
             } else {                    # hence assume channel
                 tgt <- list(channel_tag= d)

@@ -1,3 +1,8 @@
+2021-10-20  Dirk Eddelbuettel  <edd@debian.org>
+
+	* R/pushes.R (pbPost): Suppress a warning from comparison in case of
+	multiple emails (thanks Josh Ulrich for the heads-up)
+
 2021-06-01  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (URL, BugReports): Added to DESCRIPTION
