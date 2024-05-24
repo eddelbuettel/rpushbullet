@@ -3,7 +3,7 @@
 [![CI](https://github.com/eddelbuettel/rpushbullet/workflows/ci/badge.svg)](https://github.com/eddelbuettel/rpushbullet/actions?query=workflow%3Aci)
 [![License](https://img.shields.io/badge/license-GPL%20%28%3E=%202%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![CRAN](https://www.r-pkg.org/badges/version/RPushbullet)](https://cran.r-project.org/package=RPushbullet)
-[![Dependencies](https://tinyverse.netlify.com/badge/RPushbullet)](https://cran.r-project.org/package=RPushbullet)
+[![Dependencies](https://tinyverse.netlify.app/badge/RPushbullet)](https://cran.r-project.org/package=RPushbullet)
 [![Downloads](https://cranlogs.r-pkg.org/badges/RPushbullet?color=brightgreen)](https://www.r-pkg.org/pkg/RPushbullet)
 [![Code Coverage](https://codecov.io/gh/eddelbuettel/rpushbullet/graph/badge.svg)](https://codecov.io/gh/eddelbuettel/rpushbullet)
 [![Last Commit](https://img.shields.io/github/last-commit/eddelbuettel/rpushbullet)](https://github.com/eddelbuettel/rpushbullet)
