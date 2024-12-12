@@ -3,9 +3,14 @@ Type: Package
 Title: R Interface to the Pushbullet Messaging Service
 Version: 0.3.4.1
 Date: 2021-10-20
-Author: Dirk Eddelbuettel with contributions by Bill Evans, Mike Birdgeneau, 
- Henrik Bengtsson, Seth Wenchel, Colin Gillespie and Chan-Yub Park
-Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Authors@R: c(person("Dirk", "Eddelbuettel", role = c("aut", "cre"), email = "edd@debian.org",
+                    comment = c(ORCID = "0000-0001-6419-907X")),
+             person("Bill", "Evans", role = "ctb"),
+             person("Mike", "Birdgeneau", role = "ctb"), 
+             person("Henrik", "Bengtsson", role = "ctb"),
+             person("Seth", "Wenchel", role = "ctb"),
+             person("Colin", "Gillespie", role = "ctb"),
+             person("Chan-Yub", "Park", role = "ctb"))
 Description: An R interface to the Pushbullet messaging service which
  provides fast and efficient notifications (and file transfer) between
  computers, phones and tablets.  An account has to be registered at the 
