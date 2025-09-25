@@ -1,3 +1,10 @@
+2025-09-25  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Roll minor version and date
+
+	* .rpushbullet.json.gpg: Updated encrypted configuration file used in
+	continuous integration with new default device
+
 2025-09-24  Dirk Eddelbuettel  <edd@debian.org>
 
 	* .github/workflows/ci.yaml: Use r-ci with embedded bootstrap
