@@ -1,3 +1,7 @@
+2025-09-24  Dirk Eddelbuettel  <edd@debian.org>
+
+	* .github/workflows/ci.yaml: Use r-ci with embedded bootstrap
+
 2024-12-11  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Authors@R): Added
