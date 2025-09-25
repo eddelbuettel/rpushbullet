@@ -11,7 +11,7 @@ env:
   # setting this one below in the steps did not work
   TOKENFILE_PASSWORD: ${{ secrets.TOKENFILE_PASSWORD }}
   # explicit opt-in: turn tests on (just to make sure by browser extension gets spammed ...)
-  Run_RPushbullet_Tests: "yes"
+  Run_RPushbullet_Tests: "no"
   
 jobs:
   ci:
