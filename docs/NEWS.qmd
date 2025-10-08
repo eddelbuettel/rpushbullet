@@ -1,6 +1,33 @@
 ## News for Package <span class="pkg">RPushbullet</span> {.unnumbered}
 
 
+### Changes in version 0.3.5 (2025-10-08)
+
+
+<ul>
+<li> URL and BugReports fields have been added to DESCRIPTION
+
+</li>
+<li> The <code>pbPost</code> function deals more robustly with the case of
+multiple target emails
+
+</li>
+<li> The continuous integration and the README badge have been updated 
+
+</li>
+<li> The DESCRIPTION file now use Authors@R
+
+</li>
+<li> The (encrypted) unit test configuration has been adjusted to reflect
+the current set of active devices
+
+</li>
+<li> The mkdocs-material documentation site is now generated via <span class="pkg">altdoc</span>
+
+</li></ul>
+
+
+
 ### Changes in version 0.3.4 (2021-03-01)
 
 

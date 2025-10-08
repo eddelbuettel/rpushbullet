@@ -1,3 +1,16 @@
+2025-10-08  Dirk Eddelbuettel  <edd@debian.org>
+
+	* DESCRIPTION (Version, Date): Release 0.3.5
+
+	* docs/: Regenerated using altdoc with mkdocs-material
+	* .github/altdoc: Added and customized
+
+	* .github/workflows/ci.yaml (jobs): Use CODECOV_TOKEN
+
+	* README.md: The codecov badge URL has been updated
+
+	* R/isValid.R (.isValidDevice): Coverage tweak
+
 2025-09-25  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Roll minor version and date
