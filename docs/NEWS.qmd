@@ -1,0 +1,219 @@
+## News for Package <span class="pkg">RPushbullet</span> {.unnumbered}
+
+
+### Changes in version 0.3.4 (2021-03-01)
+
+
+<ul>
+<li> Return code checking using error code content if it exists
+(Thomas Shafer in <a href="https://github.com/eddelbuettel/rpushbullet/pull/64">#64</a>).
+
+</li>
+<li> Enabled GitHub Actions with encrypted JSON file for API access.
+
+</li>
+<li> Added a package documentation website.
+
+</li></ul>
+
+
+
+### Changes in version 0.3.3 (2020-01-18)
+
+
+<ul>
+<li> UTF-8 encoding is now used (Chan-Yub Park in <a href="https://github.com/eddelbuettel/rpushbullet/pull/55">#55</a>).
+
+</li>
+<li> Curl can use HTTP/1.1 (Alexandre Shannon in <a href="https://github.com/eddelbuettel/rpushbullet/pull/59">#59</a> fixing
+<a href="https://github.com/eddelbuettel/rpushbullet/issues/57">#57</a>, plus Dirk in <a href="https://github.com/eddelbuettel/rpushbullet/pull/60">#60</a> making it optional).
+
+</li></ul>
+
+
+
+### Changes in version 0.3.2 (2019-07-21)
+
+
+<ul>
+<li> The Travis setup was robustified with respect to the token
+need to run tests (Dirk in <a href="https://github.com/eddelbuettel/rpushbullet/pull/48">#48</a>)
+
+</li>
+<li> The configuration file is now readable only by the user (Colin
+Gillespie in <a href="https://github.com/eddelbuettel/rpushbullet/pull/50">#50</a>)
+
+</li>
+<li> At startup initialization is now more consistent (Colin
+Gillespie in <a href="https://github.com/eddelbuettel/rpushbullet/pull/53">#53</a> fixing <a href="https://github.com/eddelbuettel/rpushbullet/issues/52">#52</a>)
+
+</li>
+<li> A new function to fetch prior posts was added (Chan-Yub Park in
+<a href="https://github.com/eddelbuettel/rpushbullet/pull/54">#54</a>).
+
+</li></ul>
+
+
+
+### Changes in version 0.3.1 (2017-02-17)
+
+
+<ul>
+<li> The target device designation was corrected (<a href="https://github.com/eddelbuettel/rpushbullet/pull/39">#39</a>).
+
+</li>
+<li> Three new (unexported) helper functions test now test the
+validity of the api key, device and channel (Seth in <a href="https://github.com/eddelbuettel/rpushbullet/pull/41">#41</a>).
+
+</li>
+<li> The <code>summary</code> method for the <code>pbDevices</code> class was
+corrected (Seth in <a href="https://github.com/eddelbuettel/rpushbullet/pull/43">#43</a>).
+
+</li>
+<li> New helper functions <code>pbValidateConf</code>, <code>pbGetUser</code>,
+<code>pbGetChannelInfo</code> were added (Seth in <a href="https://github.com/eddelbuettel/rpushbullet/pull/44">#44</a> closing
+<a href="https://github.com/eddelbuettel/rpushbullet/issues/40">#40</a>).
+
+</li>
+<li> New classes <code>pbUser</code> and <code>pbChannelInfo</code> were added
+(Seth in <a href="https://github.com/eddelbuettel/rpushbullet/pull/44">#44</a>).
+
+</li>
+<li> Travis CI tests (and <a href="https://CRAN.R-project.org/package=covr"><span class="pkg">covr</span></a> coverage analysis) are now
+enabled via an encrypted config file (<a href="https://github.com/eddelbuettel/rpushbullet/pull/45">#45</a>).  
+
+</li></ul>
+
+
+
+### Changes in version 0.3.0 (2017-02-03)
+
+
+<ul>
+<li> The <code>curl</code> binary use was replaced by use of the
+<a href="https://CRAN.R-project.org/package=curl"><span class="pkg">curl</span></a> package; several new helper functions added (PRs
+<a href="https://github.com/eddelbuettel/rpushbullet/pull/30">#30</a>, <a href="https://github.com/eddelbuettel/rpushbullet/pull/36">#36</a> by Seth closing <a href="https://github.com/eddelbuettel/rpushbullet/issues/29">#29</a>) 
+
+</li>
+<li> Use of <a href="https://CRAN.R-project.org/package=RJSONIO"><span class="pkg">RJSONIO</span></a> was replaced by use of
+<a href="https://CRAN.R-project.org/package=jsonlite"><span class="pkg">jsonlite</span></a> (PR <a href="https://github.com/eddelbuettel/rpushbullet/pull/32">#32</a> by Seth closing <a href="https://github.com/eddelbuettel/rpushbullet/issues/31">#31</a>)
+
+</li>
+<li> A new function <code>pbSetup</code> was added to aid creating the
+resource file (PRs <a href="https://github.com/eddelbuettel/rpushbullet/pull/34">#34</a>, <a href="https://github.com/eddelbuettel/rpushbullet/pull/37">#37</a> by Seth and Dirk)
+
+</li>
+<li> The package intialization was refactored so that non-loading
+calls such as <code>RPushbullet::pbPost(...)</code> now work (<a href="https://github.com/eddelbuettel/rpushbullet/pull/33">#33</a>
+closing <a href="https://github.com/eddelbuettel/rpushbullet/issues/26">#26</a>)
+
+</li>
+<li> The test suite was updated and extended
+
+</li>
+<li> The Travis script was updated use run.sh
+
+</li>
+<li> DESCRIPTION, README.md and other files were updated for
+current <code>R CMD check</code> standards
+
+</li>
+<li> Deprecated parts such as 'type=address' were removed, and the
+documentation was updated accordingly.
+
+</li>
+<li> Coverage support was added (in a 'on-demand' setting as
+automated runs would need a Pushbullet API token)
+
+</li></ul>
+
+
+
+### Changes in version 0.2.0 (2015-02-07)
+
+
+<ul>
+<li> Added support for Pushbullet 'channels' (once again thanks to
+Mike Birdgeneau for the initial push on this; cf <a href="https://github.com/eddelbuettel/rpushbullet/issues/18">#18</a>)
+
+</li>
+<li> Support for pushes was solidified: proper choices of either
+device, email or channel should work in all cases
+
+</li>
+<li> S3 methods are now properly exports (thanks to Henrik
+Bengtsson)
+
+</li>
+<li> File transfer mode has been improved / corrected (thanks to
+Mike Birdgeneau)
+
+</li>
+<li> The regression test suite was expanded and robustified
+
+</li>
+<li> This NEWS file was added. Better late than never.
+
+</li></ul>
+
+
+
+### Changes in version 0.1.1 (2014-11-03)
+
+
+<ul>
+<li>Corrections to the file upload method
+
+</li></ul>
+
+
+
+### Changes in version 0.1.0 (2014-10-10)
+
+
+<ul>
+<li>Expanded documentation on how to set API keys, device keys and
+default settings
+
+</li>
+<li>Email support was added
+
+</li>
+<li>Regression tests for types &lsquo;link&rsquo; and &lsquo;file&rsquo;
+were added.
+
+</li>
+<li>Support for file transfers was added by Mike Birgeneau
+
+</li>
+<li>Initialization was rewritten / solidified
+
+</li></ul>
+
+
+
+### Changes in version 0.0.2 (2014-06-02)
+
+
+<ul>
+<li>Improved detection of <code>curl</code> binary at startup
+
+</li>
+<li>Package environment now in <code>.pkgenv</code>
+
+</li>
+<li>Added simple test script
+
+</li></ul>
+
+
+
+### Changes in version 0.0.1 (2014-06-02)
+
+
+<ul>
+<li>Initial version
+
+</li></ul>
+
+

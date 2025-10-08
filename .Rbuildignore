@@ -13,3 +13,6 @@ GTAGS
 ^docs
 ^docs-src
 ^\.nojekyll
+.venv_altdoc
+^docs$
+^altdoc$
