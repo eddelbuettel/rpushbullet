@@ -1,6 +1,6 @@
 ##  RPushbullet -- R interface to Pushbullet libraries
 ##
-##  Copyright (C) 2017  Seth Wenchel and Dirk Eddelbuettel
+##  Copyright (C) 2017-2025  Seth Wenchel and Dirk Eddelbuettel
 ##
 ##  This file is part of RPushbullet.
 ##
@@ -51,12 +51,12 @@
     idx <- which(devs$devices$iden==device)
     if(length(idx)>0){
         if(!all(devs$devices$active[idx]))
-            warning("The device with ID ",device,
-                    " is associated with this account,",
-                    "but it is not active.")
+            warning("The device with ID ",device,		# nocov start
+                    " is associated with this account, ",
+                    "but it is not active.")			# nocov end
         return(TRUE)
     }
-    return(FALSE)					#nocov
+    return(FALSE)						#nocov
 }
 
 ##' Test if channel is valid
