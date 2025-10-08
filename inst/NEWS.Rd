@@ -3,6 +3,19 @@
 \newcommand{\ghpr}{\href{https://github.com/eddelbuettel/rpushbullet/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/eddelbuettel/rpushbullet/issues/#1}{##1}}
 
+\section{Changes in version 0.3.5 (2025-10-08)}{
+  \itemize{
+    \item URL and BugReports fields have been added to DESCRIPTION
+    \item The \code{pbPost} function deals more robustly with the case of
+    multiple target emails
+    \item The continuous integration and the README badge have been updated 
+    \item The DESCRIPTION file now use Authors@R
+    \item The (encrypted) unit test configuration has been adjusted to reflect
+    the current set of active devices
+    \item The mkdocs-material documentation site is now generated via \pkg{altdoc}
+  }
+}
+
 \section{Changes in version 0.3.4 (2021-03-01)}{
   \itemize{
     \item Return code checking using error code content if it exists
