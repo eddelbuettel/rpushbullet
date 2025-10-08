@@ -23,6 +23,6 @@ SystemRequirements: A user API key (which one can request from the website at
  the corresponding Pushbullet 'app' has been installed on any one of these.
 NeedsCompilation: no
 BugReports: https://github.com/eddelbuettel/rpushbullet/issues
-URL: https://github.com/eddelbuettel/rpushbullet, https://dirk.eddelbuettel.com/code/rpushbullet.html
+URL: https://github.com/eddelbuettel/rpushbullet, https://eddelbuettel.github.io/rpushbullet/, https://dirk.eddelbuettel.com/code/rpushbullet.html
 License: GPL (>= 2)
 RoxygenNote: 6.0.1
