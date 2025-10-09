@@ -11,6 +11,9 @@
 
 	* R/isValid.R (.isValidDevice): Coverage tweak
 
+	* README.md: Correct codecoc badge URL again
+	* DESCRIPTION: Add documentation site to URL
+
 2025-09-25  Dirk Eddelbuettel  <edd@debian.org>
 
 	* DESCRIPTION (Version, Date): Roll minor version and date
