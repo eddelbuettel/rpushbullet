@@ -76,7 +76,8 @@ tickets first to discuss before going off on pull requests.
 A file `~/.rpushbullet.json` can be used to pass the API key and device
 identifiers to the package.  The content is read upon package startup, and
 stored in a package-local environment. The format of this file is as follows:
-```
+
+```json
 { 
     "key": "...placey your api key here...",
 

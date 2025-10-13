@@ -1,3 +1,7 @@
+2025-10-13  Dirk Eddelbuettel  <edd@debian.org>
+
+	* docs/*: Refreshed with syntax highlighting enabled
+
 2025-10-10  Dirk Eddelbuettel  <edd@debian.org>
 
 	* inst/CITATION: Added as in-container use of citation() with
